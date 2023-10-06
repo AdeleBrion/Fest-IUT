@@ -112,16 +112,13 @@ create table INSTRUMENT(
 create table ARTISTE(
     idArtiste int not null primary key,
     nom varchar(30) not null,
-    idInstrument int,    -- ça devrait dégager
-    foreign key (idInstrument) references INSTRUMENT(idInstrument)   --et du coup ça aussi, ça devrait dégager
 );
 
 create table DOCUMENT(
     idDocument int not null primary key,
     nom varchar(30) not null,
-    -- il manque le type
+    type varchar(60) not null,
     idGroupe int,
     filePath varchar(150),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe)
 );
-
