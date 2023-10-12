@@ -1,9 +1,12 @@
 DROP TABLE IF EXISTS DOCUMENT;
+DROP TABLE IF EXISTS JOUER;
+DROP TABLE IF EXISTS APPARTIENT;
 DROP TABLE IF EXISTS ARTISTE;
-DROP TABLE IF EXISTS INSTRUMENT;
+DROP TABLE IF EXISTS TYPEINSTRUMENT;
 DROP TABLE IF EXISTS ACTIVITEANNEXE;
 DROP TABLE IF EXISTS PLANIFIER;
 DROP TABLE IF EXISTS ACCUEILIR;
+DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS HEBERGEMENT;
 DROP TABLE IF EXISTS FAVORISER;
 DROP TABLE IF EXISTS CONCERT;
@@ -13,7 +16,7 @@ DROP TABLE IF EXISTS BILLET;
 DROP TABLE IF EXISTS SPECTATEUR;
 DROP TABLE IF EXISTS LIEU;
 
-create table LIEU (
+create table LIEU(
     id_lieu int not null primary key,
     nom_lieu varchar(30) not null,
     capacite_max int not null,
@@ -37,7 +40,7 @@ create table BILLET (
     duree int not null, -- en jours
     prix int not null,
     date_valide DATE,
-    foreign key(id_spectateur) references SPECTATEUR(id_spectateur)
+    foreign key (id_spectateur) references SPECTATEUR(id_spectateur)
 );
 
 create table STYLE(
@@ -51,7 +54,7 @@ create table GROUPEMUSICAL(
     nom_groupe varchar(70),
     descritpion varchar(70),
     reseaux varchar(100),
-    foreign key(id_style) references STYLE(id_style)
+    foreign key (id_style) references STYLE(id_style)
 );
 
 create table CONCERT(
@@ -65,24 +68,24 @@ create table CONCERT(
     duree_montage int not null, -- en minutes
     place_restante int not null,
     ouvert boolean not null,
-    foreign key(id_lieu) references LIEU(id_lieu),
-    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe)
+    foreign key (id_lieu) references LIEU(id_lieu),
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
 create table INSCRIRE(
     id_concert int,
     id_spectateur int,
     primary key(id_concert,id_spectateur),
-    foreign key(id_concert) references CONCERT(id_concert),
-    foreign key(id_spectateur) references SPECTATEUR(id_spectateur)
+    foreign key (id_concert) references CONCERT(id_concert),
+    foreign key (id_spectateur) references SPECTATEUR(id_spectateur)
 );
 
 create table FAVORISER(
     id_spectateur int not null,
     id_concert int not null,
     primary key(id_spectateur, id_concert),
-    foreign key(id_spectateur) references SPECTATEUR(id_spectateur),
-    foreign key (id_concert) references CONCERT(id_concert)
+    foreign key  (id_spectateur) references SPECTATEUR(id_spectateur),
+    foreign key  (id_concert) references CONCERT(id_concert)
 );
 
 create table HEBERGEMENT(
@@ -96,16 +99,16 @@ create table ACCUEILIR(
     dateheure_heb Timestamp,
     nb_personne int,
     primary key (id_groupe,id_Heb,dateheure_heb),
-    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe),
-    foreign key(id_Heb) references HEBERGEMENT(id_Heb)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key (id_Heb) references HEBERGEMENT(id_Heb)
 );
 
 create table PLANIFIER(
     id_groupe int not null,
     id_activite int not null,
     primary key (id_groupe,id_activite),
-    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe),
-    foreign key(id_activite) references ACTIVITE(id_activite)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key (id_activite) references ACTIVITE(id_activite)
 );
 
 create table ACTIVITEANNEXE(
@@ -115,33 +118,33 @@ create table ACTIVITEANNEXE(
     access boolean not null
 );
 
-create table INSTRUMENT(
-    id_instrument int not null primary key,
-    id_artiste int,
-    nom_instrument varchar(30) not null,
-    foreign key(id_artiste) references ARTISTE(id_artiste)
+create table TYPEINSTRUMENT(
+    id_type_instrument int not null primary key,
+    nom_type_instrument varchar(30) not null
 );
 
 create table ARTISTE(
     id_artiste int not null primary key,
-    nom_artiste varchar(30) not null,
+    nom_artiste varchar(30) not null
+);
+
+create table JOUER(
+    id_type_instrument int,
+    id_artiste int,
+    primary key(id_type_instrument,id_artiste),
+    foreign key (id_type_instrument) references TYPEINSTRUMENT(id_type_instrument),
+    foreign key (id_artiste) references ARTISTE(id_artiste)
 );
 
 create table APPARTIENT(
     id_groupe int,
     id_artiste int,
     primary key (id_artiste,id_groupe),
-    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe),
-    foreign key(id_artiste) references ARTISTE(id_artiste)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key (id_artiste) references ARTISTE(id_artiste)
 );
 
-create table DOCUMENT(
-    id_document int not null primary key,
-    nom_document varchar(30) not null,
-    file_path varchar(150),
-    id_groupe int,
-    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe)
-);
+
 
 
 
