@@ -20,6 +20,7 @@ create table LIEU (
     adresse varchar(30) not null,
     photo_lieu blob
 );
+
 create table SPECTATEUR(
     id_spectateur int not null primary key,
     nom varchar(30),
@@ -74,7 +75,7 @@ create table INSCRIRE(
     primary key(id_concert,id_spectateur),
     foreign key(id_concert) references CONCERT(id_concert),
     foreign key(id_spectateur) references SPECTATEUR(id_spectateur)
-)
+);
 
 create table FAVORISER(
     id_spectateur int not null,
@@ -116,15 +117,22 @@ create table ACTIVITEANNEXE(
 
 create table INSTRUMENT(
     id_instrument int not null primary key,
+    id_artiste int,
     nom_instrument varchar(30) not null,
-    id_groupe int
+    foreign key(id_artiste) references ARTISTE(id_artiste)
 );
 
 create table ARTISTE(
     id_artiste int not null primary key,
-    id_instrument int,
     nom_artiste varchar(30) not null,
-    foreign key(id_instrument) references INSTRUMENT(id_instrument)
+);
+
+create table APPARTIENT(
+    id_groupe int,
+    id_artiste int,
+    primary key (id_artiste,id_groupe),
+    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key(id_artiste) references ARTISTE(id_artiste)
 );
 
 create table DOCUMENT(
