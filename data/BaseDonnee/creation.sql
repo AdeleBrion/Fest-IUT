@@ -101,7 +101,10 @@ create table ACCUEILIR(
 
 create table PLANIFIER(
     id_groupe int not null,
-    id_activite int not null
+    id_activite int not null,
+    primary key (id_groupe,id_activite),
+    foreign key(id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key(id_activite) references ACTIVITE(id_activite)
 );
 
 create table ACTIVITEANNEXE(
