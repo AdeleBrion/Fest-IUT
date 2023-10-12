@@ -68,6 +68,14 @@ create table CONCERT(
     foreign key(id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
+create table INSCRIRE(
+    id_concert int,
+    id_spectateur int,
+    primary key(id_concert,id_spectateur),
+    foreign key(id_concert) references CONCERT(id_concert),
+    foreign key(id_spectateur) references SPECTATEUR(id_spectateur)
+)
+
 create table FAVORISER(
     id_spectateur int not null,
     id_concert int not null,
