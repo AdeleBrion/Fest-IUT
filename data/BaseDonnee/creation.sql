@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS DOCUMENT;
+DROP TABLE IF EXISTS RESEAUX
 DROP TABLE IF EXISTS PHOTO;
 DROP TABLE IF EXISTS VIDEO;
 DROP TABLE IF EXISTS JOUER;
@@ -150,7 +150,7 @@ create table APPARTIENT(
 create table PHOTO(
     id_Photo int not null primary key,
     id_groupe int,
-    file_path_photo varchar(50)
+    file_path_photo varchar(50),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
@@ -163,7 +163,7 @@ create table VIDEO(
 
 create table RESEAUX(
     id_reseau int not null primary key,
-    id_groupe int
+    id_groupe int,
     x varchar(40),
     instagram varchar(40),
     tiktok varchar(40),
