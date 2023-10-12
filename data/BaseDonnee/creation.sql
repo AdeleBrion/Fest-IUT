@@ -1,17 +1,17 @@
-DROP TABLE IF EXISTS RESEAUX
 DROP TABLE IF EXISTS PHOTO;
 DROP TABLE IF EXISTS VIDEO;
 DROP TABLE IF EXISTS JOUER;
 DROP TABLE IF EXISTS APPARTIENT;
 DROP TABLE IF EXISTS ARTISTE;
 DROP TABLE IF EXISTS TYPEINSTRUMENT;
-DROP TABLE IF EXISTS ACTIVITEANNEXE;
 DROP TABLE IF EXISTS PLANIFIER;
+DROP TABLE IF EXISTS ACTIVITEANNEXE;
 DROP TABLE IF EXISTS ACCUEILIR;
-DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS HEBERGEMENT;
 DROP TABLE IF EXISTS FAVORISER;
+DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS CONCERT;
+DROP TABLE IF EXISTS RESEAUX;
 DROP TABLE IF EXISTS GROUPEMUSICAL;
 DROP TABLE IF EXISTS STYLE;
 DROP TABLE IF EXISTS BILLET;
@@ -53,11 +53,18 @@ create table STYLE(
 create table GROUPEMUSICAL(
     id_groupe int not null primary key,
     id_style int,
-    id_reseau int,
     nom_groupe varchar(70),
     descritpion varchar(70),
-    foreign key (id_reseau) references RESEAUX(id_reseau),
     foreign key (id_style) references STYLE(id_style)
+);
+
+create table RESEAUX(
+    id_reseau int not null primary key,
+    id_groupe int,
+    x varchar(40),
+    instagram varchar(40),
+    tiktok varchar(40),
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
 create table CONCERT(
@@ -96,6 +103,7 @@ create table HEBERGEMENT(
     nom_hebergement varchar(30) not null,
     nb_Max int not null
 );
+
 create table ACCUEILIR(
     id_groupe int,
     id_Heb int,
@@ -106,19 +114,19 @@ create table ACCUEILIR(
     foreign key (id_Heb) references HEBERGEMENT(id_Heb)
 );
 
-create table PLANIFIER(
-    id_groupe int not null,
-    id_activite int not null,
-    primary key (id_groupe,id_activite),
-    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
-    foreign key (id_activite) references ACTIVITE(id_activite)
-);
-
 create table ACTIVITEANNEXE(
     id_activite int not null primary key,
     descriptionA varchar(80) not null,
     dateheure_activite Timestamp,
     access boolean not null
+);
+
+create table PLANIFIER(
+    id_groupe int not null,
+    id_activite int not null,
+    primary key (id_groupe,id_activite),
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
+    foreign key (id_activite) references ACTIVITEANNEXE(id_activite)
 );
 
 create table TYPEINSTRUMENT(
@@ -157,16 +165,9 @@ create table PHOTO(
 create table VIDEO(
     id_video int not null primary key,
     id_groupe int,
-    file_path_video varchar(50)
+    file_path_video varchar(50),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
-create table RESEAUX(
-    id_reseau int not null primary key,
-    id_groupe int,
-    x varchar(40),
-    instagram varchar(40),
-    tiktok varchar(40),
-    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
-);
+
 
