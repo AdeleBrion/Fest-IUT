@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS DOCUMENT;
+DROP TABLE IF EXISTS PHOTO;
+DROP TABLE IF EXISTS VIDEO;
 DROP TABLE IF EXISTS JOUER;
 DROP TABLE IF EXISTS APPARTIENT;
 DROP TABLE IF EXISTS ARTISTE;
@@ -96,7 +98,7 @@ create table HEBERGEMENT(
 create table ACCUEILIR(
     id_groupe int,
     id_Heb int,
-    dateheure_heb Timestamp,
+    dateheure_heb Timestamp, -- JJ/MM/YYYY
     nb_personne int,
     primary key (id_groupe,id_Heb,dateheure_heb),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
@@ -144,7 +146,26 @@ create table APPARTIENT(
     foreign key (id_artiste) references ARTISTE(id_artiste)
 );
 
+create table PHOTO(
+    id_Photo int not null primary key,
+    id_groupe int,
+    file_path_photo varchar(50)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
+);
 
+create table PHOTO(
+    id_Photo int not null primary key,
+    id_groupe int,
+    file_path_photo varchar(50)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
+);
+
+create table VIDEO(
+    id_video int not null primary key,
+    id_groupe int,
+    file_path_video varchar(50)
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
+);
 
 
 
