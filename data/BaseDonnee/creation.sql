@@ -53,9 +53,10 @@ create table STYLE(
 create table GROUPEMUSICAL(
     id_groupe int not null primary key,
     id_style int,
+    id_reseau int,
     nom_groupe varchar(70),
     descritpion varchar(70),
-    reseaux varchar(100),
+    foreign key (id_reseau) references RESEAUX(id_reseau),
     foreign key (id_style) references STYLE(id_style)
 );
 
@@ -153,13 +154,6 @@ create table PHOTO(
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
-create table PHOTO(
-    id_Photo int not null primary key,
-    id_groupe int,
-    file_path_photo varchar(50)
-    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
-);
-
 create table VIDEO(
     id_video int not null primary key,
     id_groupe int,
@@ -167,5 +161,12 @@ create table VIDEO(
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
-
+create table RESEAUX(
+    id_reseau int not null primary key,
+    id_groupe int
+    x varchar(40),
+    instagram varchar(40),
+    tiktok varchar(40),
+    foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
+);
 
