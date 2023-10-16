@@ -42,6 +42,18 @@ INSERT INTO LIEU VALUES
     (10, "Salle d'exposition", 100, "10 rue de la montagne", null),
     (11, "Salle de fête", 500, "11 rue de la rivière", null);
 
+INSERT INTO GROUPEMUSICAL VALUES
+    (1, "The Beatles", 1, "rock"),
+    (2, "Led Zeppelin", 2, "rock"),
+    (3, "Pink Floyd", 3, "rock"),
+    (4, "Queen", 4, "rock"),
+    (5, "The Rolling Stones", 5, "rock"),
+    (6, "AC/DC", 6, "rock"),
+    (7, "Metallica", 7, "rock"),
+    (8, "Nirvana", 8, "rock"),
+    (9, "Guns N' Roses", 9, "rock"),
+    (10, "Red Hot Chili Peppers", 10, "rock");
+    
 INSERT INTO HEBERGEMENT VALUES
     (1, "Hôtel", 100),
     (2, "Auberge de jeunesse", 50),
