@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS CONCERT;
 DROP TABLE IF EXISTS RESEAUX;
 DROP TABLE IF EXISTS GROUPEMUSICAL;
+DROP TABLE IF EXISTS SOUS_STYLE;
 DROP TABLE IF EXISTS STYLE;
 DROP TABLE IF EXISTS BILLET;
 DROP TABLE IF EXISTS SPECTATEUR;
@@ -48,6 +49,13 @@ create table BILLET (
 create table STYLE(
     id_style int not null primary key,
     nom_style varchar(30)
+);
+
+create table SOUS_STYLE(
+    id_style int,
+    sous_style int,
+    foreign key (id_style) references STYLE(id_style),
+    foreign key (sous_style) references STYLE(id_style)
 );
 
 create table GROUPEMUSICAL(
@@ -168,6 +176,3 @@ create table VIDEO(
     file_path_video varchar(50),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
-
-
-
