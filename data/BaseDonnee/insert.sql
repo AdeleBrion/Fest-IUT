@@ -73,4 +73,3 @@ INSERT INTO ACTIVITEANNEXE VALUES
     (9, "Conférence de presse", "2020-01-09 15:00:00", true),
     (10, "Séance de photos", "2020-01-10 16:00:00", false),
     (11, "Rencontre avec les journalistes", "2020-01-11 14:00:00", true);
-    
