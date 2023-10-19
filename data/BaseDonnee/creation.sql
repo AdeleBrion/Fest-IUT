@@ -29,11 +29,11 @@ create table LIEU(
 
 create table SPECTATEUR(
     id_spectateur int not null primary key,
-    nom varchar(30),
-    prenom varchar(30),
-    email varchar(50),
-    mot_de_passe varchar(50),
-    adresse varchar(50),
+    nom varchar(30) not null,
+    prenom varchar(30) not null,
+    email varchar(50) not null,
+    mot_de_passe varchar(50) not null,
+    adresse varchar(50) not null,
     autres_informations varchar(150)
 );
 
@@ -61,8 +61,8 @@ create table SOUS_STYLE(
 create table GROUPEMUSICAL(
     id_groupe int not null primary key,
     id_style int,
-    nom_groupe varchar(70),
-    descritpion varchar(70),
+    nom_groupe varchar(70) not null,
+    descriptionG varchar(70) not null,
     foreign key (id_style) references STYLE(id_style)
 );
 
@@ -116,7 +116,7 @@ create table ACCUEILIR(
     id_groupe int,
     id_Heb int,
     dateheure_heb Timestamp, -- JJ/MM/YYYY
-    nb_personne int,
+    nb_personne int not null,
     primary key (id_groupe,id_Heb,dateheure_heb),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe),
     foreign key (id_Heb) references HEBERGEMENT(id_Heb)
