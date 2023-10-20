@@ -21,9 +21,9 @@ DROP TABLE IF EXISTS LIEU;
 
 create table LIEU(
     idLieu int not null primary key,
-    nomLieu varchar(30) not null,
+    nomLieu varchar(100) not null,
     capaciteMax int not null,
-    adresse varchar(30) not null,
+    adresse varchar(200) not null,
     photoLieu blob
 );
 
@@ -58,6 +58,13 @@ create table SOUS_STYLE(
     foreign key (sous_style) references STYLE(idStyle)
 );
 
+create table SOUS_STYLE(
+    id_style int,
+    sous_style int,
+    foreign key (id_style) references STYLE(id_style),
+    foreign key (sous_style) references STYLE(id_style)
+);
+
 create table GROUPEMUSICAL(
     idGroupe int not null primary key,
     idStyle int,
@@ -69,9 +76,9 @@ create table GROUPEMUSICAL(
 create table RESEAUX(
     idReseau int not null primary key,
     idGroupe int,
-    x varchar(40),
-    instagram varchar(40),
-    tiktok varchar(40),
+    x varchar(100),
+    instagram varchar(100),
+    tiktok varchar(100),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe)
 );
 
