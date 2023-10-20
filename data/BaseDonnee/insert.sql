@@ -1,4 +1,4 @@
-INSERT INTO SPECTATEUR (id_spectateur, nom, prenom, email, mot_de_passe, adresse, autres_informations) VALUES
+INSERT INTO SPECTATEUR (idSpectateur, nomSpectateur, prenom, email, motDePasse, adresse, infoAnnexes) VALUES
     (1, "DUPONT", "Jean", "dupont.jean@gmail.com", "1234", "1 rue de la paix", "rien à signaler"),
     (2, "MARTIN", "Lucie", "lucie.martin@gmail.com", "5678", "2 rue de la liberté", "fan de rock"),
     (3, "DURAND", "Pierre", "pierre.durand@gmail.com", "9012", "3 rue de la république", "amateur de jazz"),
@@ -19,7 +19,7 @@ INSERT INTO SPECTATEUR (id_spectateur, nom, prenom, email, mot_de_passe, adresse
     (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "JDGW", "18 avenue de Couasnon", "fan de classique");
 
 
-INSERT INTO BILLET (id_billet, id_spectateur, duree, prix, date_valide) VALUES
+INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
     (1, 1, 1, 23, "2023-12-21"),
     (2, 1, 2, 40, "2023-12-18"),
     (3, 2, 3, 55, "2023-12-11"),
@@ -35,7 +35,7 @@ INSERT INTO BILLET (id_billet, id_spectateur, duree, prix, date_valide) VALUES
     (13, 9, 1, 23, "2023-12-14"),
     (14, 9, 3, 55, "2023-12-18");
 
-INSERT INTO STYLE (id_style, nom_style) VALUES
+INSERT INTO STYLE (idStyle, nomStyle, idGenre) VALUES
     (1, "rock"),
     (2, "jazz"),
     (3, "musique classique"),
@@ -47,12 +47,12 @@ INSERT INTO STYLE (id_style, nom_style) VALUES
     (9, "grunge"),
     (10, "j-pop");
 
-INSERT INTO SOUS_STYLE (id_style, sous_style) VALUES
-    (1, "grunge"),
-    (5, "k-pop"),
-    (5, "j-pop");
+--INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
+  --  (1, "grunge"),
+    --(5, "k-pop"),
+    --(5, "j-pop");
 
-INSERT INTO GROUPEMUSICAL (id_groupe, id_style, nom_groupe, descritpion) VALUES
+INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- ROCK (1.6)
     (1, 1, "The Rolling Stones", "Groupe de rock britannique"),
     (2, 1, "Waterparks", "Groupe de Electro-Rock américain"),
@@ -74,7 +74,7 @@ INSERT INTO GROUPEMUSICAL (id_groupe, id_style, nom_groupe, descritpion) VALUES
 
 
     
-INSERT INTO LIEU (id_lieu, nom_lieu, capacite_max, adresse, photo_lieu) VALUES
+INSERT INTO LIEU (idLieu, nomLieu, capaciteMax, adresse, photoLieu) VALUES
     (1, "Place du Martroi", 1000, "place du Martroi", null),
     (2, "L'Institut", 500, "3 rue du Colombier", null),
     (3, "Parc Louis Pasteur", 200, "2 rue Eugène Vignat", null),
@@ -86,7 +86,7 @@ INSERT INTO LIEU (id_lieu, nom_lieu, capacite_max, adresse, photo_lieu) VALUES
     (9, "CO'Met, Aréna", 10000, "Rue du Président Robert Schuman", null);
 
 
-INSERT INTO CONCERT (id_concert, id_lieu, id_groupe, nom_concert, dateheure_debut, duree_concert, duree_demontage, duree_montage, place_restante, ouvert) VALUES
+INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
     (1, 1, 1, "Concert des Rolling Stones", "2023-12-01 20:00:00", 120, 60, 60, 746, false),
     (2, 2, 2, "Concert de Waterparks", "2023-12-02 22:00:00", 150, 100, 50, 15, false),
     (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-18 20:00:00", 90, 30, 60, 5, false),
@@ -94,7 +94,7 @@ INSERT INTO CONCERT (id_concert, id_lieu, id_groupe, nom_concert, dateheure_debu
     (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
     (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
 
-INSERT INTO FAVORISER (id_spectateur, id_concert) VALUES
+INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
     (1, 1),
     (2, 3),
     (4, 5),
@@ -107,7 +107,7 @@ INSERT INTO FAVORISER (id_spectateur, id_concert) VALUES
     (8, 4),
     (10, 3);
 
-INSERT INTO HEBERGEMENT (id_Heb, nom_hebergement, nb_Max) VALUES
+INSERT INTO HEBERGEMENT (idHebergement, nomHebergement, nbMax) VALUES
     (1, "Hôtel : suite 12A", 8),
     (2, "Hôtel : suite 13A", 10),
     (3, "Hôtel : suite 14A", 6),
@@ -116,7 +116,7 @@ INSERT INTO HEBERGEMENT (id_Heb, nom_hebergement, nb_Max) VALUES
     (6, "Hôtel : suite 22B", 15);
 
 
-INSERT INTO ACCUEILIR (id_groupe, id_Heb, dateheure_heb, nb_personne) VALUES
+INSERT INTO ACCUEILIR (idGroupe, idHebergement, dateheureDeb, nbPersonne) VALUES
     (1, 1, "2023-12-01 16:00:00", 5),
     (2, 2, "2023-12-02 16:00:00", 10),
     (3, 3, "2023-12-18 20:00:00", 5),
@@ -125,7 +125,7 @@ INSERT INTO ACCUEILIR (id_groupe, id_Heb, dateheure_heb, nb_personne) VALUES
     (6, 6, "2023-12-06 16:00:00", 10);
 
 
-INSERT INTO ACTIVITEANNEXE (id_activite, descriptionA, dateheure_activite, access) VALUES
+INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, accessibleAuPublic) VALUES
     (1, "Interview radio", "2023-12-01 16:00:00", true),
     (2, "Séance de dédicaces", "2023-12-02 18:00:00", false),
     (3, "Rencontre avec les fans", "2023-12-18 17:00:00", false),
@@ -138,7 +138,7 @@ INSERT INTO ACTIVITEANNEXE (id_activite, descriptionA, dateheure_activite, acces
     (10, "Séance de photos", "2023-12-10 16:00:00", false),
     (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
-INSERT INTO PLANIFIER (id_groupe, id_activite) VALUES
+INSERT INTO PLANIFIER (idGroupe, idActivite) VALUES
     (1, 1),
     (2, 2),
     (3, 3),
@@ -146,7 +146,7 @@ INSERT INTO PLANIFIER (id_groupe, id_activite) VALUES
     (5, 4);
 
 
-INSERT INTO RESEAUX (id_reseau, id_groupe, x, instagram, tiktok) VALUES
+INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (1, 1, "", "https://www.instagram.com/rollingstone/", ""),
     (2, 2, "", "https://www.instagram.com/waterparks/?hl=fr", ""),
     (3, 3, "", "https://www.instagram.com/bringmethehorizon/?hl=fr", ""),
@@ -156,7 +156,7 @@ INSERT INTO RESEAUX (id_reseau, id_groupe, x, instagram, tiktok) VALUES
 
 --INSERT INTO INSCRIRE VALUES(id_concert, id_spectateur);
 
-INSERT INTO TYPEINSTRUMENT (id_type_instrument, nom_type_instrument) VALUES
+INSERT INTO TYPEINSTRUMENT (idTypeInstrument, nomTypeInstrument) VALUES
     (1, "Guitare éléctrique"),
     (2, "Piano à queue"),
     (3, "Clavier"),
@@ -169,7 +169,7 @@ INSERT INTO TYPEINSTRUMENT (id_type_instrument, nom_type_instrument) VALUES
     (10, "Trompette"),
     (11, "Piano");
 
-INSERT INTO ARTISTE (id_artiste, nom_artiste) VALUES
+INSERT INTO ARTISTE (idArtiste, nomArtiste) VALUES
     (1, "Mick Jagger"),
     (2, "Keith Richards"),
     (3, "Ronnie Wood"),
@@ -192,7 +192,7 @@ INSERT INTO ARTISTE (id_artiste, nom_artiste) VALUES
     (20, "Chad Smith"),
     (21, "John Frusciante");
 
-INSERT INTO JOUER (id_type_instrument, id_artiste) VALUES
+INSERT INTO JOUER (idTypeInstrument, idArtiste) VALUES
     (6, 1),
     (5, 1),
     (1, 2),
@@ -219,7 +219,7 @@ INSERT INTO JOUER (id_type_instrument, id_artiste) VALUES
     (4, 20),
     (1, 21);
 
-INSERT INTO APPARTIENT (id_groupe, id_artiste) VALUES
+INSERT INTO APPARTIENT (idGroupe, idArtiste) VALUES
     (1, 1),
     (1, 2),
     (1, 3),
@@ -242,6 +242,6 @@ INSERT INTO APPARTIENT (id_groupe, id_artiste) VALUES
     (6, 20),
     (6, 21);
 
---INSERT INTO PHOTO (id_Photo, id_groupe, file_path_photo) VALUES;
+--INSERT INTO PHOTO (idPhoto, idGroupe, filePathPhoto) VALUES;
 
---INSERT INTO VIDEO (id_video, id_groupe, file_path_video) VALUES;
+--INSERT INTO VIDEO (idVideo, idGroupe, filePathVideo) VALUES;

@@ -51,18 +51,11 @@ create table STYLE(
     nomStyle varchar(30)
 );
 
-create table SOUS_STYLE(
+create table SOUSSTYLE(
     idStyle int,
-    sous_style int,
+    sousStyle int,
     foreign key (idStyle) references STYLE(idStyle),
     foreign key (sous_style) references STYLE(idStyle)
-);
-
-create table SOUS_STYLE(
-    id_style int,
-    sous_style int,
-    foreign key (id_style) references STYLE(id_style),
-    foreign key (sous_style) references STYLE(id_style)
 );
 
 create table GROUPEMUSICAL(
@@ -114,25 +107,25 @@ create table FAVORISER(
 );
 
 create table HEBERGEMENT(
-    idHeb int not null primary key,
-    nomHeb varchar(30) not null,
+    idHebergement int not null primary key,
+    nomHebergement varchar(30) not null,
     nbMax int not null
 );
 
 create table ACCUEILIR(
     idGroupe int,
-    idHeb int,
+    idHebergement int,
     dateHeureDeb Timestamp, -- JJ/MM/YYYY
     nbPersonne int not null,
-    primary key (idGroupe,idHeb,dateHeureDeb),
+    primary key (idGroupe,idHebergement,dateHeureDeb),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe),
-    foreign key (idHeb) references HEBERGEMENT(idHeb)
+    foreign key (idHebergement) references HEBERGEMENT(idHebergement)
 );
 
 create table ACTIVITEANNEXE(
     idActivite int not null primary key,
-    descriptionA varchar(80) not null,
-    dateHeureA Timestamp,
+    descriptionActivite varchar(80) not null,
+    dateheureActivite Timestamp,
     accessibleAuPublic boolean not null
 );
 
