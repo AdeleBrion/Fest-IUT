@@ -132,6 +132,7 @@ create table ACTIVITEANNEXE(
 create table PLANIFIER(
     idGroupe int not null,
     idActivite int not null,
+    dureePlanification int not null, -- En Heures
     primary key (idGroupe,idActivite),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe),
     foreign key (idActivite) references ACTIVITEANNEXE(idActivite)
