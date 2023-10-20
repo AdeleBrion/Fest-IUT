@@ -27,3 +27,38 @@ BEGIN
     end if;
 END |
 DELIMITER ;
+
+DELIMITER|
+CREATE OR REPLACE TRIGGER CHEVAUCHEMENTACTIVITE BEFORE INSERT ON PLANIFIER FOR EACH ROW
+BEGIN
+    declare idActiA int;
+    declare dateHA Timestamp;
+    declare duree int;
+    declare inter INTERVAL;
+    declare fin_activite Timestamp;
+
+    declare inter_new INTERVAL;
+    declare fin_activite_new Timestamp;
+
+    declare fini boolean default false;
+    declare lesActivite cursor for 
+        select idActivite, dateHeureA, dureePlanification
+        from ACTIVITEANNEXE natural join PLANIFIER
+        where idGroupe=new.idGroupe;
+    declare continue handler for not found set fini = true;
+    open lesActivite;
+    while not fini then
+        fetch lesActivite into idActiA, dateHA, duree;
+        if not fini then
+            set inter = NUMTODSINTERVAL(duree, 'HOUR');
+            set fin_activite = dateHA + inter;
+
+            set inter_new = NUMTODSINTERVAL(new.duree, 'HOUR');
+            set fin_activite_new = new.dateHA + inter_new;
+            if (fin_activite >= new.dateHA and fin_activite <= fin_activite_new) or (fin_activite_new >= new.dateHA and fin_activite_new <= fin_activite) then
+                set mes = concat('L activité ', idActiA, ' ne peut pas être planifiée car elle chevauche une autre activité du même groupe');
+            end if;
+        end if;
+    end while;
+END |
+DELIMITER ;
