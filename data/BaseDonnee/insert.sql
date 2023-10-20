@@ -138,7 +138,7 @@ INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, 
     (10, "Séance de photos", "2023-12-10 16:00:00", false),
     (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
-INSERT INTO PLANIFIER (idGroupe, idActivite,duréePlanification) VALUES
+INSERT INTO PLANIFIER (idGroupe, idActivite,dureePlanification) VALUES
     (1, 1, 3),
     (2, 2, 1),
     (3, 3, 4),
