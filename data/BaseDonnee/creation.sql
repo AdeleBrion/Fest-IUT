@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS CONCERT;
 DROP TABLE IF EXISTS RESEAUX;
 DROP TABLE IF EXISTS GROUPEMUSICAL;
+DROP TABLE IF EXISTS SOUS_STYLE;
 DROP TABLE IF EXISTS STYLE;
 DROP TABLE IF EXISTS BILLET;
 DROP TABLE IF EXISTS SPECTATEUR;
@@ -20,9 +21,9 @@ DROP TABLE IF EXISTS LIEU;
 
 create table LIEU(
     id_lieu int not null primary key,
-    nom_lieu varchar(30) not null,
+    nom_lieu varchar(100) not null,
     capacite_max int not null,
-    adresse varchar(30) not null,
+    adresse varchar(200) not null,
     photo_lieu blob
 );
 
@@ -50,6 +51,13 @@ create table STYLE(
     nom_style varchar(30)
 );
 
+create table SOUS_STYLE(
+    id_style int,
+    sous_style int,
+    foreign key (id_style) references STYLE(id_style),
+    foreign key (sous_style) references STYLE(id_style)
+);
+
 create table GROUPEMUSICAL(
     id_groupe int not null primary key,
     id_style int,
@@ -61,9 +69,9 @@ create table GROUPEMUSICAL(
 create table RESEAUX(
     id_reseau int not null primary key,
     id_groupe int,
-    x varchar(40),
-    instagram varchar(40),
-    tiktok varchar(40),
+    x varchar(100),
+    instagram varchar(100),
+    tiktok varchar(100),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
 
@@ -168,6 +176,4 @@ create table VIDEO(
     file_path_video varchar(50),
     foreign key (id_groupe) references GROUPEMUSICAL(id_groupe)
 );
-
-
 

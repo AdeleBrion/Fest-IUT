@@ -1,5 +1,4 @@
-
-INSERT INTO SPECTATEUR VALUES
+INSERT INTO SPECTATEUR (id_spectateur, nom, prenom, email, mot_de_passe, adresse, autres_informations) VALUES
     (1, "DUPONT", "Jean", "dupont.jean@gmail.com", "1234", "1 rue de la paix", "rien à signaler"),
     (2, "MARTIN", "Lucie", "lucie.martin@gmail.com", "5678", "2 rue de la liberté", "fan de rock"),
     (3, "DURAND", "Pierre", "pierre.durand@gmail.com", "9012", "3 rue de la république", "amateur de jazz"),
@@ -9,115 +8,240 @@ INSERT INTO SPECTATEUR VALUES
     (7, "GIRARD", "Thomas", "thomas.girard@gmail.com", "2468", "7 rue de l'église", "amateur de musique électronique"),
     (8, "BERNARD", "Julie", "julie.bernard@gmail.com", "3690", "8 rue de la plage", "fan de reggae"),
     (9, "PETIT", "Nicolas", "nicolas.petit@gmail.com", "1478", "9 rue de la forêt", "amateur de hip-hop"),
-    (10, "ROUX", "Céline", "celine.roux@gmail.com", "2580", "10 rue de la montagne", "fan de métal");
+    (10, "ROUX", "Céline", "celine.roux@gmail.com", "2580", "10 rue de la montagne", "fan de métal"),
+    (11, "CHIDLOVSKY", "Léopold", "leopold.chidlovsky@gmail.com", "ZQSD", "11 avenue des figuiers", "fan de rock"),
+    (12, "DEMARET", "Sullivan", "sullivan.demaret@gmail.com", "0000", "12 boulevard de la délinquance", "amateur de k-pop"),
+    (13, "MOREIRA", "Daniel", "daniel.moreira@gmail.com", "1111", "13 rue du repas", "fan de j-pop"),
+    (14, "BRION", "Adèle", "adele.brion@gmail.com", "0101", "14 rue de l'agonie", "fan de k-pop"),
+    (15, "LUDMANN", "Dorian", "dorian.ludmann@gmail.com", "5896", "15 rue du Hibou", "fan de deathfonk"),
+    (16, "GRUSON--DELANNOY", "Jules", "jules.gruson-delannoy@gmail.com", "5999", "16 impasse de la réussite", "amateur de j-pop"),
+    (17, "LALLIER", "Anna", "anna.lallier@gmail.com", "4789", "17 impasse du retard", "fan de rock"),
+    (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "JDGW", "18 avenue de Couasnon", "fan de classique");
 
-INSERT INTO BILLET VALUES 
-    (1, 1, 10, 10, "2020-01-01"),
-    (2, 2, 20, 10, "2020-01-02"),
-    (3, 3, 30, 10, "2020-01-03"),
-    (4, 4, 40, 10, "2020-01-04"),
-    (5, 5, 50, 10, "2020-01-05"),
-    (6, 7, 60, 10, "2020-01-06"),
-    (7, 7, 70, 10, "2020-01-07"),
-    (8, 8, 80, 10, "2020-01-08"),
-    (9, 9, 90, 10, "2020-01-09");
 
-INSERT INTO STYLE VALUES
+INSERT INTO BILLET (id_billet, id_spectateur, duree, prix, date_valide) VALUES
+    (1, 1, 1, 23, "2023-12-21"),
+    (2, 1, 2, 40, "2023-12-18"),
+    (3, 2, 3, 55, "2023-12-11"),
+    (4, 2, 1, 23, "2023-12-18"),
+    (5, 3, 3, 55, "2023-12-12"),
+    (6, 4, 1, 23, "2023-12-12"),
+    (7, 4, 3, 55, "2023-12-18"),
+    (8, 5, 3, 55, "2023-12-14"),
+    (9, 6, 2, 40, "2023-12-20"),
+    (10, 7, 1, 23, "2023-12-14"),
+    (11, 7, 3, 55, "2023-12-18"),
+    (12, 8, 2, 40, "2023-12-08"),
+    (13, 9, 1, 23, "2023-12-14"),
+    (14, 9, 3, 55, "2023-12-18");
+
+INSERT INTO STYLE (id_style, nom_style) VALUES
     (1, "rock"),
     (2, "jazz"),
     (3, "musique classique"),
     (4, "blues"),
-    (5, "pop");
+    (5, "pop"),
+    (6, "k-pop"),
+    (7, "rap"),
+    (8, 'techno'),
+    (9, "grunge"),
+    (10, "j-pop");
 
-INSERT INTO GROUPEMUSICAL VALUES
-    (1, 1, "The Rolling Stones", "Groupe de rock britannique", "https://www.facebook.com/therollingstones/"),
-    (2, 1, "Led Zeppelin", "Groupe de rock britannique", "https://www.facebook.com/ledzeppelin/"),
-    (3, 2, "Miles Davis", "Trompettiste et compositeur de jazz américain", "https://www.facebook.com/milesdavis/"),
-    (4, 3, "Ludwig van Beethoven", "Compositeur allemand de musique classique", "https://www.facebook.com/LudwigvanBeethoven/"),
-    (5, 4, "B.B. King", "Guitariste et chanteur de blues américain", "https://www.facebook.com/bbking/"),
-    (6, 5, "Michael Jackson", "Chanteur, danseur et compositeur américain de pop", "https://www.facebook.com/michaeljackson/"),
-    (7, 1, "The Beatles", "Groupe de rock britannique", "https://www.facebook.com/thebeatles/"),
-    (8, 2, "John Coltrane", "Saxophoniste de jazz américain", "https://www.facebook.com/JohnColtrane/"),
-    (9, 4, "Stevie Ray Vaughan", "Guitariste et chanteur de blues américain", "https://www.facebook.com/StevieRayVaughan/"),
-    (10, 5, "Prince", "Chanteur, musicien et compositeur américain de pop et de funk", "https://www.facebook.com/prince/"),
-    (11, 3, "Johann Sebastian Bach", "Compositeur allemand de musique classique", "https://www.facebook.com/JohannSebastianBach/");
+INSERT INTO SOUS_STYLE (id_style, sous_style) VALUES
+    (1, "grunge"),
+    (5, "k-pop"),
+    (5, "j-pop");
+
+INSERT INTO GROUPEMUSICAL (id_groupe, id_style, nom_groupe, descritpion) VALUES
+    -- ROCK (1.6)
+    (1, 1, "The Rolling Stones", "Groupe de rock britannique"),
+    (2, 1, "Waterparks", "Groupe de Electro-Rock américain"),
+    (3, 1, "Bring Me The Horizon", "Groupe de Metal britannique"),
+    (4, 1, "Spirit Box", "Groupe de Metal canadien"),
+    (5, 1, "Muse", "Groupe de Rock britannique"),
+    (6, 1, "Red Hot Chili Peppers", "Groupe de Fusion américain"),
+    -- JAZZ(7.12)
+    (7, 2, "Essaïe Cid", "Saxophoniste et clarinetiste Espagnol"),
+    (8, 2, "Xenos", "Groupe de jazz né en Bosnie, grandi en Grèce et désormais Parisien"),
+    -- MUSIQUE CLASSIQUE(13.18)
+    -- BLUES(19.24)
+    -- POP(25.30)
+    -- K-POP(31.36)
+    (31, 6, "Itzy", "Groupe de musique coréene composé de 5 membres"),
+    (32, 6, "BlackPink", "Groupe de musique coréene composé de 4 membres"),
+    (33, 6, "Xdinary Heroes", "Groupe de musique coréene composé de 5 membres");
+    -- RAP(37.42)
+
+
     
-INSERT INTO LIEU VALUES
-    (1, "Salle de concert", 1000, "1 rue de la paix", null),
-    (2, "Amphithéâtre", 500, "2 rue de la liberté", null),
-    (3, "Salle de conférence", 200, "3 rue de la république", null),
-    (4, "Salle de spectacle", 800, "4 rue de la gare", null),
-    (5, "Salle de réunion", 50, "5 rue de la poste", null),
-    (6, "Salle de danse", 100, "6 rue de la mairie", null),
-    (7, "Salle de sport", 2000, "7 rue de l'église", null),
-    (8, "Salle de cinéma", 300, "8 rue de la plage", null),
-    (9, "Salle de théâtre", 500, "9 rue de la forêt", null),
-    (10, "Salle d'exposition", 100, "10 rue de la montagne", null),
-    (11, "Salle de fête", 500, "11 rue de la rivière", null);
+INSERT INTO LIEU (id_lieu, nom_lieu, capacite_max, adresse, photo_lieu) VALUES
+    (1, "Place du Martroi", 1000, "place du Martroi", null),
+    (2, "L'Institut", 500, "3 rue du Colombier", null),
+    (3, "Parc Louis Pasteur", 200, "2 rue Eugène Vignat", null),
+    (4, "Musée des beaux arts", 800, "1 rue Fernand Rabier", null),
+    (5, "Parvis de la Collégiale Saint Pierre le Puellier", 50, "13 Cloître St Pierre le Puellier", null),
+    (6, "Zenith Orléans", 6900, "1 rue du Président Robert Schuman", null),
+    (7, "CO'Met, Palais des Congrès", 2000, "Rue du Président Robert Schuman", null),
+    (8, "CO'Met, Parc des Expositions", 300, "Rue du Président Robert Schuman", null),
+    (9, "CO'Met, Aréna", 10000, "Rue du Président Robert Schuman", null);
 
 
-INSERT INTO CONCERT VALUES
-    (1, 1, 1, "Concert des Rolling Stones", "2020-01-01 20:00:00", 120, 60, 60, 1000, false),
-    (2, 2, 2, "Concert de Led Zeppelin", "2020-01-02 20:00:00", 150, 100, 50, 500, false),
-    (3, 3, 3, "Concert de Miles Davis", "2020-01-03 20:00:00", 90, 30, 60, 200, false),
-    (4, 4, 4, "Concert de Beethoven", "2020-01-04 20:00:00", 180, 80, 100, 800, false),
-    (5, 5, 5, "Concert de B.B. King", "2020-01-05 20:00:00", 120, 50, 70, 400, false),
-    (6, 6, 6, "Concert de Michael Jackson", "2020-01-06 20:00:00", 200, 120, 80, 1000, true),
-    (7, 7, 7, "Concert des Rolling Stones", "2020-01-07 20:00:00", 150, 80, 70, 700, true),
-    (8, 8, 8, "Concert de John Coltrane", "2020-01-08 20:00:00", 120, 40, 80, 300, true),
-    (9, 9, 9, "Concert de Stevie Ray Vaughan", "2020-01-09 20:00:00", 90, 30, 60, 200, true),
-    (10, 10, 10, "Concert de Prince", "2020-01-10 20:00:00", 180, 100, 80, 900, true),
-    (11, 11, 11, "Concert de Johann Sebastian Bach", "2020-01-11 20:00:00", 120, 60, 60, 500, true);
+INSERT INTO CONCERT (id_concert, id_lieu, id_groupe, nom_concert, dateheure_debut, duree_concert, duree_demontage, duree_montage, place_restante, ouvert) VALUES
+    (1, 1, 1, "Concert des Rolling Stones", "2023-12-01 20:00:00", 120, 60, 60, 746, false),
+    (2, 2, 2, "Concert de Waterparks", "2023-12-02 22:00:00", 150, 100, 50, 15, false),
+    (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-18 20:00:00", 90, 30, 60, 5, false),
+    (4, 3, 4, "Concert de Spirit Box", "2023-12-04 20:00:00", 180, 80, 100, 26, false),
+    (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
+    (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
 
-INSERT INTO FAVORISER VALUES
+INSERT INTO FAVORISER (id_spectateur, id_concert) VALUES
     (1, 1),
     (2, 3),
     (4, 5),
-    (6, 7),
-    (8, 9),
-    (10, 11),
+    (6, 2),
+    (8, 1),
+    (10, 2),
     (2, 5),
-    (4, 7),
-    (6, 9),
-    (8, 11),
+    (4, 6),
+    (6, 6),
+    (8, 4),
     (10, 3);
 
-INSERT INTO HEBERGEMENT VALUES
-    (1, "Hôtel", 100),
-    (2, "Auberge de jeunesse", 50),
-    (3, "Camping", 200),
-    (4, "Gîte", 50),
-    (5, "Chambre d'hôte", 50);
+INSERT INTO HEBERGEMENT (id_Heb, nom_hebergement, nb_Max) VALUES
+    (1, "Hôtel : suite 12A", 8),
+    (2, "Hôtel : suite 13A", 10),
+    (3, "Hôtel : suite 14A", 6),
+    (4, "Hôtel : suite 15A", 18),
+    (5, "Hôtel : suite 16A", 20),
+    (6, "Hôtel : suite 22B", 15);
 
 
-INSERT INTO ACCUEILIR VALUES
-    (1, 1, "2020-01-01 20:00:00", 5),
-    (2, 2, "2020-01-02 20:00:00", 10),
-    (3, 3, "2020-01-03 20:00:00", 5),
-    (4, 4, "2020-01-04 20:00:00", 10),
-    (5, 5, "2020-01-05 20:00:00", 5);
+INSERT INTO ACCUEILIR (id_groupe, id_Heb, dateheure_heb, nb_personne) VALUES
+    (1, 1, "2023-12-01 16:00:00", 5),
+    (2, 2, "2023-12-02 16:00:00", 10),
+    (3, 3, "2023-12-18 20:00:00", 5),
+    (4, 4, "2023-12-04 20:00:00", 10),
+    (5, 5, "2023-12-18 15:00:00", 15),
+    (6, 6, "2023-12-06 16:00:00", 10);
 
 
-INSERT INTO ACTIVITEANNEXE VALUES
-    (1, "Interview radio", "2020-01-01 20:00:00", true),
-    (2, "Séance de dédicaces", "2020-01-02 18:00:00", false),
-    (3, "Rencontre avec les fans", "2020-01-03 17:00:00", false),
-    (4, "Conférence de presse", "2020-01-04 15:00:00", true),
-    (5, "Séance de photos", "2020-01-05 16:00:00", false),
-    (6, "Rencontre avec les journalistes", "2020-01-06 14:00:00", true),
-    (7, "Séance de dédicaces", "2020-01-07 18:00:00", false),
-    (8, "Rencontre avec les fans", "2020-01-08 17:00:00", false),
-    (9, "Conférence de presse", "2020-01-09 15:00:00", true),
-    (10, "Séance de photos", "2020-01-10 16:00:00", false),
-    (11, "Rencontre avec les journalistes", "2020-01-11 14:00:00", true);
+INSERT INTO ACTIVITEANNEXE (id_activite, descriptionA, dateheure_activite, access) VALUES
+    (1, "Interview radio", "2023-12-01 16:00:00", true),
+    (2, "Séance de dédicaces", "2023-12-02 18:00:00", false),
+    (3, "Rencontre avec les fans", "2023-12-18 17:00:00", false),
+    (4, "Conférence de presse", "2023-12-18 15:00:00", true),
+    (5, "Séance de photos", "2023-12-04 16:00:00", false),
+    (6, "Rencontre avec les journalistes", "2023-12-06 14:00:00", true),
+    (7, "Séance de dédicaces", "2023-12-07 18:00:00", false),
+    (8, "Rencontre avec les fans", "2023-12-08 17:00:00", false),
+    (9, "Conférence de presse", "2023-12-09 15:00:00", true),
+    (10, "Séance de photos", "2023-12-10 16:00:00", false),
+    (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
-INSERT INTO PLANIFIER VALUES
+INSERT INTO PLANIFIER (id_groupe, id_activite) VALUES
     (1, 1),
     (2, 2),
     (3, 3),
-    (4, 4),
-    (5, 5);
+    (4, 5),
+    (5, 4);
 
 
+INSERT INTO RESEAUX (id_reseau, id_groupe, x, instagram, tiktok) VALUES
+    (1, 1, "", "https://www.instagram.com/rollingstone/", ""),
+    (2, 2, "", "https://www.instagram.com/waterparks/?hl=fr", ""),
+    (3, 3, "", "https://www.instagram.com/bringmethehorizon/?hl=fr", ""),
+    (4, 4, "", "https://www.instagram.com/spiritboxmusic/?hl=fr", ""),
+    (5, 5, "", "https://www.instagram.com/muse/?hl=fr", ""),
+    (6, 6, "", "https://www.instagram.com/chilipeppers/", "");
 
+--INSERT INTO INSCRIRE VALUES(id_concert, id_spectateur);
 
+INSERT INTO TYPEINSTRUMENT (id_type_instrument, nom_type_instrument) VALUES
+    (1, "Guitare éléctrique"),
+    (2, "Piano à queue"),
+    (3, "Clavier"),
+    (4, "Batterie"),
+    (5, "Micro"),
+    (6, "Harmonica"),
+    (7, "Violon"),
+    (8, "Violoncelle"),
+    (9, "Guitare basse"),
+    (10, "Trompette"),
+    (11, "Piano");
+
+INSERT INTO ARTISTE (id_artiste, nom_artiste) VALUES
+    (1, "Mick Jagger"),
+    (2, "Keith Richards"),
+    (3, "Ronnie Wood"),
+    (4, "Awsten Knight"),
+    (5, "Otto Wood"),
+    (6, "Geoff Wigington"),
+    (7, "Oliver Sykes"),
+    (8, "Matt Kean"),
+    (9, "Jordan Fish"),
+    (10, "Matt Nicholls"),
+    (11, "Courtney LaPlante"),
+    (12, "Mike Stinger"),
+    (13, "Zev Rosenberg"),
+    (14, "Josh Gilbert"),
+    (15, "Matthew Bellamy"),
+    (16, "Christopher Wolstenholme"),
+    (17, "Dominic Howard"),
+    (18, "Anthony Kiedis"),
+    (19, "Flea"),
+    (20, "Chad Smith"),
+    (21, "John Frusciante");
+
+INSERT INTO JOUER (id_type_instrument, id_artiste) VALUES
+    (6, 1),
+    (5, 1),
+    (1, 2),
+    (9, 3),
+    (1, 4),
+    (5, 4),
+    (1, 5),
+    (4, 6),
+    (5, 7),
+    (9, 8),
+    (3, 9),
+    (4, 10),
+    (5, 11),
+    (1, 12),
+    (4, 13),
+    (9, 14),
+    (5, 15),
+    (9, 16),
+    (1, 17),
+    (5, 18),
+    (9, 19),
+    (10, 19),
+    (11, 19),
+    (4, 20),
+    (1, 21);
+
+INSERT INTO APPARTIENT (id_groupe, id_artiste) VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (3, 7),
+    (3, 8),
+    (3, 9),
+    (3, 10),
+    (4, 11),
+    (4, 12),
+    (4, 13),
+    (4, 14),
+    (5, 15),
+    (5, 16),
+    (5, 17),
+    (6, 18),
+    (6, 19),
+    (6, 20),
+    (6, 21);
+
+--INSERT INTO PHOTO (id_Photo, id_groupe, file_path_photo) VALUES;
+
+--INSERT INTO VIDEO (id_video, id_groupe, file_path_video) VALUES;
