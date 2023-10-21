@@ -62,3 +62,40 @@ BEGIN
     end while;
 END |
 DELIMITER ;
+
+DELIMITER |
+CREATE OR REPLACE TRIGGER CHEVAUCHEMENTCONCERT BEFORE INSERT ON CONCERT FOR EACH ROW
+BEGIN
+    declare idConcert int;
+    declare dateHeureDebut Timestamp;
+    declare duree int;
+    declare dureeMontage int;
+    declare dureeDemontage int;
+    declare inter INTERVAL;
+    declare fin_concert Timestamp;
+
+    declare inter_new INTERVAL;
+    declare fin_concert_new Timestamp;
+
+    declare fini boolean default false;
+    declare lesConcert cursor for 
+        select idConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage
+        from CONCERT
+        where idLieu=new.idLieu;
+    declare continue handler for not found set fini = true;
+    open lesConcert;
+    while not fini do
+        fetch lesConcert into idConcert, dateHeureDebut, duree, dureeMontage, dureeDemontage;
+        if not fini then
+            set inter = NUMTODSINTERVAL((duree + dureeMontage + dureeDemontage), 'MINUTE');
+            set fin_concert = dateHeureDebut + inter;
+
+            set inter_new = NUMTODSINTERVAL((new.dureeConcert + new.dureeMontage + new.dureeDemontage), 'MINUTE');
+            set fin_concert_new = new.dateHeureDebut + inter_new;
+            if (fin_concert >= new.dateHeureDebut and fin_concert <= fin_concert_new) or (fin_concert_new >= new.dateHeureDebut and fin_concert_new <= fin_concert) then
+                set mes = concat('Le concert ', idConcert, ' ne peut pas être planifiée car il chevauche un autre concert pour un même lieu');
+            end if;
+        end if;
+    end while;
+END |
+DELIMITER ;
