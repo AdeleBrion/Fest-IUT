@@ -63,7 +63,7 @@ create table CONCERT(
     dureeConcert int not null, -- en minutes
     dureeMontage int not null, -- en minutes
     dureeDemontage int not null, -- en minutes
-    placesRestantes int not null,
+    placesRestantes int not null CHECK (placesRestantes >= 0),
     ouvertATous boolean not null,
     foreign key (idLieu) references LIEU(idLieu),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe)
@@ -88,7 +88,7 @@ create table FAVORISER(
 create table HEBERGEMENT(
     idHebergement int not null primary key,
     nomHebergement varchar(30) not null,
-    nbMax int not null
+    nbMax int not null CHECK (nbMax > 0),
 );
 
 create table ACCUEILIR(
