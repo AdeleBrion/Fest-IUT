@@ -1,4 +1,4 @@
-DELIMITER|
+DELIMITER |
 CREATE OR REPLACE TRIGGER ConcertPlein BEFORE INSERT ON INSCRIRE FOR EACH ROW
 BEGIN
     declare nbSpec int;
@@ -13,7 +13,7 @@ BEGIN
 END |
 DELIMITER ;
 
-DELIMITER|
+DELIMITER |
 CREATE OR REPLACE TRIGGER HabitationPlein BEFORE INSERT ON ACCUEILIR FOR EACH ROW
 BEGIN
     declare nbPerson int;
@@ -28,38 +28,39 @@ BEGIN
 END |
 DELIMITER ;
 
-DELIMITER|
+DELIMITER |
 CREATE OR REPLACE TRIGGER CHEVAUCHEMENTACTIVITE BEFORE INSERT ON PLANIFIER FOR EACH ROW
 BEGIN
     declare idActiA int;
     declare dateHA Timestamp;
     declare duree int;
-    declare inter INTERVAL;
     declare fin_activite Timestamp;
-
-    declare inter_new INTERVAL;
     declare fin_activite_new Timestamp;
-
-    declare fini boolean default false;
+    declare debut_activite Timestamp;
+    declare mes varchar(100);
+    DECLARE fini boolean default FALSE;
+    
     declare lesActivite cursor for 
-        select idActivite, dateHeureA, dureePlanification
+        select idActivite, dateheureActivite, dureePlanification
         from ACTIVITEANNEXE natural join PLANIFIER
-        where idGroupe=new.idGroupe;
-    declare continue handler for not found set fini = true;
+        where idGroupe = new.idGroupe;
+    declare continue handler for not found set fini = TRUE;
+
+    SELECT dateheureActivite INTO debut_activite FROM ACTIVITEANNEXE WHERE idActivite = NEW.idActivite;
+
     open lesActivite;
-    while not fini then
+    while not fini DO
         fetch lesActivite into idActiA, dateHA, duree;
         if not fini then
-            set inter = NUMTODSINTERVAL(duree, 'HOUR');
-            set fin_activite = dateHA + inter;
-
-            set inter_new = NUMTODSINTERVAL(new.duree, 'HOUR');
-            set fin_activite_new = new.dateHA + inter_new;
-            if (fin_activite >= new.dateHA and fin_activite <= fin_activite_new) or (fin_activite_new >= new.dateHA and fin_activite_new <= fin_activite) then
+            set fin_activite = TIMESTAMPADD(HOUR, duree, dateHA);
+            set fin_activite_new = TIMESTAMPADD(HOUR, new.dureePlanification, debut_activite);
+            if (fin_activite >= debut_activite and fin_activite <= fin_activite_new) or (fin_activite_new >= debut_activite and fin_activite_new <= fin_activite) then
                 set mes = concat('L activité ', idActiA, ' ne peut pas être planifiée car elle chevauche une autre activité du même groupe');
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = mes;
             end if;
         end if;
     end while;
+    CLOSE lesActivite;
 END |
 DELIMITER ;
 
@@ -71,11 +72,11 @@ BEGIN
     declare duree int;
     declare dureeMontage int;
     declare dureeDemontage int;
-    declare inter INTERVAL;
+    declare total int;
     declare fin_concert Timestamp;
-
-    declare inter_new INTERVAL;
+    declare total_new int;
     declare fin_concert_new Timestamp;
+    declare mes varchar(100);
 
     declare fini boolean default false;
     declare lesConcert cursor for 
@@ -87,11 +88,11 @@ BEGIN
     while not fini do
         fetch lesConcert into idConcert, dateHeureDebut, duree, dureeMontage, dureeDemontage;
         if not fini then
-            set inter = NUMTODSINTERVAL((duree + dureeMontage + dureeDemontage), 'MINUTE');
-            set fin_concert = dateHeureDebut + inter;
+            set total = (duree + dureeMontage + dureeDemontage);
+            set fin_concert = TIMESTAMPADD(MINUTE, total, dateHeureDebut);
 
-            set inter_new = NUMTODSINTERVAL((new.dureeConcert + new.dureeMontage + new.dureeDemontage), 'MINUTE');
-            set fin_concert_new = new.dateHeureDebut + inter_new;
+            set total_new = (new.dureeConcert + new.dureeMontage + new.dureeDemontage);
+            set fin_concert_new = TIMESTAMPADD(MINUTE, total_new, new.dateHeureDebut);
             if (fin_concert >= new.dateHeureDebut and fin_concert <= fin_concert_new) or (fin_concert_new >= new.dateHeureDebut and fin_concert_new <= fin_concert) then
                 set mes = concat('Le concert ', idConcert, ' ne peut pas être planifiée car il chevauche un autre concert pour un même lieu');
             end if;
