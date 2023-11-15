@@ -55,7 +55,7 @@ create table SOUSSTYLE(
     idStyle int,
     sousStyle int,
     foreign key (idStyle) references STYLE(idStyle),
-    foreign key (sous_style) references STYLE(idStyle)
+    foreign key (sousStyle) references STYLE(idStyle)
 );
 
 create table GROUPEMUSICAL(
