@@ -13,8 +13,8 @@ DROP TABLE IF EXISTS INSCRIRE;
 DROP TABLE IF EXISTS CONCERT;
 DROP TABLE IF EXISTS RESEAUX;
 DROP TABLE IF EXISTS GROUPEMUSICAL;
-DROP TABLE IF EXISTS SOUS_STYLE;
 DROP TABLE IF EXISTS STYLE;
+DROP TABLE IF EXISTS SOUS_STYLE;
 DROP TABLE IF EXISTS BILLET;
 DROP TABLE IF EXISTS SPECTATEUR;
 DROP TABLE IF EXISTS LIEU;
@@ -115,9 +115,9 @@ create table HEBERGEMENT(
 create table ACCUEILIR(
     idGroupe int,
     idHebergement int,
-    dateHeureDeb Timestamp, -- JJ/MM/YYYY
+    dateHeureHeb Timestamp, -- JJ/MM/YYYY
     nbPersonne int not null,
-    primary key (idGroupe,idHebergement,dateHeureDeb),
+    primary key (idGroupe, idHebergement, dateHeureHeb),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe),
     foreign key (idHebergement) references HEBERGEMENT(idHebergement)
 );
