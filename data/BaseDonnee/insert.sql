@@ -94,6 +94,10 @@ INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, du
     (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
     (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
 
+-- Pour testée le trigger CHEVAUCHEMENTCONCERT
+INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
+    (8, 9, 33, "Concert", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
+
 INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
     (1, 1),
     (2, 3),
@@ -138,13 +142,20 @@ INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, 
     (10, "Séance de photos", "2023-12-10 16:00:00", false),
     (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
-INSERT INTO PLANIFIER (idGroupe, idActivite,dureePlanification) VALUES
+-- Pour testée le trigger CHEVAUCHEMENTACTIVITE
+INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, accessibleAuPublic) VALUES
+    (12, "Rencontre avec la fan-base", "2023-12-01 17:00:00", true);
+
+INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
     (1, 1, 3),
     (2, 2, 1),
     (3, 3, 4),
     (4, 5, 2),
     (5, 4, 1);
 
+-- Pour testée le trigger CHEVAUCHEMENTACTIVITE
+INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
+    (1, 12, 3);
 
 INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (1, 1, "", "https://www.instagram.com/rollingstone/", ""),
