@@ -35,7 +35,7 @@ INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
     (13, 9, 1, 23, "2023-12-14"),
     (14, 9, 3, 55, "2023-12-18");
 
-INSERT INTO STYLE (idStyle, nomStyle, idGenre) VALUES
+INSERT INTO STYLE (idStyle, nomStyle) VALUES
     (1, "rock"),
     (2, "jazz"),
     (3, "musique classique"),
@@ -47,10 +47,10 @@ INSERT INTO STYLE (idStyle, nomStyle, idGenre) VALUES
     (9, "grunge"),
     (10, "j-pop");
 
---INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
-  --  (1, "grunge"),
-    --(5, "k-pop"),
-    --(5, "j-pop");
+-- INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
+--    (1, "grunge"),
+--     (5, "k-pop"),
+--     (5, "j-pop");
 
 INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- ROCK (1.6)
@@ -116,7 +116,7 @@ INSERT INTO HEBERGEMENT (idHebergement, nomHebergement, nbMax) VALUES
     (6, "Hôtel : suite 22B", 15);
 
 
-INSERT INTO ACCUEILIR (idGroupe, idHebergement, dateheureDeb, nbPersonne) VALUES
+INSERT INTO ACCUEILIR (idGroupe, idHebergement, dateheureHeb, nbPersonne) VALUES
     (1, 1, "2023-12-01 16:00:00", 5),
     (2, 2, "2023-12-02 16:00:00", 10),
     (3, 3, "2023-12-18 20:00:00", 5),
@@ -154,7 +154,16 @@ INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (5, 5, "", "https://www.instagram.com/muse/?hl=fr", ""),
     (6, 6, "", "https://www.instagram.com/chilipeppers/", "");
 
---INSERT INTO INSCRIRE VALUES(id_concert, id_spectateur);
+INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
+    (3,2),
+    (3,1),
+    (3,3),
+    (3,4),
+    (3,5);
+
+-- Pour test le trigger
+INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
+    (3,6);
 
 INSERT INTO TYPEINSTRUMENT (idTypeInstrument, nomTypeInstrument) VALUES
     (1, "Guitare éléctrique"),
