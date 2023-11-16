@@ -67,15 +67,17 @@ DELIMITER ;
 DELIMITER |
 CREATE OR REPLACE TRIGGER CHEVAUCHEMENTCONCERT BEFORE INSERT ON CONCERT FOR EACH ROW
 BEGIN
-    declare idConcert int;
-    declare dateHeureDebut Timestamp;
+    declare idConcertelem int;
+    declare dateHeureDebutelem Timestamp;
     declare duree int;
-    declare dureeMontage int;
-    declare dureeDemontage int;
+    declare dureeMontageelem int;
+    declare dureeDemontageelem int;
     declare total int;
     declare fin_concert Timestamp;
+    declare debut_concert Timestamp;
     declare total_new int;
     declare fin_concert_new Timestamp;
+    declare debut_concert_new Timestamp;
     declare mes varchar(100);
 
     declare fini boolean default false;
@@ -86,16 +88,23 @@ BEGIN
     declare continue handler for not found set fini = true;
     open lesConcert;
     while not fini do
-        fetch lesConcert into idConcert, dateHeureDebut, duree, dureeMontage, dureeDemontage;
+        fetch lesConcert into idConcertelem, dateHeureDebutelem, duree, dureeMontageelem, dureeDemontageelem;
         if not fini then
-            set total = (duree + dureeMontage + dureeDemontage);
-            set fin_concert = TIMESTAMPADD(MINUTE, total, dateHeureDebut);
+            set total = (duree + dureeDemontageelem);
+            set debut_concert = TIMESTAMPADD(MINUTE, -dureeMontageelem ,dateHeureDebutelem);
+            set fin_concert = TIMESTAMPADD(MINUTE, total, dateHeureDebutelem);
 
-            set total_new = (new.dureeConcert + new.dureeMontage + new.dureeDemontage);
+            set total_new = (new.dureeConcert + new.dureeDemontage);
             set fin_concert_new = TIMESTAMPADD(MINUTE, total_new, new.dateHeureDebut);
-            if (fin_concert >= new.dateHeureDebut and fin_concert <= fin_concert_new) or (fin_concert_new >= new.dateHeureDebut and fin_concert_new <= fin_concert) then
-                set mes = concat('Le concert ', idConcert, ' ne peut pas être planifiée car il chevauche un autre concert pour un même lieu');
-            end if;
+            set debut_concert_new = TIMESTAMPADD(MINUTE, -new.dureeMontage, new.dateHeureDebut);
+
+            IF (fin_concert >= debut_concert_new AND fin_concert <= fin_concert_new) OR 
+            (fin_concert_new >= debut_concert_new AND fin_concert_new <= fin_concert) OR
+            (debut_concert >= debut_concert_new AND debut_concert <= fin_concert_new) OR
+            (debut_concert_new >= debut_concert AND debut_concert_new <= fin_concert) then
+                set mes = concat('Le concert ', idConcertelem, ' ne peut pas être planifiée car il chevauche un autre concert pour un même lieu');
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = mes;
+            end if;            
         end if;
     end while;
 END |
