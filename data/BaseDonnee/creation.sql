@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS CONCERT;
 DROP TABLE IF EXISTS RESEAUX;
 DROP TABLE IF EXISTS GROUPEMUSICAL;
 DROP TABLE IF EXISTS STYLE;
-DROP TABLE IF EXISTS SOUS_STYLE;
+DROP TABLE IF EXISTS SOUSSTYLE;
 DROP TABLE IF EXISTS BILLET;
 DROP TABLE IF EXISTS SPECTATEUR;
 DROP TABLE IF EXISTS LIEU;
@@ -102,8 +102,8 @@ create table FAVORISER(
     idSpectateur int not null,
     idConcert int not null,
     primary key(idSpectateur, idConcert),
-    foreign key  (idSpectateur) references SPECTATEUR(idSpectateur),
-    foreign key  (idConcert) references CONCERT(idConcert)
+    foreign key (idSpectateur) references SPECTATEUR(idSpectateur),
+    foreign key (idConcert) references CONCERT(idConcert)
 );
 
 create table HEBERGEMENT(
