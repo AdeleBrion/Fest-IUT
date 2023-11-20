@@ -1,24 +1,3 @@
-DROP TABLE IF EXISTS PHOTO;
-DROP TABLE IF EXISTS VIDEO;
-DROP TABLE IF EXISTS JOUER;
-DROP TABLE IF EXISTS APPARTIENT;
-DROP TABLE IF EXISTS ARTISTE;
-DROP TABLE IF EXISTS TYPEINSTRUMENT;
-DROP TABLE IF EXISTS PLANIFIER;
-DROP TABLE IF EXISTS ACTIVITEANNEXE;
-DROP TABLE IF EXISTS ACCUEILIR;
-DROP TABLE IF EXISTS HEBERGEMENT;
-DROP TABLE IF EXISTS FAVORISER;
-DROP TABLE IF EXISTS INSCRIRE;
-DROP TABLE IF EXISTS CONCERT;
-DROP TABLE IF EXISTS RESEAUX;
-DROP TABLE IF EXISTS GROUPEMUSICAL;
-DROP TABLE IF EXISTS STYLE;
-DROP TABLE IF EXISTS SOUSSTYLE;
-DROP TABLE IF EXISTS BILLET;
-DROP TABLE IF EXISTS SPECTATEUR;
-DROP TABLE IF EXISTS LIEU;
-
 create table LIEU(
     idLieu int not null primary key,
     nomLieu varchar(100) not null,
@@ -84,7 +63,7 @@ create table CONCERT(
     dureeConcert int not null, -- en minutes
     dureeMontage int not null, -- en minutes
     dureeDemontage int not null, -- en minutes
-    placesRestantes int not null,
+    placesRestantes int not null CHECK (placesRestantes >= 0),
     ouvertATous boolean not null,
     foreign key (idLieu) references LIEU(idLieu),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe)
@@ -109,7 +88,7 @@ create table FAVORISER(
 create table HEBERGEMENT(
     idHebergement int not null primary key,
     nomHebergement varchar(30) not null,
-    nbMax int not null
+    nbMax int not null CHECK (nbMax > 0),
 );
 
 create table ACCUEILIR(

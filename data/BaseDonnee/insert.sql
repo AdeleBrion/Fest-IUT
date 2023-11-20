@@ -16,7 +16,8 @@ INSERT INTO SPECTATEUR (idSpectateur, nomSpectateur, prenom, email, motDePasse, 
     (15, "LUDMANN", "Dorian", "dorian.ludmann@gmail.com", "5896", "15 rue du Hibou", "fan de deathfonk"),
     (16, "GRUSON--DELANNOY", "Jules", "jules.gruson-delannoy@gmail.com", "5999", "16 impasse de la réussite", "amateur de j-pop"),
     (17, "LALLIER", "Anna", "anna.lallier@gmail.com", "4789", "17 impasse du retard", "fan de rock"),
-    (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "JDGW", "18 avenue de Couasnon", "fan de classique");
+    (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "JDGW", "18 avenue de Couasnon", "fan de classique"),
+    (19, "MAUPOU", "Cassandra", "cassandra.maupou@gmail.com","8888", "19 boulevard du 50/50", "fan de rap américain");
 
 
 INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
