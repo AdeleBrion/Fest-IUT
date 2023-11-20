@@ -88,7 +88,7 @@ create table FAVORISER(
 create table HEBERGEMENT(
     idHebergement int not null primary key,
     nomHebergement varchar(30) not null,
-    nbMax int not null CHECK (nbMax > 0),
+    nbMax int not null CHECK (nbMax > 0)
 );
 
 create table ACCUEILIR(
