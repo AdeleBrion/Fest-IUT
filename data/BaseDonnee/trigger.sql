@@ -14,21 +14,6 @@ END |
 DELIMITER ;
 
 DELIMITER |
-CREATE OR REPLACE TRIGGER HabitationPlein BEFORE INSERT ON ACCUEILIR FOR EACH ROW
-BEGIN
-    declare nbPerson int;
-    declare nbMax int;
-    declare mes varchar(100);
-    select nbMax into nbMax from HEBERGEMENT where idHebergement=new.idHebergement;
-    select sum(nbPersonne) into nbPerson from ACCUEILIR where idHebergement=new.idHebergement and dateHeureHeb=new.dateHeureHeb;
-    if nbPerson+new.nbPersonne > nbMax then
-        set mes = concat('L hebergement ', new.idHebergement, ' ne peut pas accépté autant de personne');
-        signal SQLSTATE '45000' set MESSAGE_TEXT = mes;
-    end if;
-END |
-DELIMITER ;
-
-DELIMITER |
 CREATE OR REPLACE TRIGGER CHEVAUCHEMENTACTIVITE BEFORE INSERT ON PLANIFIER FOR EACH ROW
 BEGIN
     declare idActiA int;
