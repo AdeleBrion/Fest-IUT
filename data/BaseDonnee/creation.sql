@@ -34,7 +34,7 @@ create table SOUSSTYLE(
     idStyle int,
     sousStyle int,
     foreign key (idStyle) references STYLE(idStyle),
-    foreign key (sous_style) references STYLE(idStyle)
+    foreign key (sousStyle) references STYLE(idStyle)
 );
 
 create table GROUPEMUSICAL(
@@ -81,8 +81,8 @@ create table FAVORISER(
     idSpectateur int not null,
     idConcert int not null,
     primary key(idSpectateur, idConcert),
-    foreign key  (idSpectateur) references SPECTATEUR(idSpectateur),
-    foreign key  (idConcert) references CONCERT(idConcert)
+    foreign key (idSpectateur) references SPECTATEUR(idSpectateur),
+    foreign key (idConcert) references CONCERT(idConcert)
 );
 
 create table HEBERGEMENT(
@@ -94,9 +94,9 @@ create table HEBERGEMENT(
 create table ACCUEILIR(
     idGroupe int,
     idHebergement int,
-    dateHeureDeb Timestamp, -- JJ/MM/YYYY
+    dateHeureHeb Timestamp, -- JJ/MM/YYYY
     nbPersonne int not null,
-    primary key (idGroupe,idHebergement,dateHeureDeb),
+    primary key (idGroupe, idHebergement, dateHeureHeb),
     foreign key (idGroupe) references GROUPEMUSICAL(idGroupe),
     foreign key (idHebergement) references HEBERGEMENT(idHebergement)
 );

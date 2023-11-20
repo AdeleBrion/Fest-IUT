@@ -36,7 +36,7 @@ INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
     (13, 9, 1, 23, "2023-12-14"),
     (14, 9, 3, 55, "2023-12-18");
 
-INSERT INTO STYLE (idStyle, nomStyle, idGenre) VALUES
+INSERT INTO STYLE (idStyle, nomStyle) VALUES
     (1, "rock"),
     (2, "jazz"),
     (3, "musique classique"),
@@ -48,10 +48,10 @@ INSERT INTO STYLE (idStyle, nomStyle, idGenre) VALUES
     (9, "grunge"),
     (10, "j-pop");
 
---INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
-  --  (1, "grunge"),
-    --(5, "k-pop"),
-    --(5, "j-pop");
+-- INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
+--    (1, "grunge"),
+--     (5, "k-pop"),
+--     (5, "j-pop");
 
 INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- ROCK (1.6)
@@ -95,6 +95,10 @@ INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, du
     (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
     (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
 
+-- Pour testée le trigger CHEVAUCHEMENTCONCERT
+INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
+    (8, 4, 33, "Concert", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
+
 INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
     (1, 1),
     (2, 3),
@@ -117,7 +121,7 @@ INSERT INTO HEBERGEMENT (idHebergement, nomHebergement, nbMax) VALUES
     (6, "Hôtel : suite 22B", 15);
 
 
-INSERT INTO ACCUEILIR (idGroupe, idHebergement, dateheureDeb, nbPersonne) VALUES
+INSERT INTO ACCUEILIR (idGroupe, idHebergement, dateheureHeb, nbPersonne) VALUES
     (1, 1, "2023-12-01 16:00:00", 5),
     (2, 2, "2023-12-02 16:00:00", 10),
     (3, 3, "2023-12-18 20:00:00", 5),
@@ -139,13 +143,20 @@ INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, 
     (10, "Séance de photos", "2023-12-10 16:00:00", false),
     (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
-INSERT INTO PLANIFIER (idGroupe, idActivite,dureePlanification) VALUES
+-- Pour testée le trigger CHEVAUCHEMENTACTIVITE
+INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, accessibleAuPublic) VALUES
+    (12, "Rencontre avec la fan-base", "2023-12-01 17:00:00", true);
+
+INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
     (1, 1, 3),
     (2, 2, 1),
     (3, 3, 4),
     (4, 5, 2),
     (5, 4, 1);
 
+-- Pour testée le trigger CHEVAUCHEMENTACTIVITE
+INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
+    (1, 12, 3);
 
 INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (1, 1, "", "https://www.instagram.com/rollingstone/", ""),
@@ -155,7 +166,16 @@ INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (5, 5, "", "https://www.instagram.com/muse/?hl=fr", ""),
     (6, 6, "", "https://www.instagram.com/chilipeppers/", "");
 
---INSERT INTO INSCRIRE VALUES(id_concert, id_spectateur);
+INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
+    (3,2),
+    (3,1),
+    (3,3),
+    (3,4),
+    (3,5);
+
+-- Pour test le trigger
+INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
+    (3,6);
 
 INSERT INTO TYPEINSTRUMENT (idTypeInstrument, nomTypeInstrument) VALUES
     (1, "Guitare éléctrique"),
