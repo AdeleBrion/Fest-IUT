@@ -1,8 +1,8 @@
 nav{
     display: flex;
     position:fixed;
-    width: 99%;
-    margin-left: 0%;
+    width: 100%;
+    margin-top: 0%;
 }
 
 a{
@@ -12,10 +12,14 @@ a{
     padding-bottom: 2vh;
     border-right: aliceblue solid;
     color: aliceblue;
-    background-color: rgb(65, 62, 62);
+    background-color: black;
 }
 
 a{
     text-decoration: none;
     color: aliceblue;
+}
+
+#last{
+    border-right: transparent;
 }

@@ -11,13 +11,12 @@ header{
 main{
     padding:0%;
     margin: 0%;
+    
 }
 
 .debut, .decouvertes, .billets{
     background-size: cover;
     height: 70vh;
-    padding: 0%;
-    margin: 0%;
 }
 
 .debut{
@@ -26,10 +25,19 @@ main{
     text-align: center;
 }
 
-.debut p{
-    
+p{
+    margin-top: 0%;
+}
+
+.texte{
+    text-align: center;
+    padding-top: 17%;
 }
 
 .decouvertes{
     background-image: url("../img/accueil2.jpg");
+}
+
+.billets{
+    background-image: url("../img/billets.jpg");
 }
