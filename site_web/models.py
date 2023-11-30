@@ -33,14 +33,13 @@ class Style(db.Model):
     idStyle = db.Column(db.Integer, primary_key=True)
     nomStyle = db.Column(db.String(30))
 
-# class SousStyle(db.Model):
-#     __tablename__ = "sousstyle"
-#     idStyle = db.Column(db.Integer, db.ForeignKey('style.idStyle'), primary_key=True)
-#     sousStyle = db.Column(db.Integer, db.ForeignKey('style.idStyle'), primary_key=True)
+class SousStyle(db.Model):
+    __tablename__ = 'sousstyle'
+    idStyle = db.Column(db.Integer, db.ForeignKey('style.idStyle'), primary_key=True)
+    style_principale = db.relationship('Style', foreign_keys='SousStyle.idStyle')
+    sousStyle = db.Column(db.Integer, db.ForeignKey('style.idStyle'), primary_key=True)
+    style_secondaire = db.relationship('Style', foreign_keys='SousStyle.sousStyle')
     
-#     style = db.relationship('Style', foreign_keys=[idStyle], backref=db.backref('styles', lazy="dynamic"))
-#     sous_style = db.relationship('Style', foreign_keys=[sousStyle], backref=db.backref('sous_styles', lazy="dynamic"))
-
 
 class GroupeMusical(db.Model):
     __tablename__ = "groupemusical"

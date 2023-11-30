@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+# username = 'festiut_flask'
+# password = 'FlaskMDP'
+# host = 'mysql-festiut.alwaysdata.net'
+# database = 'festiut_db'
 username = 'root'
 password = 'root'
 host = 'localhost'

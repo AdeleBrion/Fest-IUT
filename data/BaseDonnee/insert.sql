@@ -48,10 +48,9 @@ INSERT INTO STYLE (idStyle, nomStyle) VALUES
     (9, "grunge"),
     (10, "j-pop");
 
--- INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
---    (1, "grunge"),
---     (5, "k-pop"),
---     (5, "j-pop");
+INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
+    (5, 6),
+    (5, 10);
 
 INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- ROCK (1.6)
