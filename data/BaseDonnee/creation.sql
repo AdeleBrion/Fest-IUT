@@ -10,7 +10,7 @@ create table SPECTATEUR(
     idSpectateur int not null primary key,
     nomSpectateur varchar(30) not null,
     prenom varchar(30) not null,
-    email varchar(50) not null,
+    email varchar(50) not null UNIQUE,
     motDePasse varchar(50) not null,
     adresse varchar(50) not null,
     infoAnnexes varchar(150)
