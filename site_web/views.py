@@ -1,5 +1,8 @@
 from .app import app
-from flask import render_template
+from flask import render_template, redirect, url_for, request
+from flask_login import login_user, logout_user, login_required
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
 
 
 @app.route('/')
@@ -7,7 +10,7 @@ def home():
     return render_template('accueil.html')
 
 
-class LoginForm( FlaskForm ):
+class LoginForm(FlaskForm):
     identifiant = StringField('Identifiant')
     mdp = PasswordField('Password')
     def get_authentification_utilisateur(self):
