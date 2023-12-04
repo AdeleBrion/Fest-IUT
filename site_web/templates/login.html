@@ -5,11 +5,12 @@
 {% block main %}
 <main>
     <img src="/../static/img/connexion.jpg">
-    <form>
+    <form method = "POST" action = "{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
         <p> Identifiant </p>
-        <input type="text" name="identifiant"></input>
+        {{ form.identifiant(size =50, class_="form-control", placeholder="Identifiant") }}
         <p> Mot de passse </p>
-        <input type="password" name="identifiant"></input>
+        {{ form.mdp(size =50, class_="form-control", placeholder="Mot de Passe") }}
         <button> Se connecter </button>
 
         <p><a href=""> Pas encore inscris ? Inscrivez-vous !</a></p>

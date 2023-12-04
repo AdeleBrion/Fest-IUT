@@ -1,5 +1,5 @@
 from sqlalchemy import CheckConstraint
-from .app import db
+# from .app import db
 
 class Lieu(db.Model):
     __tablename__ = "LIEU"
