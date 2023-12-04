@@ -27,7 +27,7 @@ class LoginForm(FlaskForm):
             return None
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     f = LoginForm()
     if f.validate_on_submit():
@@ -41,11 +41,10 @@ def login():
                 erreur = "Login ou mot de passe incorrect")
     return render_template(
         "login.html",
-        form=f,
-        title='Page de connexion')
+        form=f)
 
 
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('login'))  
+    return redirect(url_for('login'))
