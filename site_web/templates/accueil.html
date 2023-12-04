@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="/../static/css/accueil.css">
+    <link rel="stylesheet" href="/../static/css/nav.css">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+    <main>
+        <article class="debut">
+            <div class="texte">
+                <p>Découvrez les concerts près de chez vous,</p>
+                <p>Réservez en quelques clics,</p>
+                <p>Sortez et profitez de l'ambiance Fest'IUT !</p>
+            </div>
+        </article>
+        <article class="decouvertes">
+            <div class="texte">
+                <p> Nom du groupe : bullshit </p>
+            </div>
+        </article>
+        <article class="billets">
+            <div class="texte">
+                <p> Les types de billets </p>
+            </div>
+        </article>
+    </main>
+{% endblock %}
