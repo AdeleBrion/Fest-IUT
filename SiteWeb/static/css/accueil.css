@@ -1,0 +1,43 @@
+body{
+    background-color: rgb(65,62,62);
+    padding:0%;
+    margin: 0%;
+}
+
+header{
+    text-align: center;
+}
+
+main{
+    padding:0%;
+    margin: 0%;
+    
+}
+
+.debut, .decouvertes, .billets{
+    background-size: cover;
+    height: 70vh;
+}
+
+.debut{
+    background-image: url("../img/accueil1.jpg");
+    color: white;
+    text-align: center;
+}
+
+p{
+    margin-top: 0%;
+}
+
+.texte{
+    text-align: center;
+    padding-top: 17%;
+}
+
+.decouvertes{
+    background-image: url("../img/accueil2.jpg");
+}
+
+.billets{
+    background-image: url("../img/billets.jpg");
+}
