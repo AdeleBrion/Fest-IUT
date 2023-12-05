@@ -39,3 +39,9 @@ a{
     color:rgb(0, 149, 255);
     text-decoration: none;
 }
+
+
+.erreur{
+    color: red;
+    margin-top: 2vh;
+}

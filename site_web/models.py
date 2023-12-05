@@ -1,5 +1,6 @@
 from sqlalchemy import CheckConstraint
-# from .app import db
+from .app import db
+from flask_login import UserMixin
 
 class Lieu(db.Model):
     __tablename__ = "LIEU"
@@ -9,7 +10,7 @@ class Lieu(db.Model):
     capaciteMax = db.Column(db.Integer, nullable=False)
     photoLieu = db.Column(db.LargeBinary)
 
-class Spectateur(db.Model):
+class Spectateur(db.Model, UserMixin):
     __tablename__ = "SPECTATEUR"
     idSpectateur = db.Column(db.Integer, primary_key=True)
     nomSpectateur = db.Column(db.String(45), nullable=False)
@@ -18,6 +19,9 @@ class Spectateur(db.Model):
     motDePasse = db.Column(db.String(45), nullable=False)
     adresse = db.Column(db.String(45), nullable=False)
     infoAnnexes = db.Column(db.String(45))
+
+    def get_id(self):
+      return str(self.idSpectateur)
 
 class Billet(db.Model):
     __tablename__ = "BILLET"
@@ -83,3 +87,7 @@ class Inscrire(db.Model):
 
     concert = db.relationship('Concert', backref='inscriptions')  # Crée une relation avec la classe Concert
     spectateur = db.relationship('Spectateur', backref='inscriptions')  # Crée une relation avec la classe Spectateur
+
+
+def get_email_spectateur(user):
+    return Spectateur.query.filter_by(email=user).first()

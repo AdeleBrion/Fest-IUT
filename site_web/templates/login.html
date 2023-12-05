@@ -12,7 +12,9 @@
         <p> Mot de passse </p>
         {{ form.mdp(size =50, class_="form-control", placeholder="Mot de Passe") }}
         <button> Se connecter </button>
-
+        {% if erreur %}
+            <p class="erreur"><strong>{{ erreur }}</strong></p>
+        {% endif %}
         <p><a href=""> Pas encore inscris ? Inscrivez-vous !</a></p>
     </form>
 </main>
