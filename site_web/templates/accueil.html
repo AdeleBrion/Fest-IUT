@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil Fest-iut</title>
-    <link rel="stylesheet" href="../static/css/accueil.css">
-    <link rel="stylesheet" href="../static/css/nav.css">
-</head>
-
-<body>
-    <header>
-        <nav>
-            <a href="accueil.html">LES CONCERTS</a>
-            <a href="">L'ACTUALITE</a>
-            <a href="billeterie.html">LA BILLETERIE</a>
-            <a href="connexion.html">CONNEXION</a>
-        </nav>
-    </header>
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="/../static/css/accueil.css">
+    <link rel="stylesheet" href="/../static/css/nav.css">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
     <main>
         <article class="debut">
             <div class="texte">
@@ -27,6 +14,7 @@
             </div>
         </article>
         <article class="decouvertes">
+
             <div class="texte"></div>
                 <p> Nom du groupe : bullshit </p>
             </div>
@@ -37,6 +25,4 @@
             </div>
         </article>
     </main>
-</body>
-
-</html>
+{% endblock %}
