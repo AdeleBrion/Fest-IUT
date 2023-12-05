@@ -1,0 +1,41 @@
+html, body{
+    overflow: hidden;
+    margin: 0%;
+}
+
+main{
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0%;
+    text-align: center;
+}
+
+img{
+    flex-basis: 50%;
+    max-width: 40%;
+}
+
+form{
+    border: black solid;
+    text-align: center;
+    margin-left: 15vw;
+    padding: 5vh 12vh 2vh 12vh;
+}
+
+form p{
+    margin-top: 5vh;
+}
+
+button{
+    margin-top: 5vh;
+    background-color: black;
+    color: white;
+    box-shadow: inset;
+    border-radius: 5px;
+    padding: 1vh 2vh 1vh 2vh;
+}
+
+a{
+    color:rgb(0, 149, 255);
+    text-decoration: none;
+}
