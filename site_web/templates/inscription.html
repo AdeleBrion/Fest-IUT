@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/connexion.css">
-    <title>Connexion Fest'Iut</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="/../static/css/connexion.css">
+{% endblock %}
+{% block main %}
     <main>
         <img src="../static/img/inscription.jpg">
         <form>
@@ -14,10 +10,9 @@
             <input type="text" name="identifiant"></input>
             <p> Mot de passse </p>
             <input type="password" name="identifiant"></input>
-            <button> Se connecter </button>
+            <button>S'inscrire</button>
 
-            <p><a href="connexion.html"> Déjà inscris ? Connectez-vous !</a>
+            <p><a href="{{ url_for('login')}}"> Déjà inscris ? Connectez-vous !</a>
         </form>
     </main>
-</body>
-</html>
+{% endblock %}
