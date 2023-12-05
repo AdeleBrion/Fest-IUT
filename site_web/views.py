@@ -69,3 +69,8 @@ def load_user(user):
 @login_required
 def compte():
     return render_template('compte.html')
+
+
+@app.route('/inscription')
+def inscription():
+    return render_template('inscription.html')

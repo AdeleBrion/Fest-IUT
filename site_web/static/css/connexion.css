@@ -10,9 +10,8 @@ main{
 }
 
 img{
-    flex-basis: 70%;
-    max-height: 100vh;
-    margin: 0%;
+    flex-basis: 50%;
+    max-width: 40%;
 }
 
 form{
@@ -39,7 +38,6 @@ a{
     color:rgb(0, 149, 255);
     text-decoration: none;
 }
-
 
 .erreur{
     color: red;
