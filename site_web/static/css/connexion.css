@@ -7,18 +7,18 @@ main{
     display: flex;
     flex-wrap: nowrap;
     margin: 0%;
+    text-align: center;
 }
 
 img{
-    flex-basis: 70%;
-    max-height: 100vh;
-    margin: 0%;
+    flex-basis: 50%;
+    max-width: 40%;
 }
 
 form{
     border: black solid;
     text-align: center;
-    margin: 10% 20% 10% 20%;
+    margin-left: 15vw;
     padding: 5vh 12vh 2vh 12vh;
 }
 
@@ -27,7 +27,7 @@ form p{
 }
 
 button{
-    margin-top: 10vh;
+    margin-top: 5vh;
     background-color: black;
     color: white;
     box-shadow: inset;
