@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/nav.css">
-    <link rel="stylesheet" href="../static/css/billeterie.css">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="accueil.html">LES CONCERTS</a>
-            <a href="">L'ACTUALITE</a>
-            <a href="" class="active">LA BILLETERIE</a>
-            <a href="connexion.html">CONNEXION</a>
-        </nav>
-    </header>
-    <main>
-        <div class="1">
-            <img src="../static/img/billet1.jpg">
-            <p> Billet catégorie 1</p>
-            <p>Vous voulez assister au festival pour un jour ?</p>
-            <p>Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris.</p>
-            <p>Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
-        </div>
-        <div class="2">
-            <img src="../static/img/billet2.jpg">
-            <p> Billet catégorie 1</p>
-        </div>
-        <div class="3">
-            <img src="../static/img/billet3.jpg">
-            <p> Billet catégorie 1</p>
-        </div>
-        <div class="info">
-            <p>Un problème avec votre réservation ? Une erreur lors de l'achat ? Un remboursement ?</p>
-            <a href="">Toutes les informations nécessaires en un clic.</a>
-        </div>
-    </main>
-</body>
-</html>
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="/../static/css/billeterie.css">
+    <link rel="stylesheet" href="/../static/css/nav.css">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+<main>
+    <div class="1">
+        <img src="../static/img/billet1.jpg">
+        <p> Billet catégorie 1</p>
+        <p>Vous voulez assister au festival pour un jour ?</p>
+        <p>Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris.</p>
+        <p>Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
+    </div>
+    <div class="2">
+        <img src="../static/img/billet2.jpg">
+        <p> Billet catégorie 1</p>
+    </div>
+    <div class="3">
+        <img src="../static/img/billet3.jpg">
+        <p> Billet catégorie 1</p>
+    </div>
+    <div class="info">
+        <p>Un problème avec votre réservation ? Une erreur lors de l'achat ? Un remboursement ?</p>
+        <a href="">Toutes les informations nécessaires en un clic.</a>
+    </div>
+</main>
+{% endblock %}

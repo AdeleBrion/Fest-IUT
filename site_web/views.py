@@ -74,3 +74,9 @@ def compte():
 @app.route('/inscription')
 def inscription():
     return render_template('inscription.html')
+
+
+@app.route('/billeterie')
+@login_required
+def billeterie():
+    return render_template('billeterie.html')
