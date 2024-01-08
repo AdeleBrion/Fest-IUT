@@ -1,4 +1,4 @@
-from .app import app, login_manager
+from .app import app, login_manager, db
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -65,6 +65,26 @@ def load_user(user):
 #                   Compte                            #
 #-----------------------------------------------------#
 
+
+class InscriptionForm(FlaskForm):
+    nom = StringField('Nom')
+    prenom = StringField('Prenom')
+    email = StringField('Email')
+    mdp = PasswordField('Password')
+    adresse = StringField('Adresse')
+    infoAnnexes = StringField('InfoAnnexes')
+    def inscription_utilisateur(self):
+        spec = Spectateur(
+            nomSpectateur=self.nom.data,
+            prenom=self.prenom.data,
+            email=self.email.data,
+            motDePasse=self.mdp.data,
+            adresse="",
+            infoAnnexes= ""
+        )
+        return spec
+
+
 @app.route('/compte')
 @login_required
 def compte():
@@ -73,10 +93,32 @@ def compte():
 
 @app.route('/inscription')
 def inscription():
-    return render_template('inscription.html')
+    return render_template('inscription.html', form=InscriptionForm())
 
 
 @app.route('/billeterie')
 @login_required
 def billeterie():
     return render_template('billeterie.html')
+
+
+
+
+#-----------------------------------------------------#
+#                   Spectateur                        #
+#-----------------------------------------------------#
+
+@app.route('/save/spectateur', methods=("GET", "POST"))
+def ajouter_spec():
+    f = InscriptionForm()
+    spec = Spectateur(
+        nomSpectateur=f.nom.data,
+        prenom=f.prenom.data,
+        email=f.email.data,
+        motDePasse=f.mdp.data,
+        adresse=f.adresse.data,
+        infoAnnexes=f.infoAnnexes.data
+    )
+    db.session.add(spec)
+    db.session.commit()
+    return redirect(url_for('home'))

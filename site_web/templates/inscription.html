@@ -5,13 +5,17 @@
 {% block main %}
     <main>
         <img src="../static/img/inscription.jpg">
-        <form>
-            <p> Identifiant </p>
-            <input type="text" name="identifiant"></input>
+        <form role="form" method="POST" action="{{ url_for('ajouter_spec')}}">
+            {{ form.hidden_tag() }}
+            <p>Nom</p>
+            {{ form.nom(size=50, class_="form-control",placeholder ="Nom") }}
+            <p>Prénom</p>
+            {{ form.prenom(size=50, class_="form-control",placeholder ="Prénom") }}
+            <p> Email </p>
+            {{ form.email(size=50, class_="form-control",placeholder ="Username ") }}
             <p> Mot de passse </p>
-            <input type="password" name="identifiant"></input>
-            <button>S'inscrire</button>
-
+            {{ form.mdp(size=50, class_="form-control",placeholder ="Mot de Passe") }}
+            <button type="submit" >S'inscrire</button>
             <p><a href="{{ url_for('login')}}"> Déjà inscris ? Connectez-vous !</a>
         </form>
     </main>

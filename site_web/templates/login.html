@@ -5,7 +5,7 @@
 {% block main %}
 <main>
     <img src="/../static/img/connexion.jpg">
-    <form method = "POST" action = "{{ url_for('login') }}">
+    <form role="form" method = "POST" action = "{{ url_for('login') }}">
         {{ form.hidden_tag() }}
         <p> Identifiant </p>
         {{ form.identifiant(size =50, class_="form-control", placeholder="Identifiant") }}
