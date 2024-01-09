@@ -82,3 +82,7 @@ def inscription():
 @login_required
 def billeterie():
     return render_template('billeterie.html', title ="Billeterie")
+
+@app.route("/actualite")
+def actualite():
+    return render_template('actualite.html', title="L'actu")
