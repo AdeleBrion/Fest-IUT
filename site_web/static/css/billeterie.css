@@ -14,16 +14,22 @@ main{
 
 div{
     background-color: aliceblue;
-    flex-basis: 25%;
+    flex-basis: 20%;
+    flex-grow: 1;
+    background-image: url("../img/billet1.jpg");
+    background-size: cover;
 
     border-radius: 10vh;
 
     padding: 2vh;
     margin: 2vh;
+
+    font-size: 2vh;
 }
 
 div img{
-    max-width: 15vw;
+    max-width: 30vw;
+    max-height: 30vh;
 }
 
 .info{
@@ -35,4 +41,12 @@ div img{
 .info a{
     color:rgb(0, 149, 255);
     text-decoration: none;
+}
+
+button{
+    background-color: black;
+    border-color: black;
+    color: white;
+    font-size: 4vh;
+    padding:1vh;
 }
