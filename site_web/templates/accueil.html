@@ -1,28 +1,67 @@
 {% extends "base.html" %}
 {% block page_specific_css %}
-    <link rel="stylesheet" href="/../static/css/accueil.css">
-    <link rel="stylesheet" href="/../static/css/nav.css">
+<link rel="stylesheet" href="/../static/css/accueil.css">
+<link rel="stylesheet" href="/../static/css/nav.css">
 {% endblock %}
 {% include "nav.html" %}
 {% block main %}
-    <main>
-        <article class="debut">
-            <div class="texte">
-                <p>Découvrez les concerts près de chez vous,</p>
-                <p>Réservez en quelques clics,</p>
-                <p>Sortez et profitez de l'ambiance Fest'IUT !</p>
-            </div>
-        </article>
-        <article class="decouvertes">
+<main>
+    <article class="debut">
+        <div class="texte">
+            <p>Découvrez les concerts près de chez vous,</p>
+            <p>Réservez en quelques clics,</p>
+            <p>Sortez et profitez de l'ambiance Fest'IUT !</p>
+        </div>
+    </article>
+    <article class="decouvertes">
+        <div class="container">
+            <button id="left-btn"><i class="arrow"></i></button>
+            <div>
+                <div>
+                    <img id="carousel" src="" alt="">
+                </div>
+                <div class="infos_carousel">
+                    <h2 id="nom_carousel"></h2>
+                    <div class="petit_infos">
+                        <p id="date_carousel"></p>
+                        <p id="heure_carousel"></p>
+                        <p id="style_carousel"></p>
+                    </div>
+                    <p id="description_carousel"></p>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas repellat nobis molestiae iure
+                        asperiores rerum molestias libero in distinctio ipsum eos voluptate cumque saepe ipsam quasi
+                        eius laborum, nostrum officia.
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas repellat nobis molestiae iure
+                        asperiores rerum molestias libero in distinctio ipsum eos voluptate cumque saepe ipsam quasi
+                        eius laborum, nostrum officia.
+                    </p>
+                </div>
 
-            <div class="texte"></div>
-                <p> Nom du groupe : bullshit </p>
             </div>
-        </article>
-        <article class="billets">
-            <div class="texte">
-                <p> Les types de billets </p>
+            <button id="right-btn"><i class="arrow"></i></button>
+        </div>
+    </article>
+    <article class="billets">
+        <div class="texte">
+            <p>Prenez vos places pour assister aux concerts qui vous plaisent</p>
+            <p>Que vous souhaitiez voir un seul artiste ou assiter à une journée ou plus au festival,</p>
+            <p>Nous avons les billets qu'il vous faut !</p>
+        </div>
+        <aside class="Les_concerts">
+            {% for concert in concerts %}
+            <div>
+                <div class="image_ticket">
+                    <img src="/../static/img/billet1.jpg" alt="">
+                </div>
+                <div class="texte_ticket">
+                    <p>{{concert.nomConcert}}</p>
+                    <p>{{concert.dateHeureDebut}}</p>
+                </div>
             </div>
-        </article>
-    </main>
+            {% endfor %}
+        </aside>
+    </article>
+</main>
+<script src="/../static/JavaScript/accueil.js"></script>
 {% endblock %}
