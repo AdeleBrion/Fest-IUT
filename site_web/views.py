@@ -8,7 +8,6 @@ from hashlib import sha256
 
 @app.route('/')
 def home():
-    print(Concert.query.limit(3).all())
     return render_template('accueil.html', concerts=Concert.query.limit(3).all())
 
 #-----------------------------------------------------#

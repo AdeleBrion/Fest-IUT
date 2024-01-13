@@ -130,6 +130,11 @@ div.petit_infos{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+div.petit_infos p{
+    padding-right: 10px;
 }
 
 h2 {
