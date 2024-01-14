@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concerts.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+<main>
+    <h2> Catégories </h2>
+    
+    <div class="categorie">
+        {% for style in styles %}
+        <div class="unStyle">
+            <p> {{ style.nomStyle }} </p>
+        </div>
+        {% endfor %}
+    </div>
+    
+</main>
+{% endblock %}

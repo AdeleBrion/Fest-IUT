@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from .models import get_email_spectateur, Spectateur
+from .models import Style, get_email_spectateur, Spectateur
 from hashlib import sha256
 
 @app.route('/')
@@ -80,3 +80,7 @@ def inscription():
 @login_required
 def billeterie():
     return render_template('billeterie.html')
+
+@app.route('/concerts')
+def concerts():
+    return render_template('concerts.html',styles = Style.query.all())

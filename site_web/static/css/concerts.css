@@ -1,0 +1,15 @@
+body{
+    margin: 0px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div.categorie{
+    display: flex;
+}
