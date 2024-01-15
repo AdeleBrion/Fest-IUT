@@ -1,16 +1,14 @@
 from .app import app, login_manager
-from flask import render_template, redirect, url_for, request
+from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style
+from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from .models import Style, get_email_spectateur, Spectateur
 from hashlib import sha256
 
 @app.route('/')
 def home():
-    return render_template('accueil.html')
-
-
+    return render_template('accueil.html', concerts=Concert.query.limit(3).all())
 
 #-----------------------------------------------------#
 #                   Connexion                         #
@@ -84,3 +82,11 @@ def billeterie():
 @app.route('/concerts')
 def concerts():
     return render_template('concerts.html',styles = Style.query.all())
+
+#-----------------------------------------------------#
+#                         API                         #
+#-----------------------------------------------------#
+
+@app.route('/groupes/liste')
+def liste_groupes():
+    return jsonify([groupe.serialize() for groupe in GroupeMusical.query.join(Concert).all()])
