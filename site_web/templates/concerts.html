@@ -7,14 +7,17 @@
 {% block main %}
 <main>
     <h2> Catégories </h2>
-    
+
     <div class="categorie">
         {% for style in styles %}
         <div class="unStyle">
-            <p> {{ style.nomStyle }} </p>
+            <a href="{{ url_for('static', filename='img/'+style.getImage()) }}">
+                <img src="{{ url_for('static', filename='img/'+style.getImage()) }}" alt="Image du style + {{ style.nomStyle }}">
+                <p> {{ style.getNomToUpperCase() }} </p>
+            </a>
         </div>
         {% endfor %}
     </div>
-    
+
 </main>
 {% endblock %}

@@ -35,6 +35,13 @@ class Style(db.Model):
     __tablename__ = "STYLE"
     idStyle = db.Column(db.Integer, primary_key=True)
     nomStyle = db.Column(db.String(30))
+    imageStyle = db.Column(db.String(100))
+
+    def getNomToUpperCase(self):
+        return self.nomStyle.upper()
+
+    def getImage(self):
+        return self.imageStyle if self.imageStyle else "confetti.jpg"
 
 class SousStyle(db.Model):
     __tablename__ = 'SOUSSTYLE'
