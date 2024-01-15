@@ -27,7 +27,8 @@ create table BILLET (
 
 create table STYLE(
     idStyle int not null primary key,
-    nomStyle varchar(30)
+    nomStyle varchar(30),
+    imageStyle varchar(100)
 );
 
 create table SOUSSTYLE(
