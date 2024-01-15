@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concerts_style.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+<main>
+    <h2>Les prochains concerts</h2>
+    <div class="concert">
+        {% for concert in concerts %}
+        <div class="unConcert">
+            <!-- <div class="concert_image">
+                <img src="" alt="Image du concert + {{ concert.nomConcert }}">
+            </div> -->
+            <div class="concert_info">
+                <h3>{{ concert.nomConcert }}</h3>
+                <p>{{ concert.dateHeureDebut }}</p>
+                <p>{{ concert.lieu.nomLieu }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+{% endblock %}

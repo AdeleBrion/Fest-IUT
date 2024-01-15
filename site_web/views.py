@@ -83,6 +83,11 @@ def billeterie():
 def concerts():
     return render_template('concerts.html',styles = Style.query.all())
 
+
+@app.route('/concerts/<string:style>')
+def concerts_style(style):
+    return render_template('concerts_style.html', concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == Style.idStyle).all())
+
 #-----------------------------------------------------#
 #                         API                         #
 #-----------------------------------------------------#
