@@ -27,13 +27,14 @@ div{
     font-size: 2vh;
 }
 
-div img{
-    max-width: 30vw;
-    max-height: 30vh;
+div p{
+    backdrop-filter: blur(8px);
 }
 
 .info{
     background-color: transparent;
+
+    backdrop-filter: blur(8px);
     flex-basis: 100%;
     padding: 0%;
 }
@@ -47,6 +48,5 @@ button{
     background-color: black;
     border-color: black;
     color: white;
-    font-size: 4vh;
-    padding:1vh;
+    font-size: 3vh;
 }
