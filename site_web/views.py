@@ -86,7 +86,8 @@ def concerts():
 
 @app.route('/concerts/<string:style>')
 def concerts_style(style):
-    return render_template('concerts_style.html', concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == Style.idStyle).all())
+    style_trouve = Style.query.filter(Style.nomStyle == style).first()
+    return render_template('concerts_style.html', concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
 
 #-----------------------------------------------------#
 #                         API                         #
