@@ -65,7 +65,6 @@ def load_user(user):
 #                   Compte                            #
 #-----------------------------------------------------#
 
-
 class InscriptionForm(FlaskForm):
     nom = StringField('Nom')
     prenom = StringField('Prenom')
@@ -100,8 +99,6 @@ def inscription():
 @login_required
 def billeterie():
     return render_template('billeterie.html')
-
-
 
 
 #-----------------------------------------------------#
