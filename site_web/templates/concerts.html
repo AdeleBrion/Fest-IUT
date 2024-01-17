@@ -11,7 +11,7 @@
     <div class="categorie">
         {% for style in styles %}
         <div class="unStyle">
-            <a href="{{ url_for('static', filename='img/'+style.getImage()) }}">
+            <a href="{{ url_for('concerts_style', style=style.nomStyle) }}">
                 <img src="{{ url_for('static', filename='img/'+style.getImage()) }}" alt="Image du style + {{ style.nomStyle }}">
                 <p> {{ style.getNomToUpperCase() }} </p>
             </a>
