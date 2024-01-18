@@ -22,6 +22,8 @@ class Spectateur(db.Model, UserMixin):
 
     def get_id(self):
       return str(self.idSpectateur)
+    def getMaxId():
+        return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
 
 class Billet(db.Model):
     __tablename__ = "BILLET"
