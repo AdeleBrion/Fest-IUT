@@ -17,15 +17,16 @@ div.categorie{
 }
 
 div.unStyle{
-    margin: 0 10px;
+    flex-basis: 20%;
+    margin: 0 2vw;
 }
 
 div.unStyle img{
-    width: 200px;
-    height: 200px;
+    width: 20vw;
+    height: 20vh;
 }
 
-a{
+main a{
     text-decoration: none;
     color: black;
     font-weight: bold;

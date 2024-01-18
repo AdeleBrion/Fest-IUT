@@ -13,6 +13,11 @@
         <p>Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
         <a href="accueil.html"><button> Réserver </button></a>
     </div>
+    <div>
+    {% for billet in billets %}
+        <p> {{ billet.prix }} </p>
+    {% endfor %}
+    </div>
     <div class="2">
         <p> Billet catégorie 1</p>
         <p>Vous voulez assister au festival pour un jour ?</p>
