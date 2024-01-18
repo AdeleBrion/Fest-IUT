@@ -5,36 +5,17 @@
 {% endblock %}
 {% include "nav.html" %}
 {% block main %}
-<main class="main-billeterie">
-    <div class="div-billeterie">
-        <p class="div-billeterie-p"> Billet catégorie 1</p>
-        <p class="div-billeterie-p">Vous voulez assister au festival pour un jour ?</p>
-        <p class="div-billeterie-p">Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris.</p>
-        <p class="div-billeterie-p">Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
-        <a href="accueil.html"><button class="button-billeterie"> Réserver </button></a>
-    </div>
-    <div class="div-billeterie">
+<main>
     {% for billet in billets %}
-        <p class="div-billeterie-p"> {{ billet.prix }} </p>
+    <div class="billet">
+        <h2> {{ billet.intitule }}</h2>
+            <p> {{ billet.description }}</p>
+        <a href="accueil.html"><button> Réserver </button></a>
+    </div>
     {% endfor %}
-    </div>
-    <div class="div-billeterie">
-        <p class="div-billeterie-p"> Billet catégorie 1</p>
-        <p class="div-billeterie-p">Vous voulez assister au festival pour un jour ?</p>
-        <p class="div-billeterie-p">Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris.</p>
-        <p class="div-billeterie-p">Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
-        <button class="button-billeterie"> Réserver </button>
-    </div>
-    <div class="div-billeterie">
-        <p class="div-billeterie-p"> Billet catégorie 1</p>
-        <p class="div-billeterie-p">Vous voulez assister au festival pour un jour ?</p>
-        <p class="div-billeterie-p">Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris.</p>
-        <p class="div-billeterie-p">Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.</p>
-        <button class="button-billeterie"> Réserver </button>
-    </div>
-    <div class="info-billeterie">
-        <p class="div-billeterie-p">Un problème avec votre réservation ? Une erreur lors de l'achat ? Un remboursement ?</p>
-        <a class="info-billeterie-a" href="">Toutes les informations nécessaires en un clic.</a>
+    <div class="info">
+        <p>Un problème avec votre réservation ? Une erreur lors de l'achat ? Un remboursement ?</p>
+        <a href="">Toutes les informations nécessaires en un clic.</a>
     </div>
 </main>
 {% endblock %}

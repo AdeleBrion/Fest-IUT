@@ -6,23 +6,38 @@ create table LIEU(
     photoLieu blob
 );
 
+create table Role(
+    idRole int not null primary key,
+    nomRole varchar(30) not null
+);
+
 create table SPECTATEUR(
     idSpectateur int not null primary key,
+    idRole int,
     nomSpectateur varchar(30) not null,
     prenom varchar(30) not null,
     email varchar(50) not null UNIQUE,
     motDePasse varchar(250) not null,
     adresse varchar(50) not null,
-    infoAnnexes varchar(150)
+    infoAnnexes varchar(150),
+    foreign key (idRole) references `ROLE`(idRole)
+);
+
+create table TYPEBILLET(
+    idTypeBillet int not null primary key, 
+    intitule varchar(50) not NULL, 
+    description varchar(5000) not NULL, 
+    prix int not NULL, 
+    duree int not NULL
 );
 
 create table BILLET (
     idBillet int not null primary key,
-    idSpectateur int,
-    duree int not null, -- en jours
-    prix int not null,
-    dateValidite DATE,
-    foreign key (idSpectateur) references SPECTATEUR(idSpectateur)
+    idSpectateur int not null,
+    idTypeBillet int not null, -- en jours
+    dateDebut DATE,
+    foreign key (idSpectateur) references SPECTATEUR(idSpectateur),
+    foreign key (idTypeBillet) references TYPEBILLET(idTypeBillet)
 );
 
 create table STYLE(

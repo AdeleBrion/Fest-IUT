@@ -33,4 +33,8 @@ div.concert_info{
 }
 div.concert_info p{
     margin: 0;
-}	
+}
+
+div img{
+    max-height: 6vh;
+}

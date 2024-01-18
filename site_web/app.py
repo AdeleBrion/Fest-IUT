@@ -5,10 +5,25 @@ import os.path
 
 
 app = Flask(__name__)
+
+
+
+username = 'brion'
+password = 'brion'
+host = 'servinfo-maria'
+database = 'DBbrion'
+
 # username = 'moreira'
 # password = 'moreira'
 # host = 'servinfo-maria'
 # database = 'DBmoreira'
+
+
+#username = 'root'
+#password = 'root'
+#host = 'localhost'
+#database = 'sae_festi'
+
 
 username = 'susu'
 password = 'susu'

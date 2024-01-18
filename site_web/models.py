@@ -10,6 +10,11 @@ class Lieu(db.Model):
     capaciteMax = db.Column(db.Integer, nullable=False)
     photoLieu = db.Column(db.LargeBinary)
 
+class Role(db.Model):
+    __tablename__ = "ROLE"
+    idRole = db.Column(db.Integer, primary_key=True)
+    nomRole = db.Column(db.String(30), nullable=False)
+
 class Spectateur(db.Model, UserMixin):
     __tablename__ = "SPECTATEUR"
     idSpectateur = db.Column(db.Integer, primary_key=True)
@@ -19,6 +24,8 @@ class Spectateur(db.Model, UserMixin):
     motDePasse = db.Column(db.String(45), nullable=False)
     adresse = db.Column(db.String(45), nullable=False)
     infoAnnexes = db.Column(db.String(45))
+    idRole = db.Column(db.Integer, db.ForeignKey('ROLE.idRole'), nullable=False)
+    role = db.relationship('Role', backref=db.backref('rols',lazy="dynamic"))
 
     def get_id(self):
       return str(self.idSpectateur)
@@ -27,12 +34,20 @@ class Spectateur(db.Model, UserMixin):
     def get_current_user_infos():
         return Spectateur.query.filter_by(idSpectateur=current_user.idSpectateur).first()
 
+class TypeBillet(db.Model):
+    __tablename__ = "TYPEBILLET"
+    idTypeBillet = db.Column(db.Integer, primary_key=True)
+    intitule = db.Column(db.String(50))
+    description = db.Column(db.String(5000))
+    prix = db.Column(db.Integer, nullable=False)
+    duree = db.Column(db.Integer, nullable=False)
+
 class Billet(db.Model):
     __tablename__ = "BILLET"
     idBillet = db.Column(db.Integer, primary_key=True)
-    duree = db.Column(db.Integer, nullable=False)
-    prix = db.Column(db.Integer, nullable=False)
-    dateValidite = db.Column(db.DateTime, nullable=False)
+    idTypeBillet = db.Column(db.Integer, db.ForeignKey('TYPEBILLET.idTypeBillet'))
+    typeBillet = db.relationship('TypeBillet', backref=db.backref('billets',lazy="dynamic"))
+    dateDebut = db.Column(db.DateTime, nullable=False)
     idSpectateur = db.Column(db.Integer, db.ForeignKey('SPECTATEUR.idSpectateur'))
     spectateur = db.relationship('Spectateur', backref=db.backref('billets',lazy="dynamic"))
 
