@@ -97,7 +97,7 @@ INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, du
 
 -- Pour testée le trigger CHEVAUCHEMENTCONCERT
 INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
-    (8, 4, 33, "Concert", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
+    (8, 4, 33, "Concert de XDinary Heroes", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
 
 INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
     (1, 1),
