@@ -7,10 +7,10 @@ def mkpath(p):
     return os.path.normpath(os.path.join(os.path.dirname( __file__ ),p))
 
 app = Flask(__name__)
-username = 'root'
-password = 'root'
-host = 'localhost'
-database = 'sae_festi'
+username = 'moreira'
+password = 'moreira'
+host = 'servinfo-maria'
+database = 'DBmoreira'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+username+':'+password+'@'+host+'/'+database
 
