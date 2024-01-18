@@ -5,4 +5,5 @@
 {% include "nav.html" %}
 {% block main %}
 <h1>Mon Compte</h1>
+<button><a href="{{ url_for('logout') }}">Se déconnecter</a></button>
 {% endblock %}
