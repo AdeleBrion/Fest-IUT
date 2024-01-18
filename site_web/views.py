@@ -107,12 +107,13 @@ def billeterie():
 def ajouter_spec():
     f = InscriptionForm()
     spec = Spectateur(
+        idSpectateur= Spectateur.getMaxId() + 1,
         nomSpectateur=f.nom.data,
         prenom=f.prenom.data,
         email=f.email.data,
-        motDePasse=f.mdp.data,
-        adresse=f.adresse.data,
-        infoAnnexes=f.infoAnnexes.data
+        motDePasse= sha256(f.mdp.data.encode()).hexdigest(),
+        adresse= "",
+        infoAnnexes=""
     )
     db.session.add(spec)
     db.session.commit()
