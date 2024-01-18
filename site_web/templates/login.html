@@ -5,7 +5,8 @@
 {% block main %}
 <main>
     <img src="/../static/img/connexion.jpg">
-    <form method = "POST" action = "{{ url_for('login') }}">
+    <a href="{{ url_for('home') }}" ><input class="buttonHome" type="image" src="/../static/img/retour.jpg" alt="fleche retour"/></a>
+    <form role="form" method = "POST" action = "{{ url_for('login') }}">
         {{ form.hidden_tag() }}
         <p> Identifiant </p>
         {{ form.identifiant(size =50, class_="form-control", placeholder="Identifiant") }}
