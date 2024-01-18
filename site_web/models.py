@@ -1,6 +1,6 @@
 from sqlalchemy import CheckConstraint
 from .app import db
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 class Lieu(db.Model):
     __tablename__ = "LIEU"
@@ -24,6 +24,8 @@ class Spectateur(db.Model, UserMixin):
       return str(self.idSpectateur)
     def getMaxId():
         return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
+    def get_current_user_infos():
+        return Spectateur.query.filter_by(idSpectateur=current_user.idSpectateur).first()
 
 class Billet(db.Model):
     __tablename__ = "BILLET"

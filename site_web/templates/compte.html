@@ -5,5 +5,36 @@
 {% include "nav.html" %}
 {% block main %}
 <h1>Mon Compte</h1>
+<section>
+    <h2>Informations du compte</h2>
+    <form action="{{ url_for('update_account') }}" method="post">
+        <label for="nom">Nom:</label>
+        <input type="text" id="username" name="username" value= "{{ spectateur.nomSpectateur }}">
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="username" name="username" value= "{{ spectateur.prenom}}">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" value="{{ spectateur.email }}">
+        <label for ="addresses">Adresse :</label>
+        <input type="text" id="adresse" name="adresse" value="{{ spectateur.adresse }}">
+        <label for="Biographie">Biographie :</label>
+        <textarea id="biographie" name="biographie">{{ spectateur.infoAnnexes }}</textarea>
+        <input type="submit" value="Mettre à jour les informations">
+    </form>
+</section>
+<section>
+    <h2>Mes Groupes Favoris</h2>
+    <div class="concert">
+        {% for groupe in groupes %}
+        <div class="unConcert">
+            <div class="concert_info">
+                <h3>{{ groupe.nomGroupe }}</h3>
+                <p>{{ groupe.style.nomStyle }}</p>
+                <p>{{ groupe.paysOrigine }}</p>
+            </div>
+        </div>
+        {% endfor %}
+</section>
+
 <button><a href="{{ url_for('logout') }}">Se déconnecter</a></button>
+<h2></h2>
 {% endblock %}

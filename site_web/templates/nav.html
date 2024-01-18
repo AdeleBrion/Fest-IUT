@@ -4,9 +4,15 @@
         <a href="{{ url_for('concerts')}}">LES CONCERTS</a>
         <a href="{{ url_for('billeterie')}}">LA BILLETERIE</a>
         {% if current_user.is_authenticated %}
-            <a href="{{ url_for('compte') }}">MON COMPTE</a>
+            <div class="dropdown">
+                <a href="{{ url_for('compte') }}">MON COMPTE</a>
+                <div class="dropdown-content">
+                    <a href="">Mes Informations</a>
+                    <a href="">Mes Concerts</a>
+                    <a href="">Mes Billets</a>
+                </div>
+            </div>
         {% else %}
             <a href="{{ url_for('login') }}">CONNEXION</a>
         {% endif %}
     </nav>
-</header>

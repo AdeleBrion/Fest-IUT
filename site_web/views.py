@@ -87,7 +87,7 @@ class InscriptionForm(FlaskForm):
 @app.route('/compte')
 @login_required
 def compte():
-    return render_template('compte.html', title ="Mon compte")
+    return render_template('compte.html', title ="Mon compte", spectateur = Spectateur.get_current_user_infos())
 
 
 @app.route('/inscription')
@@ -127,6 +127,21 @@ def ajouter_spec():
 def concerts():
     return render_template('concerts.html',styles = Style.query.all())
 
+
+@app.route('/update_compte', methods=['POST'])
+@login_required
+def update_account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        if form.password.data:
+            m = sha256()
+            m.update(form.password.data.encode())
+            current_user.password = m.hexdigest()
+        db.session.commit()
+        return redirect(url_for('compte'))
+    return redirect(url_for('compte'))
 
 @app.route('/concerts/<string:style>')
 def concerts_style(style):
