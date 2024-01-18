@@ -104,18 +104,29 @@ INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, du
 INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
     (8, 4, 33, "Concert de XDinary Heroes", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
 
-INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
+INSERT INTO FAVORISER (idSpectateur, idGroupe) VALUES
     (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (1, 6),
+    (2, 1),
+    (2, 2),
     (2, 3),
-    (4, 5),
-    (6, 2),
-    (8, 1),
-    (10, 2),
+    (2, 4),
     (2, 5),
-    (4, 6),
-    (6, 6),
-    (8, 4),
-    (10, 3);
+    (2, 6),
+    (3, 1),
+    (3, 2),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (3, 6),
+    (4, 1),
+    (4, 2),
+    (4, 3),
+    (4, 4);
 
 INSERT INTO HEBERGEMENT (idHebergement, nomHebergement, nbMax) VALUES
     (1, "Hôtel : suite 12A", 8),

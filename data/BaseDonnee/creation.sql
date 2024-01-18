@@ -72,9 +72,9 @@ create table CONCERT(
 
 create table INSCRIRE(
     idConcert int,
-    idSpectateur int,
-    primary key(idConcert,idSpectateur),
-    foreign key (idConcert) references CONCERT(idConcert),
+    idGroupe int,
+    primary key(idGroupe,idSpectateur),
+    foreign key (idGroupe) references GROUPEMUSICAL(idGroupe),
     foreign key (idSpectateur) references SPECTATEUR(idSpectateur)
 );
 

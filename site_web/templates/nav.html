@@ -4,15 +4,17 @@
         <a href="{{ url_for('actualite')}}">L'ACTUALITE</a>
         <a href="{{ url_for('billeterie')}}">LA BILLETERIE</a>
         {% if current_user.is_authenticated %}
-            <div class="dropdown">
-                <a href="{{ url_for('compte') }}">MON COMPTE</a>
-                <div class="dropdown-content">
-                    <a href="">Mes Informations</a>
-                    <a href="">Mes Concerts</a>
+            <div class="dropdown-menu">
+                <a href="">MON COMPTE</a>
+                <div class="dropdown-content-menu">
+                    <a href="{{ url_for('compte') }}">Mes Informations</a>
+                    <a href="">Mes Concerts/Groupes</a>
                     <a href="">Mes Billets</a>
+                    <a href="{{ url_for('logout') }}">Déconnexion</a>
                 </div>
             </div>
         {% else %}
             <a href="{{ url_for('login') }}">CONNEXION</a>
         {% endif %}
     </nav>
+</header>

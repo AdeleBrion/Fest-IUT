@@ -112,6 +112,8 @@ def actualite():
 #                   Spectateur                        #
 #-----------------------------------------------------#
 
+
+
 @app.route('/save/spectateur', methods=("GET", "POST"))
 def ajouter_spec():
     f = InscriptionForm()
@@ -132,20 +134,25 @@ def concerts():
     return render_template('concerts.html',styles = Style.query.all())
 
 
-@app.route('/update_compte', methods=['POST'])
-@login_required
+@app.route('/update_account', methods=['POST'])
 def update_account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        if form.password.data:
-            m = sha256()
-            m.update(form.password.data.encode())
-            current_user.password = m.hexdigest()
+    new_nom = request.form['nom']
+    new_prenom = request.form['prenom']
+    email = request.form['email']
+    adresse = request.form['adresse']
+    biographie = request.form['biographie']
+
+    spectateur = Spectateur.query.filter_by(nomSpectateur=current_user.nomSpectateur).first()
+    if spectateur:
+        spectateur.nomSpectateur = new_nom
+        spectateur.prenom = new_prenom
+        spectateur.email = email
+        spectateur.adresse = adresse
+        spectateur.infoAnnexes = biographie
         db.session.commit()
-        return redirect(url_for('compte'))
+
     return redirect(url_for('compte'))
+
 
 @app.route('/concerts/<string:style>')
 def concerts_style(style):

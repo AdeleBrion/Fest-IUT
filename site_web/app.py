@@ -5,15 +5,15 @@ import os.path
 
 
 app = Flask(__name__)
-username = 'moreira'
-password = 'moreira'
-host = 'servinfo-maria'
-database = 'DBmoreira'
+# username = 'moreira'
+# password = 'moreira'
+# host = 'servinfo-maria'
+# database = 'DBmoreira'
 
-# username = 'susu'
-# password = 'susu'
-# host = 'localhost'
-# database = 'festiut'
+username = 'susu'
+password = 'susu'
+host = 'localhost'
+database = 'festiut'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+username+':'+password+'@'+host+'/'+database
 
