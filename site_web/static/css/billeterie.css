@@ -5,7 +5,7 @@ body{
     background-size: cover;
 }
 
-.main-billeterie {
+main{
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -35,7 +35,7 @@ body{
 }
 
 
-.button-billeterie {
+button{
     background-color: black;
     border-color: black;
     color: white;
