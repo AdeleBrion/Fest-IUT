@@ -1,16 +1,14 @@
 from .app import app, login_manager
-from flask import render_template, redirect, url_for, request
+from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style
+from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from .models import get_email_spectateur, Spectateur
 from hashlib import sha256
 
 @app.route('/')
 def home():
-    return render_template('accueil.html', title="Accueil Fest-iut")
-
-
+    return render_template('accueil.html', concerts=Concert.query.limit(3).all(), title="Accueil Fest-iut")
 
 #-----------------------------------------------------#
 #                   Connexion                         #
@@ -86,3 +84,21 @@ def billeterie():
 @app.route("/actualite")
 def actualite():
     return render_template('actualite.html', title="L'actu")
+
+@app.route('/concerts')
+def concerts():
+    return render_template('concerts.html',styles = Style.query.all())
+
+
+@app.route('/concerts/<string:style>')
+def concerts_style(style):
+    style_trouve = Style.query.filter(Style.nomStyle == style).first()
+    return render_template('concerts_style.html', concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
+
+#-----------------------------------------------------#
+#                         API                         #
+#-----------------------------------------------------#
+
+@app.route('/groupes/liste')
+def liste_groupes():
+    return jsonify([groupe.serialize() for groupe in GroupeMusical.query.join(Concert).all()])

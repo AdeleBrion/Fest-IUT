@@ -11,7 +11,7 @@ create table SPECTATEUR(
     nomSpectateur varchar(30) not null,
     prenom varchar(30) not null,
     email varchar(50) not null UNIQUE,
-    motDePasse varchar(50) not null,
+    motDePasse varchar(250) not null,
     adresse varchar(50) not null,
     infoAnnexes varchar(150)
 );
@@ -27,7 +27,8 @@ create table BILLET (
 
 create table STYLE(
     idStyle int not null primary key,
-    nomStyle varchar(30)
+    nomStyle varchar(30),
+    imageStyle varchar(100)
 );
 
 create table SOUSSTYLE(
