@@ -12,7 +12,7 @@ main{
     flex-wrap: wrap;
 }
 
-div{
+.billet{
     background-color: aliceblue;
     flex-basis: 20%;
     flex-grow: 1;
@@ -32,7 +32,9 @@ div p{
 }
 
 .info{
-    background-color: transparent;
+    background-color: lightgray;
+    border-radius: 10vh;
+    margin: 4vw;
 
     backdrop-filter: blur(8px);
     flex-basis: 100%;
