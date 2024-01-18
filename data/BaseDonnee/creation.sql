@@ -16,13 +16,21 @@ create table SPECTATEUR(
     infoAnnexes varchar(150)
 );
 
+create table TYPEBILLET(
+    idTypeBillet int not null primary key, 
+    intitule varchar(50) not NULL, 
+    description varchar(5000) not NULL, 
+    prix int not NULL, 
+    duree int not NULL
+);
+
 create table BILLET (
     idBillet int not null primary key,
-    idSpectateur int,
-    duree int not null, -- en jours
-    prix int not null,
-    dateValidite DATE,
-    foreign key (idSpectateur) references SPECTATEUR(idSpectateur)
+    idSpectateur int not null,
+    idTypeBillet int not null, -- en jours
+    dateDebut DATE,
+    foreign key (idSpectateur) references SPECTATEUR(idSpectateur),
+    foreign key (idTypeBillet) references TYPEBILLET(idTypeBillet)
 );
 
 create table STYLE(

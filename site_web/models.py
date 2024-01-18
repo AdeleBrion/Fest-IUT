@@ -22,13 +22,23 @@ class Spectateur(db.Model, UserMixin):
 
     def get_id(self):
       return str(self.idSpectateur)
+    def getMaxId():
+        return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
+
+class TypeBillet(db.Model):
+    __tablename__ = "TYPEBILLET"
+    idTypeBillet = db.Column(db.Integer, primary_key=True)
+    intitule = db.Column(db.String(50))
+    description = db.Column(db.String(5000))
+    prix = db.Column(db.Integer, nullable=False)
+    duree = db.Column(db.Integer, nullable=False)
 
 class Billet(db.Model):
     __tablename__ = "BILLET"
     idBillet = db.Column(db.Integer, primary_key=True)
-    duree = db.Column(db.Integer, nullable=False)
-    prix = db.Column(db.Integer, nullable=False)
-    dateValidite = db.Column(db.DateTime, nullable=False)
+    idTypeBillet = db.Column(db.Integer, db.ForeignKey('TYPEBILLET.idTypeBillet'))
+    typeBillet = db.relationship('TypeBillet', backref=db.backref('billets',lazy="dynamic"))
+    dateDebut = db.Column(db.DateTime, nullable=False)
     idSpectateur = db.Column(db.Integer, db.ForeignKey('SPECTATEUR.idSpectateur'))
     spectateur = db.relationship('Spectateur', backref=db.backref('billets',lazy="dynamic"))
 
