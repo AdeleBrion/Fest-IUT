@@ -19,22 +19,27 @@ INSERT INTO SPECTATEUR (idSpectateur, nomSpectateur, prenom, email, motDePasse, 
     (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "18 avenue de Couasnon", "fan de classique"),
     (19, "MAUPOU", "Cassandra", "cassandra.maupou@gmail.com","f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "19 boulevard du 50/50", "fan de rap américain");
 
+INSERT INTO TYPEBILLET(idTypeBillet, intitule, description, prix, duree) VALUES
+    (1, "Day'ut", "Vous voulez assister au festival pour un jour ? \n Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris. \n Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.", 25, 1),
+    (2, "Four'ut", "Vous voulez assister au festival pour quelques jours ? \n Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris. \n Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.", 60, 4),
+    (3, "Week'ut", "Vous voulez assister au festival pour un jour ? \n Ce billet est fait pour vous ! Vous pourrez profiter toute la journée des concerts de vos artistes favoris. \n Le ticket est valable pour le jour séléctionné de l'ouverture du festival jusqu'à sa fermeture.", 120, 7);
+    
 
-INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
-    (1, 1, 1, 23, "2023-12-21"),
-    (2, 1, 2, 40, "2023-12-18"),
-    (3, 2, 3, 55, "2023-12-11"),
-    (4, 2, 1, 23, "2023-12-18"),
-    (5, 3, 3, 55, "2023-12-12"),
-    (6, 4, 1, 23, "2023-12-12"),
-    (7, 4, 3, 55, "2023-12-18"),
-    (8, 5, 3, 55, "2023-12-14"),
-    (9, 6, 2, 40, "2023-12-20"),
-    (10, 7, 1, 23, "2023-12-14"),
-    (11, 7, 3, 55, "2023-12-18"),
-    (12, 8, 2, 40, "2023-12-08"),
-    (13, 9, 1, 23, "2023-12-14"),
-    (14, 9, 3, 55, "2023-12-18");
+INSERT INTO BILLET (idBillet, idSpectateur, idTypeBillet, dateDebut) VALUES
+    (1, 1, 1, "2023-12-21"),
+    (2, 1, 1, "2023-12-18"),
+    (3, 2, 2, "2023-12-11"),
+    (4, 2, 1, "2023-12-18"),
+    (5, 3, 2, "2023-12-12"),
+    (6, 4, 1, "2023-12-12"),
+    (7, 4, 2, "2023-12-18"),
+    (8, 5, 2, "2023-12-14"),
+    (9, 6, 3, "2023-12-20"),
+    (10, 7, 1, "2023-12-14"),
+    (11, 7, 3, "2023-12-18"),
+    (12, 8, 2, "2023-12-08"),
+    (13, 9, 1, "2023-12-14"),
+    (14, 9, 3, "2023-12-18");
 
 INSERT INTO STYLE (idStyle, nomStyle, imageStyle) VALUES
     (1, "rock", "rock.jpg"),

@@ -1,5 +1,5 @@
 from .app import app, login_manager
-from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style
+from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, Billet
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -77,7 +77,7 @@ def inscription():
 @app.route('/billeterie')
 @login_required
 def billeterie():
-    return render_template('billeterie.html')
+    return render_template('billeterie.html', billets = Billet.query.all())
 
 @app.route('/accueil')
 def accueil():
