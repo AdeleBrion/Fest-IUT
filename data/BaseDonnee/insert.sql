@@ -1,23 +1,27 @@
-INSERT INTO SPECTATEUR (idSpectateur, nomSpectateur, prenom, email, motDePasse, adresse, infoAnnexes) VALUES
-    (1, "DUPONT", "Jean", "dupont.jean@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "1 rue de la paix", "rien à signaler"),
-    (2, "MARTIN", "Lucie", "lucie.martin@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "2 rue de la liberté", "fan de rock"),
-    (3, "DURAND", "Pierre", "pierre.durand@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "3 rue de la république", "amateur de jazz"),
-    (4, "LEFEVRE", "Sophie", "sophie.lefevre@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "4 rue de la gare", "fan de musique classique"),
-    (5, "MOREAU", "Antoine", "antoine.moreau@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "5 rue de la poste", "amateur de blues"),
-    (6, "ROUSSEAU", "Marie", "marie.rousseau@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "6 rue de la mairie", "fan de pop"),
-    (7, "GIRARD", "Thomas", "thomas.girard@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "7 rue de l'église", "amateur de musique électronique"),
-    (8, "BERNARD", "Julie", "julie.bernard@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "8 rue de la plage", "fan de reggae"),
-    (9, "PETIT", "Nicolas", "nicolas.petit@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "9 rue de la forêt", "amateur de hip-hop"),
-    (10, "ROUX", "Céline", "celine.roux@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "10 rue de la montagne", "fan de métal"),
-    (11, "CHIDLOVSKY", "Léopold", "leopold.chidlovsky@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "11 avenue des figuiers", "fan de rock"),
-    (12, "DEMARET", "Sullivan", "sullivan.demaret@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "12 boulevard de la délinquance", "amateur de k-pop"),
-    (13, "MOREIRA", "Daniel", "daniel.moreira@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "13 rue du repas", "fan de j-pop"),
-    (14, "BRION", "Adèle", "adele.brion@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "14 rue de l'agonie", "fan de k-pop"),
-    (15, "LUDMANN", "Dorian", "dorian.ludmann@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "15 rue du Hibou", "fan de deathfonk"),
-    (16, "GRUSON--DELANNOY", "Jules", "jules.gruson-delannoy@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "16 impasse de la réussite", "amateur de j-pop"),
-    (17, "LALLIER", "Anna", "anna.lallier@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "17 impasse du retard", "fan de rock"),
-    (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "18 avenue de Couasnon", "fan de classique"),
-    (19, "MAUPOU", "Cassandra", "cassandra.maupou@gmail.com","f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "19 boulevard du 50/50", "fan de rap américain");
+INSERT INTO `ROLE` (`idRole`, `nomRole`) VALUES
+    (1, 'Spectateur'),
+    (2, 'Administrateur');
+
+INSERT INTO SPECTATEUR (idSpectateur, nomSpectateur, prenom, email, motDePasse, adresse, infoAnnexes, idRole) VALUES
+    (1, "DUPONT", "Jean", "dupont.jean@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "1 rue de la paix", "rien à signaler",1),
+    (2, "MARTIN", "Lucie", "lucie.martin@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "2 rue de la liberté", "fan de rock",1),
+    (3, "DURAND", "Pierre", "pierre.durand@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "3 rue de la république", "amateur de jazz",1),
+    (4, "LEFEVRE", "Sophie", "sophie.lefevre@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "4 rue de la gare", "fan de musique classique",1),
+    (5, "MOREAU", "Antoine", "antoine.moreau@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "5 rue de la poste", "amateur de blues",1),
+    (6, "ROUSSEAU", "Marie", "marie.rousseau@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "6 rue de la mairie", "fan de pop",1),
+    (7, "GIRARD", "Thomas", "thomas.girard@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "7 rue de l'église", "amateur de musique électronique",1),
+    (8, "BERNARD", "Julie", "julie.bernard@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "8 rue de la plage", "fan de reggae",1),
+    (9, "PETIT", "Nicolas", "nicolas.petit@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "9 rue de la forêt", "amateur de hip-hop",1),
+    (10, "ROUX", "Céline", "celine.roux@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "10 rue de la montagne", "fan de métal",1),
+    (11, "CHIDLOVSKY", "Léopold", "leopold.chidlovsky@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "11 avenue des figuiers", "fan de rock",1),
+    (12, "DEMARET", "Sullivan", "sullivan.demaret@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "12 boulevard de la délinquance", "amateur de k-pop",1),
+    (13, "MOREIRA", "Daniel", "daniel.moreira@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "13 rue du repas", "fan de j-pop",1),
+    (14, "BRION", "Adèle", "adele.brion@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "14 rue de l'agonie", "fan de k-pop",2),
+    (15, "LUDMANN", "Dorian", "dorian.ludmann@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "15 rue du Hibou", "fan de deathfonk",1),
+    (16, "GRUSON--DELANNOY", "Jules", "jules.gruson-delannoy@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "16 impasse de la réussite", "amateur de j-pop",1),
+    (17, "LALLIER", "Anna", "anna.lallier@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "17 impasse du retard", "fan de rock",1),
+    (18, "DUBOIS", "Tom", "tom.dubois@gmail.com", "f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "18 avenue de Couasnon", "fan de classique",1),
+    (19, "MAUPOU", "Cassandra", "cassandra.maupou@gmail.com","f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9", "19 boulevard du 50/50", "fan de rap américain",1);
 
 
 INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
@@ -96,8 +100,8 @@ INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, du
     (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
 
 -- Pour testée le trigger CHEVAUCHEMENTCONCERT
-INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
-    (8, 4, 33, "Concert", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
+-- INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
+--     (8, 4, 33, "Concert", "2023-12-10 22:00:00", 120, 40, 50, 1345, false);
 
 INSERT INTO FAVORISER (idSpectateur, idConcert) VALUES
     (1, 1),
@@ -144,8 +148,8 @@ INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, 
     (11, "Rencontre avec les journalistes", "2023-12-11 14:00:00", true);
 
 -- Pour testée le trigger CHEVAUCHEMENTACTIVITE
-INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, accessibleAuPublic) VALUES
-    (12, "Rencontre avec la fan-base", "2023-12-01 17:00:00", true);
+-- INSERT INTO ACTIVITEANNEXE (idActivite, descriptionActivite, dateheureActivite, accessibleAuPublic) VALUES
+--     (12, "Rencontre avec la fan-base", "2023-12-01 17:00:00", true);
 
 INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
     (1, 1, 3),
@@ -155,8 +159,8 @@ INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
     (5, 4, 1);
 
 -- Pour testée le trigger CHEVAUCHEMENTACTIVITE
-INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
-    (1, 12, 3);
+-- INSERT INTO PLANIFIER (idGroupe, idActivite, dureePlanification) VALUES
+--     (1, 12, 3);
 
 INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (1, 1, "", "https://www.instagram.com/rollingstone/", ""),
@@ -174,8 +178,8 @@ INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
     (3,5);
 
 -- Pour test le trigger
-INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
-    (3,6);
+-- INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
+--     (3,6);
 
 INSERT INTO TYPEINSTRUMENT (idTypeInstrument, nomTypeInstrument) VALUES
     (1, "Guitare éléctrique"),
