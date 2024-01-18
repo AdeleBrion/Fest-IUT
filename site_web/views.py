@@ -79,6 +79,10 @@ def inscription():
 def billeterie():
     return render_template('billeterie.html')
 
+@app.route('/accueil')
+def accueil():
+    return render_template('accueil.html')
+
 @app.route('/concerts')
 def concerts():
     return render_template('concerts.html',styles = Style.query.all())
