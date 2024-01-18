@@ -1,5 +1,6 @@
+import json
 from .app import app, login_manager, db
-from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, Billet
+from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, Billet, Appartient, Artiste
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -144,3 +145,52 @@ def concerts_style(style):
 @app.route('/groupes/liste')
 def liste_groupes():
     return jsonify([groupe.serialize() for groupe in GroupeMusical.query.join(Concert).all()])
+
+
+
+#-----------------------------------------------------#
+#                   INSERTION                         #
+#-----------------------------------------------------#
+
+
+@app.route('/cree/groupe/')
+def cree_groupe():
+    liste_style = Style.query.all()
+    liste_artiste = Artiste.query.all()
+    return render_template('form_enregistre_groupe.html', styles = liste_style, personnes = liste_artiste)
+
+@app.route('/cree/groupe/save', methods=['POST'])
+def cree_groupe_save():
+    liste_personnes_string = request.form.get('listePersonnes')
+    nom = request.form['nomGroupe']
+    description = request.form['descriptionGroupe']
+    style = request.form['styleGroupe']
+    idstyle = Style.query.filter(Style.nomStyle == style).first().idStyle
+    photo = request.form['imageGroupe']
+    
+    video = request.form['videoGroupe']
+    if not video:
+        video = "https://www.youtube.com/watch?v=O7Sau7u32b0"
+    try:
+        liste_personnes = json.loads(liste_personnes_string)
+        print(liste_personnes)
+    except json.JSONDecodeError:
+        print("Erreur JSON")
+
+    maxidGroupe = GroupeMusical.query.order_by(GroupeMusical.idGroupe.desc()).first().idGroupe
+    groupe = GroupeMusical(idGroupe=maxidGroupe+1, nomGroupe=nom, descriptionGroupe=description, idStyle=idstyle)
+    db.session.add(groupe)
+    
+    for artiste in liste_personnes:
+        art = Artiste.query.filter(Artiste.nomArtiste == artiste).first()
+        print(artiste)
+        if art is None:
+            idmax = Artiste.query.order_by(Artiste.idArtiste.desc()).first().idArtiste
+            art = Artiste(idArtiste=idmax+1, nomArtiste=artiste)
+            db.session.add(art)
+
+        appartien = Appartient(idArtiste=art.idArtiste,idGroupe= groupe.idGroupe)
+        db.session.add(appartien)
+
+    db.session.commit()
+    return redirect(url_for('home'))
