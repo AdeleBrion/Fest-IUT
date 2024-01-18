@@ -1,5 +1,5 @@
 from .app import app, login_manager, db
-from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet
+from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -135,7 +135,7 @@ def concerts():
 @app.route('/concerts/<string:style>')
 def concerts_style(style):
     style_trouve = Style.query.filter(Style.nomStyle == style).first()
-    return render_template('concerts_style.html', concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
+    return render_template('concerts_style.html', activites = GroupeMusical.query.filter(GroupeMusical.idStyle == style_trouve.idStyle).all(), concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
 
 #-----------------------------------------------------#
 #                         API                         #

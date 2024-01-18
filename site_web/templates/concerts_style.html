@@ -16,10 +16,27 @@
                 <img src="" alt="Image du concert + {{ concert.nomConcert }}">
             </div> -->
             <fieldset class="concert_info">
-                <legend><h3>{{ concert.nomConcert }}</h3></legend>
+                <legend>
+                    <h3>{{ concert.nomConcert }}</h3>
+                </legend>
                 <p>{{ concert.dateHeureDebut }}</p>
                 <p>{{ concert.lieu.nomLieu }}</p>
                 <p>{{ concert.placesRestantes }} places restantes</p>
+            </fieldset>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Les groupes</h2>
+    <div class="concert">
+        {% for activite in activites %}
+        <div class="unConcert">
+            <fieldset class="concert_info">
+                <legend>
+                    <h3>{{ activite.nomGroupe}}</h3>
+                </legend>
+                <a><img src="{{ url_for('static', filename='img/coeur.png') }}"> Ajouter au favori </a>
+                <p>{{ activite.descriptionGroupe }}</p>
             </fieldset>
         </div>
         {% endfor %}
