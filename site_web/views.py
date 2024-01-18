@@ -1,6 +1,8 @@
 import json
+
 from .app import app, login_manager, db
 from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
+from .form import ConcertFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -177,22 +179,22 @@ def liste_groupes():
 
 @app.route('/cree/groupe/')
 def cree_groupe():
-    liste_style = Style.query.all()
     liste_artiste = Artiste.query.all()
-    return render_template('form_enregistre_groupe.html', styles = liste_style, personnes = liste_artiste)
+    title = "Créer un groupe"
+    f = ConcertFrom()
+    f.style.choices = [(style.idStyle, style.nomStyle) for style in Style.query.all()]
+    return render_template('form_enregistre_groupe.html', personnes = liste_artiste, title=title, form = f)
 
 @app.route('/cree/groupe/save', methods=['POST'])
 def cree_groupe_save():
-    liste_personnes_string = request.form.get('listePersonnes')
-    nom = request.form['nomGroupe']
-    description = request.form['descriptionGroupe']
-    style = request.form['styleGroupe']
-    idstyle = Style.query.filter(Style.nomStyle == style).first().idStyle
-    photo = request.form['imageGroupe']
-    
-    video = request.form['videoGroupe']
-    if not video:
-        video = "https://www.youtube.com/watch?v=O7Sau7u32b0"
+    f = ConcertFrom()
+    nom = f.nomGroupe.data
+    description = f.descriptionGroupe.data
+    style = f.style.data
+    photo = f.photo.data
+    video = f.video.data
+    liste_personnes_string = f.listePersonnes.data
+
     try:
         liste_personnes = json.loads(liste_personnes_string)
         print(liste_personnes)
@@ -200,7 +202,7 @@ def cree_groupe_save():
         print("Erreur JSON")
 
     maxidGroupe = GroupeMusical.query.order_by(GroupeMusical.idGroupe.desc()).first().idGroupe
-    groupe = GroupeMusical(idGroupe=maxidGroupe+1, nomGroupe=nom, descriptionGroupe=description, idStyle=idstyle)
+    groupe = GroupeMusical(idGroupe=maxidGroupe+1, nomGroupe=nom, descriptionGroupe=description, idStyle=style)
     db.session.add(groupe)
     
     for artiste in liste_personnes:
@@ -217,10 +219,17 @@ def cree_groupe_save():
     db.session.commit()
     return redirect(url_for('home'))
 
+@app.route('/cree/concert/')
+def cree_concert():
+    title = "Créer un concert"
+    liste_groupes = GroupeMusical.query.all()
+    return render_template('form_enregistre_concert.html', groupes = liste_groupes, title=title)
+
 #-----------------------------------------------------#
 #                        ADMIN                        #
 #-----------------------------------------------------#
 
 @app.route('/panel')
+@login_required
 def panelAdmin():
     return render_template('panelAdmin.html', title="Panel Admin")
