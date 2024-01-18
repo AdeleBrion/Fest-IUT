@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="/../static/css/connexion.css">
+{% endblock %}
+{% block main %}
+<main>
+    <img src="/../static/img/connexion.jpg">
+    <form method = "POST" action = "{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+        <p> Identifiant </p>
+        {{ form.identifiant(size =50, class_="form-control", placeholder="Identifiant") }}
+        <p> Mot de passse </p>
+        {{ form.mdp(size =50, class_="form-control", placeholder="Mot de Passe") }}
+        <button> Se connecter </button>
+        {% if erreur %}
+            <p class="erreur"><strong>{{ erreur }}</strong></p>
+        {% endif %}
+        <p><a href="{{ url_for('inscription') }}"> Pas encore inscris ? Inscrivez-vous !</a></p>
+    </form>
+</main>
+{% endblock %}

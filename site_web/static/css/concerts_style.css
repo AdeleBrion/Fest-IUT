@@ -1,0 +1,36 @@
+body{
+    margin: 5%;
+}
+
+header img{
+    max-height: 6vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div.concert{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+div.unConcert{
+    
+    margin: 0 10px;
+}
+
+div.concert_info{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+div.concert_info p{
+    margin: 0;
+}	

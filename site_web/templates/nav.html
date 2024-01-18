@@ -1,0 +1,12 @@
+<header>
+    <nav>
+        <a href="{{ url_for('concerts')}}">LES CONCERTS</a>
+        <a href="">L'ACTUALITE</a>
+        <a href="{{ url_for('billeterie')}}">LA BILLETERIE</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('compte') }}">MON COMPTE</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">CONNEXION</a>
+        {% endif %}
+    </nav>
+</header>
