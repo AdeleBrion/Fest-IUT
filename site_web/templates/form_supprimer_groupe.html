@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concerts.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+
+<div>
+    {% for groupe in groupes %}
+    <div>
+        <form action="{{ url_for('supprimer_groupe_id', id=groupe.idGroupe) }}" method="get">
+            <p>{{ groupe.nomGroupe }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

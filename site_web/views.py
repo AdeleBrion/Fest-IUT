@@ -219,6 +219,23 @@ def cree_groupe_save():
     db.session.commit()
     return redirect(url_for('home'))
 
+@app.route('/supprimer/groupe/<int:id>', methods=['GET'])
+def supprimer_groupe_id(id):
+    if id is not None:
+        groupe = GroupeMusical.query.get(id)
+        if groupe:
+            db.session.delete(groupe)
+            db.session.commit()
+        return redirect(url_for('supprimer_groupe'))
+    else:
+        groupes = GroupeMusical.query.all()
+        return render_template('form_supprimer_groupe.html', groupes=groupes)
+
+@app.route('/supprimer/groupe/')
+def supprimer_groupe():
+    groupes = GroupeMusical.query.all()
+    return render_template('form_supprimer_groupe.html', groupes=groupes)
+
 @app.route('/cree/concert/')
 def cree_concert():
     title = "Créer un concert"
