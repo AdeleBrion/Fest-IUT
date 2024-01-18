@@ -29,8 +29,13 @@ class Spectateur(db.Model, UserMixin):
 
     def get_id(self):
       return str(self.idSpectateur)
+    
     def getMaxId():
         return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
+    
+    def is_admin(self):
+        return True if self.idRole == Role.query.filter_by(nomRole="Administrateur").first().idRole else False
+    
     def get_current_user_infos():
         return Spectateur.query.filter_by(idSpectateur=current_user.idSpectateur).first()
 

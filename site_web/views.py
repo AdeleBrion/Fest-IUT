@@ -216,3 +216,11 @@ def cree_groupe_save():
 
     db.session.commit()
     return redirect(url_for('home'))
+
+#-----------------------------------------------------#
+#                        ADMIN                        #
+#-----------------------------------------------------#
+
+@app.route('/panel')
+def panelAdmin():
+    return render_template('panelAdmin.html', title="Panel Admin")
