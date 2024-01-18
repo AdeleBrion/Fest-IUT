@@ -10,6 +10,11 @@ class Lieu(db.Model):
     capaciteMax = db.Column(db.Integer, nullable=False)
     photoLieu = db.Column(db.LargeBinary)
 
+class Role(db.Model):
+    __tablename__ = "ROLE"
+    idRole = db.Column(db.Integer, primary_key=True)
+    nomRole = db.Column(db.String(30), nullable=False)
+
 class Spectateur(db.Model, UserMixin):
     __tablename__ = "SPECTATEUR"
     idSpectateur = db.Column(db.Integer, primary_key=True)
@@ -19,6 +24,8 @@ class Spectateur(db.Model, UserMixin):
     motDePasse = db.Column(db.String(45), nullable=False)
     adresse = db.Column(db.String(45), nullable=False)
     infoAnnexes = db.Column(db.String(45))
+    idRole = db.Column(db.Integer, db.ForeignKey('ROLE.idRole'), nullable=False)
+    role = db.relationship('Role', backref=db.backref('rols',lazy="dynamic"))
 
     def get_id(self):
       return str(self.idSpectateur)
