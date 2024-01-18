@@ -6,7 +6,7 @@ create table LIEU(
     photoLieu blob
 );
 
-create table Role(
+create table ROLE(
     idRole int not null primary key,
     nomRole varchar(30) not null
 );
@@ -20,7 +20,7 @@ create table SPECTATEUR(
     motDePasse varchar(250) not null,
     adresse varchar(50) not null,
     infoAnnexes varchar(150),
-    foreign key (idRole) references `ROLE`(idRole)
+    foreign key (idRole) references ROLE(idRole)
 );
 
 create table TYPEBILLET(
