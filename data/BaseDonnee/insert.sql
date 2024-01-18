@@ -36,22 +36,22 @@ INSERT INTO BILLET (idBillet, idSpectateur, duree, prix, dateValidite) VALUES
     (13, 9, 1, 23, "2023-12-14"),
     (14, 9, 3, 55, "2023-12-18");
 
-INSERT INTO STYLE (idStyle, nomStyle) VALUES
-    (1, "rock"),
-    (2, "jazz"),
-    (3, "musique classique"),
-    (4, "blues"),
-    (5, "pop"),
-    (6, "k-pop"),
-    (7, "rap"),
-    (8, 'techno'),
-    (9, "grunge"),
-    (10, "j-pop");
+INSERT INTO STYLE (idStyle, nomStyle, imageStyle) VALUES
+    (1, "rock", "rock.jpg"),
+    (2, "jazz", "jazz.jpg"),
+    (3, "musique classique", "classique.jpg"),
+    (4, "blues", null),
+    (5, "pop", "pop.jpg"),
+    (6, "k-pop", "k-pop.jpg"),
+    (7, "rap", "rap.jpg"),
+    (8, 'techno', "techno.jpg"),
+    (9, "grunge", null),
+    (10, "j-pop", null);
 
--- INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
---    (1, "grunge"),
---     (5, "k-pop"),
---     (5, "j-pop");
+INSERT INTO SOUSSTYLE (idStyle, sousStyle) VALUES
+    (1, 9),
+    (5, 6),
+    (5, 10);
 
 INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- ROCK (1.6)

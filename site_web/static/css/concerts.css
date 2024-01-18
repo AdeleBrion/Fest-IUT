@@ -1,0 +1,32 @@
+body{
+    margin: 0px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div.categorie{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+div.unStyle{
+    margin: 0 10px;
+}
+
+div.unStyle img{
+    width: 200px;
+    height: 200px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
