@@ -1,0 +1,66 @@
+body{
+    background-color: white;
+    padding:0%;
+    margin: 0%;
+}
+
+main{
+    display: flex;
+    overflow: hidden;
+    padding:0%;
+    margin: 0%;
+    
+}
+
+main > img {
+    width: 40vw;
+    height: 92vh;
+    object-fit: cover;
+    object-position: top left;
+}
+
+div > img {
+    flex-basis: 36%;
+    height: 21vh;
+    object-fit: cover;
+    object-position: center right;
+    border-radius: 0 2vh 2vh 0;
+}
+
+section{
+    width: 100%;
+    position: absolute;
+    align-content: center;
+    top: 0;
+    width: 90%;
+    height: 30%;
+    margin: 10vh;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+section > *{
+    margin: 8vh;
+    margin-bottom: 0;
+    border-radius: 2vh;
+    max-width: 80vw;
+    background-color: white;
+    box-shadow:  5px 5px 10px black;
+    display: flex;
+}
+
+div p{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+div a{
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+article{
+    padding : 1.5vh;
+    margin: 2vh;
+    flex: 1;
+    box-sizing: border-box; 
+}

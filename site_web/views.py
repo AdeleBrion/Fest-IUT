@@ -8,7 +8,7 @@ from hashlib import sha256
 
 @app.route('/')
 def home():
-    return render_template('accueil.html')
+    return render_template('accueil.html', title="Accueil Fest-iut")
 
 
 
@@ -45,10 +45,12 @@ def login():
         else:
             return render_template(
                 "login.html",
+                title = "Page de connexion",
                 form=f,
                 erreur = "Erreur : Identifiant ou Mot De Passe Incorrect")
     return render_template(
         "login.html",
+        title = "Page de connexion",
         form=f)
 
 
@@ -68,15 +70,19 @@ def load_user(user):
 @app.route('/compte')
 @login_required
 def compte():
-    return render_template('compte.html')
+    return render_template('compte.html', title ="Mon compte")
 
 
 @app.route('/inscription')
 def inscription():
-    return render_template('inscription.html')
+    return render_template('inscription.html', title ="Inscription")
 
 
 @app.route('/billeterie')
 @login_required
 def billeterie():
-    return render_template('billeterie.html')
+    return render_template('billeterie.html', title ="Billeterie")
+
+@app.route("/actualite")
+def actualite():
+    return render_template('actualite.html', title="L'actu")
