@@ -3,8 +3,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/concerts_style.css') }}">
 {% endblock %}
-{% include "nav.html" %}
 {% block main %}
+<header>
+    <a href="{{ url_for('concerts') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
 <main>
     <h2>Les prochains concerts</h2>
     <div class="concert">
@@ -13,11 +15,11 @@
             <!-- <div class="concert_image">
                 <img src="" alt="Image du concert + {{ concert.nomConcert }}">
             </div> -->
-            <div class="concert_info">
-                <h3>{{ concert.nomConcert }}</h3>
+            <fieldset class="concert_info">
+                <legend><h3>{{ concert.nomConcert }}</h3></legend>
                 <p>{{ concert.dateHeureDebut }}</p>
                 <p>{{ concert.lieu.nomLieu }}</p>
-            </div>
+            </fieldset>
         </div>
         {% endfor %}
     </div>
