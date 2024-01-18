@@ -6,6 +6,8 @@ import os.path
 
 app = Flask(__name__)
 
+
+
 username = 'brion'
 password = 'brion'
 host = 'servinfo-maria'
@@ -16,15 +18,17 @@ database = 'DBbrion'
 # host = 'servinfo-maria'
 # database = 'DBmoreira'
 
+
 #username = 'root'
 #password = 'root'
 #host = 'localhost'
 #database = 'sae_festi'
 
-# username = 'susu'
-# password = 'susu'
-# host = 'localhost'
-# database = 'festiut'
+
+username = 'susu'
+password = 'susu'
+host = 'localhost'
+database = 'festiut'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+username+':'+password+'@'+host+'/'+database
 

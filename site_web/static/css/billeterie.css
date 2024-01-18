@@ -1,16 +1,16 @@
 body{
     padding:0%;
     margin: 0%;
-    
     background-image: url("../img/billleterie.jpg");
     background-size: cover;
 }
 
-main{
+.main-billeterie {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
 }
+
 
 .billet{
     background-color: aliceblue;
@@ -18,35 +18,24 @@ main{
     flex-grow: 1;
     background-image: url("../img/billet1.jpg");
     background-size: cover;
-
     border-radius: 10vh;
-
     padding: 2vh;
     margin: 2vh;
-
     font-size: 2vh;
 }
 
-div p{
-    backdrop-filter: blur(8px);
-}
 
 .info{
     background-color: lightgray;
     border-radius: 10vh;
     margin: 4vw;
-
     backdrop-filter: blur(8px);
     flex-basis: 100%;
     padding: 0%;
 }
 
-.info a{
-    color:rgb(0, 149, 255);
-    text-decoration: none;
-}
 
-button{
+.button-billeterie {
     background-color: black;
     border-color: black;
     color: white;
