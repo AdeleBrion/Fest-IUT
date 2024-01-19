@@ -1,4 +1,4 @@
-INSERT INTO `ROLE` (`idRole`, `nomRole`) VALUES
+INSERT INTO ROLE (idRole, nomRole) VALUES
     (1, 'Spectateur'),
     (2, 'Administrateur');
 
@@ -74,13 +74,23 @@ INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALU
     (7, 2, "Essaïe Cid", "Saxophoniste et clarinetiste Espagnol"),
     (8, 2, "Xenos", "Groupe de jazz né en Bosnie, grandi en Grèce et désormais Parisien"),
     -- MUSIQUE CLASSIQUE(13.18)
+    (13, 3, "Hahn & Taraud", "Duo international violon + piano"),
+    (14, 3, "Yochen", "Duo asiatique violon + violoncelle"),
     -- BLUES(19.24)
+    (19, 4, "Polyphia", "Groupe de Blues, originaire de Dallas"),
     -- POP(25.30)
+    (25, 5, "Twenty One Pilots", "Duo de pop-music originaire de Colombus"),
     -- K-POP(31.36)
-    (31, 6, "Itzy", "Groupe de musique coréene composé de 5 membres"),
+    (31, 6, "Itzy", "Groupe de musique coréenne composé de 5 membres"),
     (32, 6, "BlackPink", "Groupe de musique coréene composé de 4 membres"),
-    (33, 6, "Xdinary Heroes", "Groupe de musique coréene composé de 5 membres");
+    (33, 6, "Xdinary Heroes", "Groupe de musique coréene composé de 6 membres"),
     -- RAP(37.42)
+    (37, 7, "Bigflo et Oli", "Deux frères rappeurs français"),
+    (38, 7, "Masked Wolf", "Légende du rap en Australie"),
+    (39, 7, "Casseurs Flowters", "Duo de rappeurs originaires du Calvados"),
+    -- TECHNO (43.47)
+    (43, 8, "Dimitri Vegas & Like Mike", "Groupe de disc jockeys belges"),
+    (44, 8, "The Chainsmokers", "Duo américain de disc jockeys et producteurs");
 
 
     
@@ -99,10 +109,16 @@ INSERT INTO LIEU (idLieu, nomLieu, capaciteMax, adresse, photoLieu) VALUES
 INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
     (1, 1, 1, "Concert des Rolling Stones", "2023-12-01 20:00:00", 120, 60, 60, 746, false),
     (2, 2, 2, "Concert de Waterparks", "2023-12-02 22:00:00", 150, 100, 50, 15, false),
-    (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-18 20:00:00", 90, 30, 60, 5, false),
+    (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-03 20:00:00", 90, 30, 60, 5, false),
     (4, 3, 4, "Concert de Spirit Box", "2023-12-04 20:00:00", 180, 80, 100, 26, false),
-    (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
-    (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
+    (5, 6, 5, "Concert de Muse", "2023-12-03 18:00:00", 120, 50, 70, 213, false),
+    (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-05 20:00:00", 200, 120, 80, 214, true),
+    (7, 4, 37, "Concert de Bigflo et Oli", "2023-12-02 21:00:00", 120, 45, 45, 150, false),
+    (8, 5, 43, "DJ Set du duo Dimitri Vegas & Like Mike", "2023-12-06 21:00:00", 180, 60, 70, 333, true),
+    (9, 7, 31, "Concert de Itzy", "2023-12-05 15:00:00", 90, 180, 200, 800, true),
+    (10, 8, 32, "Concert de BlackPink", "2023-12-06 15:00:00", 100, 160, 180, 900, true),
+    (11, 9, 33, "Concert de Xdinary Heroes", "2023-12-04 15:00:00", 70, 170, 180, 850, true),
+    (12, 9, 25, "The Icy Tour | Twenty One Pilots", "2023-12-01 15:00:00", 100, 120, 130, 830, true);
 
 -- Pour testée le trigger CHEVAUCHEMENTCONCERT
 -- INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
@@ -184,7 +200,17 @@ INSERT INTO RESEAUX (idReseau, idGroupe, x, instagram, tiktok) VALUES
     (3, 3, "", "https://www.instagram.com/bringmethehorizon/?hl=fr", ""),
     (4, 4, "", "https://www.instagram.com/spiritboxmusic/?hl=fr", ""),
     (5, 5, "", "https://www.instagram.com/muse/?hl=fr", ""),
-    (6, 6, "", "https://www.instagram.com/chilipeppers/", "");
+    (6, 6, "", "https://www.instagram.com/chilipeppers/", ""),
+    (7, 19, "", "https://www.instagram.com/polyphia/", ""),
+    (8, 25, "", "https://www.instagram.com/twentyonepilots/", ""),
+    (9, 31, "", "https://www.instagram.com/itzy.all.in.us/", ""),
+    (10, 32, "", "https://www.instagram.com/blackpink/", ""),
+    (11, 33, "", "https://www.instagram.com/xdinaryheroes_official/", ""),
+    (12, 37, "", "https://www.instagram.com/bigfloetoli/", ""),
+    (13, 38, "", "https://www.instagram.com/maskedwolf/", ""),
+    (14, 39, "", "https://www.instagram.com/casseursflowtersinfinity/?hl=fr", ""),
+    (15, 43, "", "https://www.instagram.com/dimitrivegasandlikemike/", ""),
+    (16, 44, "", "https://www.instagram.com/thechainsmokers/?hl=fr", "");
 
 INSERT INTO INSCRIRE (idConcert, idSpectateur) VALUES
     (3,2),
@@ -208,7 +234,9 @@ INSERT INTO TYPEINSTRUMENT (idTypeInstrument, nomTypeInstrument) VALUES
     (8, "Violoncelle"),
     (9, "Guitare basse"),
     (10, "Trompette"),
-    (11, "Piano");
+    (11, "Piano"),
+    (12, "Ukulele"),
+    (13, "Platine");
 
 INSERT INTO ARTISTE (idArtiste, nomArtiste) VALUES
     (1, "Mick Jagger"),
@@ -231,7 +259,41 @@ INSERT INTO ARTISTE (idArtiste, nomArtiste) VALUES
     (18, "Anthony Kiedis"),
     (19, "Flea"),
     (20, "Chad Smith"),
-    (21, "John Frusciante");
+    (21, "John Frusciante"),
+    (22, "Hilary Hahn"),
+    (23, "Alexandre Tharaud"),
+    (24, "Ray Chen"),
+    (25, "Yo-Yo Ma"),
+    (26, "Biglo"),
+    (27, "Oli"),
+    (28, "Masked Wolf"),
+    (29, "Tyler Joseph"),
+    (30, "Josh Dun"),
+    (31, "Dimitri Vegas"),
+    (32, "Like Mike"),
+    (33, "Andrew Taggart"),
+    (34, "Alex Pall"),
+    (35, "Tim Henson"),
+    (36, "Scott LePage"),
+    (37, "Clay Gober"),
+    (38, "Clay Aeschliman"),
+    (39, "Orelsan"),
+    (40, "Gringe"),
+    (41, "Hwang Yeji"),
+    (42, "Lia"),
+    (43, "Ryujin"),
+    (44, "Chaeryeong"),
+    (45, "Yuna"),
+    (46, "Jennie"),
+    (47, "Lisa"),
+    (48, "Jisoo"),
+    (49, "Rose"),
+    (50, "Kwak Ji Seok"),
+    (51, "Jooyen"),
+    (52, "Jun Han"),
+    (53, "Gun-il"),
+    (54, "Jungsu"),
+    (55, "O.de");
 
 INSERT INTO JOUER (idTypeInstrument, idArtiste) VALUES
     (6, 1),
@@ -258,7 +320,51 @@ INSERT INTO JOUER (idTypeInstrument, idArtiste) VALUES
     (10, 19),
     (11, 19),
     (4, 20),
-    (1, 21);
+    (1, 21),
+    (7, 22),
+    (11, 23),
+    (7, 24),
+    (8, 25),
+    (5, 26),
+    (5, 27),
+    (5, 28),
+    (4, 29),
+    (11, 30),
+    (5, 30),
+    (9, 30),
+    (12, 30),
+    (13, 31),
+    (13, 32),
+    (13, 33),
+    (13, 34),
+    (1, 35),
+    (1, 36),
+    (9, 37),
+    (4, 38),
+    (5, 39),
+    (5, 40),
+    (5, 41),
+    (5, 42),
+    (5, 43),
+    (5, 44),
+    (5, 45),
+    (5, 46),
+    (5, 47),
+    (5, 48),
+    (5, 49),
+    (5, 50),
+    (1, 50),
+    (5, 51),
+    (9, 51),
+    (5, 52),
+    (1, 52),
+    (5, 53),
+    (4, 53),
+    (5, 54),
+    (3, 54),
+    (5, 55),
+    (13, 55);
+
 
 INSERT INTO APPARTIENT (idGroupe, idArtiste) VALUES
     (1, 1),
@@ -281,7 +387,41 @@ INSERT INTO APPARTIENT (idGroupe, idArtiste) VALUES
     (6, 18),
     (6, 19),
     (6, 20),
-    (6, 21);
+    (6, 21),
+    (13, 22),
+    (13, 23),
+    (14, 24),
+    (14, 25),
+    (37, 26),
+    (37, 27),
+    (38, 28),
+    (25, 29),
+    (25, 30),
+    (43, 31),
+    (43, 32),
+    (44, 33),
+    (44, 34),
+    (19, 35),
+    (19, 36),
+    (19, 37),
+    (19, 38),
+    (39, 39),
+    (39, 40),
+    (31, 41),
+    (31, 42),
+    (31, 43),
+    (31, 44),
+    (31, 45),
+    (32, 46),
+    (32, 47),
+    (32, 48),
+    (32, 49),
+    (33, 50),
+    (33, 51),
+    (33, 52),
+    (33, 53),
+    (33, 54),
+    (33, 55);
 
 INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALUES
     -- MUSIQUE CLASSIQUE(13.18)
