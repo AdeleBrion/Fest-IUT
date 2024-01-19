@@ -33,6 +33,12 @@ class Spectateur(db.Model, UserMixin):
         return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
     def get_current_user_infos():
         return Spectateur.query.filter_by(idSpectateur=current_user.idSpectateur).first()
+    def recupereConcertFavoris():
+        favoris = Favoriser.query.filter_by(idSpectateur=current_user.idSpectateur).all()
+        listeConcerts = []
+        for favori in favoris:
+            listeConcerts.append(Concert.query.filter_by(idConcert=favori.idConcert).first())
+        return listeConcerts
 
 class TypeBillet(db.Model):
     __tablename__ = "TYPEBILLET"
@@ -62,6 +68,8 @@ class Style(db.Model):
 
     def getImage(self):
         return self.imageStyle if self.imageStyle else "confetti.jpg"
+    def getStyle(idStyle):
+        return Style.query.filter_by(idStyle=idStyle).first()
 
 class SousStyle(db.Model):
     __tablename__ = 'SOUSSTYLE'
@@ -91,7 +99,20 @@ class GroupeMusical(db.Model):
             "concert": unConcert.serialize() if unConcert else None,
             "photos": self.photos,
         }
-
+    def getGroupe(idGroupe):
+        return GroupeMusical.query.filter_by(idGroupe=idGroupe).first()
+    def get_membres(self):
+        return Appartient.query.filter_by(idGroupe=self.idGroupe).all()
+    def get_instruments(self):
+        membres = Appartient.query.filter_by(idGroupe=self.idGroupe).all()
+        instruments = set()  # Utiliser un ensemble pour éviter les doublons
+        for membre in membres:
+            artiste = membre.artiste
+            instruments_membre = Jouer.query.filter_by(idArtiste=artiste.idArtiste).all()
+            for instrument in instruments_membre:
+                instruments.add(instrument.type_instrument.nomTypeInstrument)
+        return list(instruments)
+        
 class Reseaux(db.Model):
     __tablename__ = "RESEAUX"
     idReseau = db.Column(db.Integer, primary_key=True)
@@ -135,6 +156,8 @@ class Concert(db.Model):
         # "inscriptions": self.inscriptions,
         # "favorises": self.favorises,
         }
+    def getConcert(idConcert):
+        return Concert.query.filter_by(idConcert=idConcert).first()
 
 class Inscrire(db.Model):
     __tablename__ = "INSCRIRE"
