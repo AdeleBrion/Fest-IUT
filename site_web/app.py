@@ -18,7 +18,6 @@ database = 'DBbrion'
 # host = 'servinfo-maria'
 # database = 'DBmoreira'
 
-
 #username = 'root'
 #password = 'root'
 #host = 'localhost'

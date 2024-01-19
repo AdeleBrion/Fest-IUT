@@ -8,20 +8,15 @@
 
 <div>
     <form action="{{ url_for('cree_groupe_save')}}" method="post">
+        {{ form.hidden_tag() }}
         <div>
-            <label for="nomGroupe">Le nom du groupe</label>
-            <input type="text" name="nomGroupe" id="nomGroupe" required>
-            <label for="descriptionGroupe">Une petite description du groupe</label>
-            <input type="text" name="descriptionGroupe" id="descriptionGroupe" required>
-            <select name="styleGroupe">
-                <option value="0">Choisir un style</option>
-                {% for style in styles %}
-                <option value="{{ style.nomStyle }}">{{ style.nomStyle }}</option>
-                {% endfor %}
-            </select>
+            {{ form.nomGroupe.label }}{{ form.nomGroupe }}
+            {{ form.descriptionGroupe.label }}{{ form.descriptionGroupe }}
+            {{ form.style.label }}{{ form.style }}
         </div>
         <div>
             <h4>Les liens du groupe <span>Optionel</span></h2>
+
                 <label for="ReseauxX">Un lien vers leur x</label>
                 <input type="text" name="ReseauxX" id="ReseauxX">
                 <label for="ReseauxInsta">Un lien vers leur instagram</label>
@@ -31,10 +26,8 @@
         </div>
 
         <div>
-            <label for="imageGroupe">Une image du groupe <span>Optionel</span></label>
-            <input type="file" name="imageGroupe" id="imageGroupe">
-            <label for="videoGroupe">Un lien pour une video promotionel <span>Optionel</span></label>
-            <input type="" name="videoGroupe" id="videoGroupe">
+            {{ form.photo.label}} {{ form.photo }}
+            {{ form.video.label}} {{ form.video }}
         </div>
 
         <div>
@@ -45,7 +38,7 @@
                 {% endfor %}
             </select>
             <p>Les personnes que vous avez ajouté aux groupe :</p>
-            <input type="hidden" name="listePersonnes" id="listePersonnes" value="">
+            {{ form.listePersonnes}}
             <ul id="list_personne"></ul>
         </div>
 

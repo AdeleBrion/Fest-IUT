@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/concerts_style.css') }}">
 {% endblock %}
-{% include "nav.html" %}
 {% block main %}
 <header>
     <a href="{{ url_for('concerts') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>

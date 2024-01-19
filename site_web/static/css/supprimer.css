@@ -1,0 +1,18 @@
+header img{
+    max-height: 6vh;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2vh;
+}
+
+div.page{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+div.page div{
+    margin: 4vh;
+    padding: 3vh;
+    border: solid black;
+}

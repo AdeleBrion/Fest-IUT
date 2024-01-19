@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/panelAdmin.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+
+{% if current_user.is_authenticated %}
+{% if current_user.is_admin %}
+
+<div class="admin">
+    <h1>Panel Admin</h1>
+    <div class="rubriques">
+        <fieldset>
+            <legend><h2>Les Groupes</h2></legend>
+            <a href="{{ url_for('cree_groupe') }}">Nouveau groupe</a>
+            <a href="{{ url_for('supprimer_groupe')}}">Supprimer un groupe</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Concerts</h2></legend>
+            <a href="{{ url_for('cree_concert') }}">Nouveau concert</a>
+            <a href="{{ url_for('supprimer_concert')}}">Supprimer un concert</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Styles</h2></legend>
+            <a href="">Nouveau style</a>
+            <a href="">Supprimer un style</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Artistes</h2></legend>
+            <a href="">Nouveau artiste</a>
+            <a href="">Supprimer un artiste</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Utilisateurs</h2></legend>
+            <a href="">Supprimer un utilisateur</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Lieux</h2></legend>
+            <a href="">Nouveau lieu</a>
+            <a href="">Supprimer un lieu</a>
+        </fieldset>
+        <fieldset>
+            <legend><h2>Les Actualités</h2></legend>
+            <a href="">Nouvelle actualité</a>
+            <a href="">Supprimer une actualité</a>
+        </fieldset>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+{% endblock %}

@@ -5,7 +5,7 @@
 {% block main %}
     <main>
         <img src="../static/img/inscription.jpg">
-        <a href="{{ url_for('home') }}" ><input class="buttonHome" type="image" src="../static/img/retour.jpg" alt="fleche retour"/></a>
+        <a href="{{ url_for('home') }}" ><input class="buttonHome" type="image" src="../static/img/retourBlanc.png" alt="fleche retour"/></a>
         <form role="form" method="POST" action="{{ url_for('ajouter_spec')}}">
             {{ form.hidden_tag() }}
             <p>Nom</p>

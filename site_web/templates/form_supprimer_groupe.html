@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/supprimer.css') }}">
+{% endblock %}
+{% block main %}
+
+<header>
+    <a href="{{ url_for('panelAdmin') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
+<div class="page">
+    {% for groupe in groupes %}
+    <div>
+        <form action="{{ url_for('supprimer_groupe_id', id=groupe.idGroupe) }}" method="get">
+            <p>{{ groupe.nomGroupe }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
+    {% for concert in concerts %}
+    <div>
+        <form action="{{ url_for('supprimer_concert_id', id=concert.idConcert) }}" method="get">
+            <p>{{ concert.nomConcert }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
