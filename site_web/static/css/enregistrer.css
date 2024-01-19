@@ -1,0 +1,23 @@
+div{
+    text-align: center;
+}
+
+header img{
+    max-height: 6vh;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2vh;
+}
+
+fieldset{
+    text-align: center;
+    margin: 4vh 15vw 4vh 15vw;
+}
+
+legend{
+    text-align: center;
+}
+
+button, input.bouton{
+    margin-bottom: 4vh;
+}

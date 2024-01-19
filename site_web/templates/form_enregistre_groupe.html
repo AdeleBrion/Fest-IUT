@@ -1,36 +1,39 @@
 {% extends "base.html" %}
 {% block page_specific_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/concerts.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/enregistrer.css') }}">
 {% endblock %}
-{% include "nav.html" %}
 {% block main %}
 
+<header>
+    <a href="{{ url_for('panelAdmin') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
 <div>
     <form action="{{ url_for('cree_groupe_save')}}" method="post">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.nomGroupe.label }}{{ form.nomGroupe }}
-            {{ form.descriptionGroupe.label }}{{ form.descriptionGroupe }}
-            {{ form.style.label }}{{ form.style }}
-        </div>
-        <div>
-            <h4>Les liens du groupe <span>Optionel</span></h2>
+        <fieldset>
+            <legend> Informations </legend>
+            <p>{{ form.nomGroupe.label }}</p><p>{{ form.nomGroupe }}</p>
+            <p>{{ form.descriptionGroupe.label }}</p><p>{{ form.descriptionGroupe }}</p>
+            <p>{{ form.style.label }}</p><p>{{ form.style }}</p>
+        </fieldset>
+        <fieldset>
+            <legend>Les liens du groupe (optionel)</legend>
+            <p><label for="ReseauxX">Un lien vers leur x</label></p>
+            <p><input type="text" name="ReseauxX" id="ReseauxX"></p>
+            <p><label for="ReseauxInsta">Un lien vers leur instagram</label></p>
+            <p><input type="text" name="ReseauxInsta" id="ReseauxInsta"></p>
+            <p><label for="ReseauxTiktok">Un lien vers leur TikTok</label></p>
+            <p><input type="text" name="ReseauxTiktok" id="ReseauxTiktok"></p>
+        </fieldset>
 
-                <label for="ReseauxX">Un lien vers leur x</label>
-                <input type="text" name="ReseauxX" id="ReseauxX">
-                <label for="ReseauxInsta">Un lien vers leur instagram</label>
-                <input type="text" name="ReseauxInsta" id="ReseauxInsta">
-                <label for="ReseauxTiktok">Un lien vers leur TikTok</label>
-                <input type="text" name="ReseauxTiktok" id="ReseauxTiktok">
-        </div>
-
-        <div>
+        <fieldset>
             {{ form.photo.label}} {{ form.photo }}
             {{ form.video.label}} {{ form.video }}
-        </div>
+        </fieldset>
 
-        <div>
+        <fieldset>
+            <legend> Artiste(s)</legend>
             <select name="Personne" id="Personne" onchange="ajouterALaListe()" >
                 <option value="0">Choisir une personne</option>
                 {% for personne in personnes %}
@@ -40,10 +43,10 @@
             <p>Les personnes que vous avez ajouté aux groupe :</p>
             {{ form.listePersonnes}}
             <ul id="list_personne"></ul>
-        </div>
+        </fieldset>
 
         <div>
-            <input type="submit" value="Enregistrer">
+            <input class="bouton" type="submit" value="Enregistrer">
         </div>
     </form>
 </div>
