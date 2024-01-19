@@ -163,8 +163,8 @@ class Hebergement(db.Model):
     nomHebergement = db.Column(db.String(30), nullable=False)
     nbMax = db.Column(db.Integer, nullable=False)
 
-class Accueillir(db.Model):
-    __tablename__ = "ACCUEILLIR"
+class Accueilir(db.Model):
+    __tablename__ = "ACCUEILIR"
     idGroupe = db.Column(db.Integer, db.ForeignKey('GROUPEMUSICAL.idGroupe'), primary_key=True)
     idHebergement = db.Column(db.Integer, db.ForeignKey('HEBERGEMENT.idHebergement'), primary_key=True)
     dateHeureHeb = db.Column(db.DateTime, nullable=False)  # Utilisez le type DateTime pour stocker la date et l'heure

@@ -1,7 +1,7 @@
 import json
 
 from .app import app, login_manager, db
-from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
+from .models import Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
 from .form import ConcertFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
@@ -224,6 +224,19 @@ def supprimer_groupe_id(id):
     if id is not None:
         groupe = GroupeMusical.query.get(id)
         if groupe:
+            idGroupe = groupe.idGroupe
+            appartients = Appartient.query.filter(Appartient.idGroupe == idGroupe).all()
+            for appartient in appartients:
+                db.session.delete(appartient)
+            planifier = Planifier.query.filter(Planifier.idGroupe == idGroupe).first()
+            if planifier:
+                db.session.delete(planifier)
+            photo = Photo.query.filter(Photo.idGroupe == idGroupe).first()
+            if photo:
+                db.session.delete(photo)
+            video = Video.query.filter(Video.idGroupe == idGroupe).first()
+            if video:
+                db.session.delete(video)
             db.session.delete(groupe)
             db.session.commit()
         return redirect(url_for('supprimer_groupe'))
