@@ -1,6 +1,9 @@
+from datetime import datetime
 import json
+
 from .app import app, login_manager, db
-from .models import get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
+from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
+from .form import ConcertFrom, GroupeFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -181,22 +184,22 @@ def liste_groupes():
 
 @app.route('/cree/groupe/')
 def cree_groupe():
-    liste_style = Style.query.all()
     liste_artiste = Artiste.query.all()
-    return render_template('form_enregistre_groupe.html', styles = liste_style, personnes = liste_artiste)
+    title = "Créer un groupe"
+    f = GroupeFrom()
+    f.style.choices = [(style.idStyle, style.nomStyle) for style in Style.query.all()]
+    return render_template('form_enregistre_groupe.html', personnes = liste_artiste, title=title, form = f)
 
 @app.route('/cree/groupe/save', methods=['POST'])
 def cree_groupe_save():
-    liste_personnes_string = request.form.get('listePersonnes')
-    nom = request.form['nomGroupe']
-    description = request.form['descriptionGroupe']
-    style = request.form['styleGroupe']
-    idstyle = Style.query.filter(Style.nomStyle == style).first().idStyle
-    photo = request.form['imageGroupe']
-    
-    video = request.form['videoGroupe']
-    if not video:
-        video = "https://www.youtube.com/watch?v=O7Sau7u32b0"
+    f = GroupeFrom()
+    nom = f.nomGroupe.data
+    description = f.descriptionGroupe.data
+    style = f.style.data
+    photo = f.photo.data
+    video = f.video.data
+    liste_personnes_string = f.listePersonnes.data
+
     try:
         liste_personnes = json.loads(liste_personnes_string)
         print(liste_personnes)
@@ -204,7 +207,7 @@ def cree_groupe_save():
         print("Erreur JSON")
 
     maxidGroupe = GroupeMusical.query.order_by(GroupeMusical.idGroupe.desc()).first().idGroupe
-    groupe = GroupeMusical(idGroupe=maxidGroupe+1, nomGroupe=nom, descriptionGroupe=description, idStyle=idstyle)
+    groupe = GroupeMusical(idGroupe=maxidGroupe+1, nomGroupe=nom, descriptionGroupe=description, idStyle=style)
     db.session.add(groupe)
     
     for artiste in liste_personnes:
@@ -220,6 +223,86 @@ def cree_groupe_save():
 
     db.session.commit()
     return redirect(url_for('home'))
+
+@app.route('/supprimer/groupe/<int:id>', methods=['GET'])
+def supprimer_groupe_id(id):
+    if id is not None:
+        groupe = GroupeMusical.query.get(id)
+        if groupe:
+            idGroupe = groupe.idGroupe
+            appartients = Appartient.query.filter(Appartient.idGroupe == idGroupe).all()
+            for appartient in appartients:
+                db.session.delete(appartient)
+            planifier = Planifier.query.filter(Planifier.idGroupe == idGroupe).first()
+            if planifier:
+                db.session.delete(planifier)
+            photo = Photo.query.filter(Photo.idGroupe == idGroupe).first()
+            if photo:
+                db.session.delete(photo)
+            video = Video.query.filter(Video.idGroupe == idGroupe).first()
+            if video:
+                db.session.delete(video)
+            db.session.delete(groupe)
+            db.session.commit()
+        return redirect(url_for('supprimer_groupe'))
+    else:
+        groupes = GroupeMusical.query.all()
+        return render_template('form_supprimer_groupe.html', groupes=groupes)
+
+@app.route('/supprimer/groupe/')
+def supprimer_groupe():
+    groupes = GroupeMusical.query.all()
+    return render_template('form_supprimer_groupe.html', groupes=groupes)
+
+@app.route('/cree/concert/')
+def cree_concert():
+    title = "Créer un concert"
+    f = ConcertFrom()
+    f.lieu.choices = [(lieu.idLieu, lieu.nomLieu) for lieu in Lieu.query.all()]
+    f.groupe.choices = [(groupe.idGroupe, groupe.nomGroupe) for groupe in GroupeMusical.query.all()]
+    f.ouvertATous.choices = [(0, "Non"), (1, "Oui")]
+    return render_template('form_enregistre_concert.html',form = f, title=title)
+
+@app.route('/cree/concert/save', methods=['POST'])
+def cree_concert_save():
+    f = ConcertFrom()
+    heureDebut = f.heureDebut.data
+    dateDebut = f.dateDebut.data
+    ouvertATous = f.ouvertATous.data
+
+    ouvertATous = True if ouvertATous == 1 else False
+    maxidConcert = Concert.query.order_by(Concert.idConcert.desc()).first().idConcert
+    date_et_heure = datetime.combine(dateDebut, heureDebut)    
+    concert = Concert(idConcert=maxidConcert+1, idLieu=f.lieu.data, idGroupe=f.groupe.data, nomConcert=f.nomConcert.data, dateHeureDebut= date_et_heure, dureeConcert=f.dureeConcert.data, dureeMontage=f.dureeMontage.data, dureeDemontage=f.dureeDemontage.data, placesRestantes=f.placesRestantes.data, ouvertATous=ouvertATous)
+    db.session.add(concert)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/concert/<int:id>', methods=['GET'])
+def supprimer_concert_id(id):
+    if id is not None:
+        concert = Concert.query.get(id)
+        if concert:
+            db.session.delete(concert)
+            db.session.commit()
+        return redirect(url_for('supprimer_concert'))
+    else:
+        concerts = Concert.query.all()
+        return render_template('form_supprimer_groupe.html', concerts=concerts)
+    
+@app.route('/supprimer/concert/')
+def supprimer_concert():
+    concerts = Concert.query.all()
+    return render_template('form_supprimer_groupe.html', concerts=concerts)
+
+#-----------------------------------------------------#
+#                        ADMIN                        #
+#-----------------------------------------------------#
+
+@app.route('/panel')
+@login_required
+def panelAdmin():
+    return render_template('panelAdmin.html', title="Panel Admin")
 
 @app.route('/like_concert', methods=['POST'])
 def like_concert():
