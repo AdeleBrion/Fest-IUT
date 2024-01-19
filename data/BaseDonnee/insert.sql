@@ -81,9 +81,9 @@ INSERT INTO GROUPEMUSICAL (idGroupe, idStyle, nomGroupe, descriptionGroupe) VALU
     -- POP(25.30)
     (25, 5, "Twenty One Pilots", "Duo de pop-music originaire de Colombus"),
     -- K-POP(31.36)
-    (31, 6, "Itzy", "Groupe de musique coréene composé de 5 membres"),
+    (31, 6, "Itzy", "Groupe de musique coréenne composé de 5 membres"),
     (32, 6, "BlackPink", "Groupe de musique coréene composé de 4 membres"),
-    (33, 6, "Xdinary Heroes", "Groupe de musique coréene composé de 5 membres"),
+    (33, 6, "Xdinary Heroes", "Groupe de musique coréene composé de 6 membres"),
     -- RAP(37.42)
     (37, 7, "Bigflo et Oli", "Deux frères rappeurs français"),
     (38, 7, "Masked Wolf", "Légende du rap en Australie"),
@@ -109,10 +109,16 @@ INSERT INTO LIEU (idLieu, nomLieu, capaciteMax, adresse, photoLieu) VALUES
 INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
     (1, 1, 1, "Concert des Rolling Stones", "2023-12-01 20:00:00", 120, 60, 60, 746, false),
     (2, 2, 2, "Concert de Waterparks", "2023-12-02 22:00:00", 150, 100, 50, 15, false),
-    (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-18 20:00:00", 90, 30, 60, 5, false),
+    (3, 6, 3, "Concert de Bring Me The Horizon", "2023-12-03 20:00:00", 90, 30, 60, 5, false),
     (4, 3, 4, "Concert de Spirit Box", "2023-12-04 20:00:00", 180, 80, 100, 26, false),
-    (5, 6, 5, "Concert de Muse", "2023-12-18 18:00:00", 120, 50, 70, 213, false),
-    (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-06 20:00:00", 200, 120, 80, 214, true);
+    (5, 6, 5, "Concert de Muse", "2023-12-03 18:00:00", 120, 50, 70, 213, false),
+    (6, 1, 6, "Concert de Red Hot Chilli Peppers", "2023-12-05 20:00:00", 200, 120, 80, 214, true),
+    (7, 4, 37, "Concert de Bigflo et Oli", "2023-12-02 21:00:00", 120, 45, 45, 150, false),
+    (8, 5, 43, "DJ Set du duo Dimitri Vegas & Like Mike", "2023-12-06 21:00:00", 180, 60, 70, 333, true),
+    (9, 7, 31, "Concert de Itzy", "2023-12-05 15:00:00", 90, 180, 200, 800, true),
+    (10, 8, 32, "Concert de BlackPink", "2023-12-06 15:00:00", 100, 160, 180, 900, true),
+    (11, 9, 33, "Concert de Xdinary Heroes", "2023-12-04 15:00:00", 70, 170, 180, 850, true),
+    (12, 9, 25, "The Icy Tour | Twenty One Pilots", "2023-12-01 15:00:00", 100, 120, 130, 830, true);
 
 -- Pour testée le trigger CHEVAUCHEMENTCONCERT
 -- INSERT INTO CONCERT (idConcert, idLieu, idGroupe, nomConcert, dateHeureDebut, dureeConcert, dureeMontage, dureeDemontage, placesRestantes, ouvertATous) VALUES
@@ -272,7 +278,22 @@ INSERT INTO ARTISTE (idArtiste, nomArtiste) VALUES
     (37, "Clay Gober"),
     (38, "Clay Aeschliman"),
     (39, "Orelsan"),
-    (40, "Gringe");
+    (40, "Gringe"),
+    (41, "Hwang Yeji"),
+    (42, "Lia"),
+    (43, "Ryujin"),
+    (44, "Chaeryeong"),
+    (45, "Yuna"),
+    (46, "Jennie"),
+    (47, "Lisa"),
+    (48, "Jisoo"),
+    (49, "Rose"),
+    (50, "Kwak Ji Seok"),
+    (51, "Jooyen"),
+    (52, "Jun Han"),
+    (53, "Gun-il"),
+    (54, "Jungsu"),
+    (55, "O.de");
 
 INSERT INTO JOUER (idTypeInstrument, idArtiste) VALUES
     (6, 1),
@@ -321,7 +342,29 @@ INSERT INTO JOUER (idTypeInstrument, idArtiste) VALUES
     (9, 37),
     (4, 38),
     (5, 39),
-    (5, 40);
+    (5, 40),
+    (5, 41),
+    (5, 42),
+    (5, 43),
+    (5, 44),
+    (5, 45),
+    (5, 46),
+    (5, 47),
+    (5, 48),
+    (5, 49),
+    (5, 50),
+    (1, 50),
+    (5, 51),
+    (9, 51),
+    (5, 52),
+    (1, 52),
+    (5, 53),
+    (4, 53),
+    (5, 54),
+    (3, 54),
+    (5, 55),
+    (13, 55);
+
 
 INSERT INTO APPARTIENT (idGroupe, idArtiste) VALUES
     (1, 1),
@@ -363,7 +406,22 @@ INSERT INTO APPARTIENT (idGroupe, idArtiste) VALUES
     (19, 37),
     (19, 38),
     (39, 39),
-    (39, 40);
+    (39, 40),
+    (31, 41),
+    (31, 42),
+    (31, 43),
+    (31, 44),
+    (31, 45),
+    (32, 46),
+    (32, 47),
+    (32, 48),
+    (32, 49),
+    (33, 50),
+    (33, 51),
+    (33, 52),
+    (33, 53),
+    (33, 54),
+    (33, 55);
 
 --INSERT INTO PHOTO (idPhoto, idGroupe, filePathPhoto) VALUES;
 
