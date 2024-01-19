@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/compteFavoris.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+    <h1>Mes concerts favoris</h1>
+    <div class="concert">
+        {% for concert in concerts %}
+            <div class="unConcert">
+                <fieldset class="concert_info">
+                    <legend>
+                        <h3>{{ concert.nomConcert }}</h3>
+                    </legend>
+                    <p>{{ concert.dateHeureDebut }}</p>
+                    <p>{{ concert.lieu.nomLieu }}</p>
+                    <p>{{ concert.dureeConcert }} minutes</p>
+                    <p>{{ concert.placesRestantes }} places restantes</p>
+                    <form method="post" action="{{ url_for('dislike_favoris') }}">
+                        <input type="hidden" name="concert_id" value="{{ concert.idConcert }}">
+                        <button type="submit" class="invisible-button">
+                            <img class="like-button" id="like-button-{{ concert.idConcert }}" src="{{ url_for('static', filename='img/coeurRemplie.png') }}" alt="Unlike">
+                        </button>
+                    </form>
+
+                </fieldset>
+            </div>
+        {% endfor %}
+        {% if not concerts %}
+        <h2>Vous n'avez pas encore de concerts favoris</h2>
+        {% endif %}
+    </div>
+{% endblock %}

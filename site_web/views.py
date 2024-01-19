@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
+from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
 from .form import ConcertFrom, GroupeFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
@@ -132,7 +132,9 @@ def ajouter_spec():
     )
     db.session.add(spec)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
+
+
 @app.route('/concerts')
 def concerts():
     return render_template('concerts.html',styles = Style.query.all())
@@ -159,9 +161,11 @@ def update_account():
 
 
 @app.route('/concerts/<string:style>')
+@login_required
 def concerts_style(style):
     style_trouve = Style.query.filter(Style.nomStyle == style).first()
-    return render_template('concerts_style.html', activites = GroupeMusical.query.filter(GroupeMusical.idStyle == style_trouve.idStyle).all(), concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
+    print(style_trouve)
+    return render_template('concerts_style.html', style_trouve= style_trouve ,concerts_likes= Spectateur.recupereConcertFavoris() ,activites = GroupeMusical.query.filter(GroupeMusical.idStyle == style_trouve.idStyle).all(), concerts = Concert.query.join(GroupeMusical).filter(GroupeMusical.idStyle == style_trouve.idStyle).all())
 
 #-----------------------------------------------------#
 #                         API                         #
@@ -299,3 +303,39 @@ def supprimer_concert():
 @login_required
 def panelAdmin():
     return render_template('panelAdmin.html', title="Panel Admin")
+
+@app.route('/like_concert', methods=['POST'])
+def like_concert():
+    concert_id = request.form.get('concert_id')
+    favori = Favoriser.query.filter_by(idSpectateur=current_user.idSpectateur, idConcert=concert_id).first()
+    if favori:
+        db.session.delete(favori)
+        liked = False
+    else:
+        favori = Favoriser(idSpectateur=current_user.idSpectateur, idConcert=concert_id)
+        db.session.add(favori)
+        liked = True
+    db.session.commit()
+    style = Style.getStyle(GroupeMusical.getGroupe(Concert.getConcert(concert_id).idGroupe).idStyle)
+    return concerts_style(style.nomStyle)
+
+@app.route('/moncompte/meeFavoris')
+def mes_concerts():
+    return render_template('compteFavoris.html', concerts = Spectateur.recupereConcertFavoris())
+
+
+@app.route('/dislikeFavoris', methods=['POST'])
+def dislike_favoris():
+    concert_id = request.form.get('concert_id')
+    if concert_id is None:
+        return "No concert ID provided", 400
+    favori = Favoriser.query.filter_by(idSpectateur=current_user.idSpectateur, idConcert=concert_id).first()
+    if favori:
+        db.session.delete(favori)
+        liked = False
+    else:
+        favori = Favoriser(idSpectateur=current_user.idSpectateur, idConcert=concert_id)
+        db.session.add(favori)
+        liked = True
+    db.session.commit()
+    return redirect(url_for('mes_concerts'))
