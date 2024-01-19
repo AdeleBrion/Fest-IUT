@@ -38,7 +38,7 @@ nav a {
 
 .dropdown-menu {
     position: relative;
-    display: inline-block;
+    display: flex;
 }
 
 .dropdown-menu a {

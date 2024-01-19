@@ -64,3 +64,22 @@ fieldset.concert_info {
     position: relative;
     /* autres styles */
 }
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333; /* Couleur du texte */
+    margin-bottom: 20px;
+}
+
+img#like-image {
+    display: block;
+    margin: 0 auto; /* Centrer l'image horizontalement avec une marge en haut et en bas */
+    max-width: 100%;
+    max-height: 200px; /* Réglez la hauteur maximale de l'image */
+}
