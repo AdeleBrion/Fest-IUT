@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concerts.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+
+<div>
+    <form action="{{ url_for('cree_concert_save')}}" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.nomConcert.label }}{{ form.nomConcert }}
+        </div>
+        <div>
+            {{ form.groupe.label }}{{ form.groupe }}
+            {{ form.lieu.label }}{{ form.lieu }}
+        </div>
+        <div>
+            {{ form.dateDebut.label }}{{ form.dateDebut }}
+            {{ form.heureDebut.label }}{{ form.heureDebut }}
+            {{ form.dureeConcert.label }}{{ form.dureeConcert }}
+            {{ form.dureeMontage.label }}{{ form.dureeMontage }}
+            {{ form.dureeDemontage.label }}{{ form.dureeDemontage }}
+            {{ form.placesRestantes.label }}{{ form.placesRestantes }}
+            {{ form.ouvertATous.label }}{{ form.ouvertATous }}            
+        </div>
+        <div>
+            <button type="submit">Enregistre</button>
+        </div>
+
+    </form>
+    
+</div>
+
+{% endblock %}

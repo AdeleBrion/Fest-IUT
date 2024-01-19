@@ -5,7 +5,7 @@
         <a href="{{ url_for('billeterie')}}">LA BILLETERIE</a>
         {% if current_user.is_authenticated %}
         {% if current_user.is_admin %}
-        <a href="{{ url_for('panelAdmin')}}">Panel</a>
+        <a href="{{ url_for('panelAdmin')}}">PANEL EN MAJUSCULE</a>
         {% endif %}
             <div class="dropdown-menu">
                 <a href="">MON COMPTE</a>

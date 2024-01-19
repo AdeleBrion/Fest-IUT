@@ -1,8 +1,9 @@
+from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
-from .form import ConcertFrom
+from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste
+from .form import ConcertFrom, GroupeFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -181,13 +182,13 @@ def liste_groupes():
 def cree_groupe():
     liste_artiste = Artiste.query.all()
     title = "Créer un groupe"
-    f = ConcertFrom()
+    f = GroupeFrom()
     f.style.choices = [(style.idStyle, style.nomStyle) for style in Style.query.all()]
     return render_template('form_enregistre_groupe.html', personnes = liste_artiste, title=title, form = f)
 
 @app.route('/cree/groupe/save', methods=['POST'])
 def cree_groupe_save():
-    f = ConcertFrom()
+    f = GroupeFrom()
     nom = f.nomGroupe.data
     description = f.descriptionGroupe.data
     style = f.style.data
@@ -252,8 +253,43 @@ def supprimer_groupe():
 @app.route('/cree/concert/')
 def cree_concert():
     title = "Créer un concert"
-    liste_groupes = GroupeMusical.query.all()
-    return render_template('form_enregistre_concert.html', groupes = liste_groupes, title=title)
+    f = ConcertFrom()
+    f.lieu.choices = [(lieu.idLieu, lieu.nomLieu) for lieu in Lieu.query.all()]
+    f.groupe.choices = [(groupe.idGroupe, groupe.nomGroupe) for groupe in GroupeMusical.query.all()]
+    f.ouvertATous.choices = [(0, "Non"), (1, "Oui")]
+    return render_template('form_enregistre_concert.html',form = f, title=title)
+
+@app.route('/cree/concert/save', methods=['POST'])
+def cree_concert_save():
+    f = ConcertFrom()
+    heureDebut = f.heureDebut.data
+    dateDebut = f.dateDebut.data
+    ouvertATous = f.ouvertATous.data
+
+    ouvertATous = True if ouvertATous == 1 else False
+    maxidConcert = Concert.query.order_by(Concert.idConcert.desc()).first().idConcert
+    date_et_heure = datetime.combine(dateDebut, heureDebut)    
+    concert = Concert(idConcert=maxidConcert+1, idLieu=f.lieu.data, idGroupe=f.groupe.data, nomConcert=f.nomConcert.data, dateHeureDebut= date_et_heure, dureeConcert=f.dureeConcert.data, dureeMontage=f.dureeMontage.data, dureeDemontage=f.dureeDemontage.data, placesRestantes=f.placesRestantes.data, ouvertATous=ouvertATous)
+    db.session.add(concert)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/concert/<int:id>', methods=['GET'])
+def supprimer_concert_id(id):
+    if id is not None:
+        concert = Concert.query.get(id)
+        if concert:
+            db.session.delete(concert)
+            db.session.commit()
+        return redirect(url_for('supprimer_concert'))
+    else:
+        concerts = Concert.query.all()
+        return render_template('form_supprimer_groupe.html', concerts=concerts)
+    
+@app.route('/supprimer/concert/')
+def supprimer_concert():
+    concerts = Concert.query.all()
+    return render_template('form_supprimer_groupe.html', concerts=concerts)
 
 #-----------------------------------------------------#
 #                        ADMIN                        #

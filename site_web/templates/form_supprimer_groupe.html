@@ -15,5 +15,13 @@
         </form>
     </div>
     {% endfor %}
+    {% for concert in concerts %}
+    <div>
+        <form action="{{ url_for('supprimer_concert_id', id=concert.idConcert) }}" method="get">
+            <p>{{ concert.nomConcert }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
