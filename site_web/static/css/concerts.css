@@ -1,53 +1,33 @@
 body{
-    padding:0%;
-    margin: 0%;
-
-    background-image: url("../img/billleterie.jpg");
-    background-size: cover;
+    margin: 0px;
 }
 
 main{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div.categorie{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
-.billet{
-    background-color: aliceblue;
+div.unStyle{
     flex-basis: 20%;
-    flex-grow: 1;
-    background-image: url("../img/billet1.jpg");
-    background-size: cover;
-
-    border-radius: 10vh;
-
-    padding: 2vh;
-    margin: 2vh;
-
-    font-size: 2vh;
+    margin: 0 2vw;
 }
 
-div p{
-    backdrop-filter: blur(8px);
+div.unStyle img{
+    width: 20vw;
+    height: 20vh;
 }
 
-.info{
-    background-color: lightgray;
-    border-radius: 10vh;
-    margin: 4vw;
-
-    backdrop-filter: blur(8px);
-    flex-basis: 100%;
-    padding: 0%;
-}
-
-.info a{
-    color:rgb(0, 149, 255);
+main a{
     text-decoration: none;
-}
-
-button{
-    background-color: black;
-    border-color: black;
-    color: white;
+    color: black;
+    font-weight: bold;
 }

@@ -25,10 +25,10 @@ database = 'DBbrion'
 #database = 'sae_festi'
 
 
-username = 'susu'
-password = 'susu'
-host = 'localhost'
-database = 'festiut'
+#username = 'susu'
+#password = 'susu'
+#host = 'localhost'
+#database = 'festiut'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+username+':'+password+'@'+host+'/'+database
 
