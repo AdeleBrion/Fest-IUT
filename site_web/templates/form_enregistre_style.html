@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/enregistrer.css') }}">
+{% endblock %}
+{% block main %}
+
+<header>
+    <a href="{{ url_for('panelAdmin') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
+<div>
+    <form action="{{ url_for('cree_style_save')}}" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend> Informations </legend>
+            <p>{{ form.nomStyle.label }}</p><p>{{ form.nomStyle }}</p>
+            <p>{{ form.imageStyle.label }}</p><p>{{ form.imageStyle }}</p>
+        </fieldset>
+        <div>
+            <input class="bouton" type="submit" value="Enregistrer">
+        </div>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='JavaScript/form_engregistre_groupe.js') }}"></script>
+{% endblock %}

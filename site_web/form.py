@@ -23,3 +23,7 @@ class ConcertFrom(FlaskForm):
     dureeDemontage = IntegerField('Durée du démontage', validators=[DataRequired()])
     placesRestantes = IntegerField('Nombre de places disponibles', validators=[DataRequired()])
     ouvertATous = SelectField('Ouvert à tous')
+
+class StyleForm(FlaskForm):
+    nomStyle = StringField('Nom du Style', validators=[DataRequired()])
+    imageStyle = FileField('Image du Style')

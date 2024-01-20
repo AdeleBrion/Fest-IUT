@@ -2,8 +2,8 @@ from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
-from .form import ConcertFrom, GroupeFrom
+from .models import Lieu, Photo, SousStyle, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
+from .form import ConcertFrom, GroupeFrom, StyleForm
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -294,6 +294,22 @@ def supprimer_concert_id(id):
 def supprimer_concert():
     concerts = Concert.query.all()
     return render_template('form_supprimer_groupe.html', concerts=concerts)
+
+@app.route('/cree/style/')
+def cree_style():
+    f = StyleForm()
+    return render_template('form_enregistre_style.html' , title="Créer un style", form = f)
+
+@app.route('/cree/style/save', methods=['POST'])
+def cree_style_save():
+    f = StyleForm()
+    nomStyle = f.nomStyle.data
+    maxidStyle = Style.query.order_by(Style.idStyle.desc()).first().idStyle
+    style = Style(idStyle=maxidStyle+1, nomStyle=nomStyle, imageStyle="")
+    db.session.add(style)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 
 #-----------------------------------------------------#
 #                        ADMIN                        #
