@@ -2,8 +2,8 @@ from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Lieu, Photo, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
-from .form import ConcertFrom, GroupeFrom
+from .models import Jouer, Lieu, Photo, TypeInstrument, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
+from .form import ArtisteForm, ConcertFrom, GroupeFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -294,6 +294,49 @@ def supprimer_concert_id(id):
 def supprimer_concert():
     concerts = Concert.query.all()
     return render_template('form_supprimer_groupe.html', concerts=concerts)
+
+@app.route('/cree/artiste/')
+def cree_artiste():
+    f = ArtisteForm()
+    f.instruments.choices = [(instrument.idTypeInstrument, instrument.nomTypeInstrument) for instrument in  TypeInstrument.query.all()]
+    return render_template('form_enregistre_artiste.html', form = f, title="ajoute Artiste")
+
+@app.route('/cree/artiste/save', methods=['POST'])
+def cree_artiste_save():
+    f = ArtisteForm()
+    nom = f.nomArtiste.data
+    instrument = f.instruments.data
+    maxidArtiste = Artiste.query.order_by(Artiste.idArtiste.desc()).first().idArtiste
+    artiste = Artiste(idArtiste=maxidArtiste+1, nomArtiste=nom)
+    db.session.add(artiste)
+    joue = Jouer(idArtiste=maxidArtiste+1, idTypeInstrument=instrument)
+    db.session.add(joue)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/artiste/<int:id>', methods=['GET'])
+def supprimer_artiste_id(id):
+    if id is not None:
+        artiste = Artiste.query.get(id)
+        if artiste:
+            idArtiste = artiste.idArtiste
+            appartients = Appartient.query.filter(Appartient.idArtiste == idArtiste).all()
+            for appartient in appartients:
+                db.session.delete(appartient)
+            instruments = Jouer.query.filter(Jouer.idArtiste == idArtiste).all()
+            for instrument in instruments:
+                db.session.delete(instrument)
+            db.session.delete(artiste)
+            db.session.commit()
+        return redirect(url_for('supprimer_artiste'))
+    else:
+        artistes = Artiste.query.all()
+        return render_template('form_supprimer_groupe.html', artistes=artistes)
+    
+@app.route('/supprimer/artiste/')
+def supprimer_artiste():
+    artistes = Artiste.query.all()
+    return render_template('form_supprimer_groupe.html', artistes=artistes)
 
 #-----------------------------------------------------#
 #                        ADMIN                        #

@@ -23,3 +23,7 @@ class ConcertFrom(FlaskForm):
     dureeDemontage = IntegerField('Durée du démontage', validators=[DataRequired()])
     placesRestantes = IntegerField('Nombre de places disponibles', validators=[DataRequired()])
     ouvertATous = SelectField('Ouvert à tous')
+
+class ArtisteForm(FlaskForm):
+    nomArtiste = StringField('Nom de l\'artiste', validators=[DataRequired()])
+    instruments = SelectField('Instrument')
