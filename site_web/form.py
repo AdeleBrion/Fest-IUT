@@ -27,3 +27,9 @@ class ConcertFrom(FlaskForm):
 class ArtisteForm(FlaskForm):
     nomArtiste = StringField('Nom de l\'artiste', validators=[DataRequired()])
     instruments = SelectField('Instrument')
+
+class LieuForm(FlaskForm):
+    nomLieu = StringField('Nom du Lieu', validators=[DataRequired()])
+    adresse = StringField('L\'adresse du lieu', validators=[DataRequired()])
+    capaciteMax = IntegerField('La capacité max du lieu',validators=[DataRequired()])
+    photolieu = FileField('Une photo du lieu')

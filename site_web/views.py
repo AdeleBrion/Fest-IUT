@@ -3,7 +3,7 @@ import json
 
 from .app import app, login_manager, db
 from .models import Billet, Inscrire, Jouer, Lieu, Photo, TypeInstrument, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
-from .form import ArtisteForm, ConcertFrom, GroupeFrom
+from .form import ArtisteForm, ConcertFrom, GroupeFrom, LieuForm
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -364,6 +364,38 @@ def supprimer_utilisateur_id(id):
 def supprimer_utilisateur():
     utilisateur = Spectateur.query.all()
     return render_template('form_supprimer.html', utilisateurs=utilisateur)
+
+@app.route('/cree/lieu/')
+def cree_lieu():
+    f = LieuForm()
+    return render_template('form_enregistre_lieu.html', form = f, title="ajoute Lieu")
+
+@app.route('/cree/lieu/save', methods=['POST'])
+def cree_lieu_save():
+    f = LieuForm()
+    maxidLieu = Lieu.query.order_by(Lieu.idLieu.desc()).first().idLieu
+    lieu = Lieu(idLieu=maxidLieu+1, nomLieu=f.nomLieu.data, adresse=f.adresse.data, capaciteMax=f.capaciteMax.data, photoLieu=None)
+    db.session.add(lieu)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/lieu/<int:id>', methods=['GET'])
+def supprimer_lieu_id(id):
+    if id is not None:
+        lieu = Lieu.query.get(id)
+        if lieu:
+            db.session.delete(lieu)
+            db.session.commit()
+        return redirect(url_for('supprimer_lieu'))
+    else:
+        utilisateur = Spectateur.query.all()
+        return render_template('form_supprimer.html', utilisateurs=utilisateur)
+    
+@app.route('/supprimer/lieu/')
+def supprimer_lieu():
+    lieux = Lieu.query.all()
+    return render_template('form_supprimer.html', lieux=lieux)
+
 #-----------------------------------------------------#
 #                        ADMIN                        #
 #-----------------------------------------------------#
