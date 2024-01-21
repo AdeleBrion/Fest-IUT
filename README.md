@@ -1,5 +1,4 @@
 # Fest-IUT
-
 # Lancement
 
 - installer les requirements (pip install -r requirements)
@@ -11,3 +10,10 @@
 
 - identifiant : adele.brion@gmail.com
 - mot de passe : azerty
+
+## Membre du groupe :
+- BRION Adèle
+- CHIDLOVSKY Léopold
+- DEMARERT Sullivan
+- MOREIRA Daniel
+
