@@ -3,7 +3,6 @@ from flask_wtf import FlaskForm
 from wtforms import FileField, HiddenField, SelectField, StringField, TimeField, IntegerField, DateField
 from wtforms.validators import DataRequired
 
-
 class GroupeFrom(FlaskForm):
     nomGroupe = StringField('Nom du groupe')
     descriptionGroupe = StringField('Description du groupe')
@@ -33,3 +32,7 @@ class LieuForm(FlaskForm):
     adresse = StringField('L\'adresse du lieu', validators=[DataRequired()])
     capaciteMax = IntegerField('La capacité max du lieu',validators=[DataRequired()])
     photolieu = FileField('Une photo du lieu')
+
+class StyleForm(FlaskForm):
+    nomStyle = StringField('Nom du Style', validators=[DataRequired()])
+    imageStyle = FileField('Image du Style')
