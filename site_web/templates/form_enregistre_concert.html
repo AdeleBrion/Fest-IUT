@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/enregistrer.css') }}">
+{% endblock %}
+{% block main %}
+
+<header>
+    <a href="{{ url_for('panelAdmin') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
+<div>
+    <form action="{{ url_for('cree_concert_save')}}" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <p>{{ form.nomConcert.label }}</p><p>{{ form.nomConcert }}</p>
+        </fieldset>
+        <fieldset>
+            <legend> Informations </legend>
+            <p>{{ form.groupe.label }}<p></p>{{ form.groupe }}</p>
+            <p>{{ form.lieu.label }}<p></p>{{ form.lieu }}</p>
+        </fieldset>
+        <fieldset>
+            <legend> Détails </legend>
+            <p>{{ form.dateDebut.label }}<p></p>{{ form.dateDebut }}</p>
+            <p>{{ form.heureDebut.label }}<p></p>{{ form.heureDebut }}</p>
+            <p>{{ form.dureeConcert.label }}<p></p>{{ form.dureeConcert }}</p>
+            <p>{{ form.dureeMontage.label }}<p></p>{{ form.dureeMontage }}</p>
+            <p>{{ form.dureeDemontage.label }}<p></p>{{ form.dureeDemontage }}</p>
+            <p>{{ form.placesRestantes.label }}<p></p>{{ form.placesRestantes }}</p>
+            <p>{{ form.ouvertATous.label }}<p></p>{{ form.ouvertATous }}</p>
+        </fieldset>
+        <div>
+            <button type="submit">Enregistrer</button>
+        </div>
+
+    </form>
+    
+</div>
+
+{% endblock %}

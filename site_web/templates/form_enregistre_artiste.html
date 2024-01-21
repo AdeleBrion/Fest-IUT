@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/enregistrer.css') }}">
+{% endblock %}
+{% block main %}
+
+<header>
+    <a href="{{ url_for('panelAdmin') }}"><img src="{{ url_for('static', filename='img/retour.png') }}"></a>
+</header>
+<div>
+    <form action="{{ url_for('cree_artiste_save')}}" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <p>{{ form.nomArtiste.label }}</p><p>{{ form.nomArtiste }}</p>
+        </fieldset>
+        <fieldset>
+            <legend> Informations </legend>
+            <p>{{ form.instruments.label }}<p></p>{{ form.instruments }}</p>
+        </fieldset>
+        <div>
+            <button type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

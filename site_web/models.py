@@ -1,6 +1,6 @@
 from sqlalchemy import CheckConstraint
 from .app import db
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 class Lieu(db.Model):
     __tablename__ = "LIEU"
@@ -9,6 +9,11 @@ class Lieu(db.Model):
     adresse = db.Column(db.String(45), nullable=False)
     capaciteMax = db.Column(db.Integer, nullable=False)
     photoLieu = db.Column(db.LargeBinary)
+
+class Role(db.Model):
+    __tablename__ = "ROLE"
+    idRole = db.Column(db.Integer, primary_key=True)
+    nomRole = db.Column(db.String(30), nullable=False)
 
 class Spectateur(db.Model, UserMixin):
     __tablename__ = "SPECTATEUR"
@@ -19,16 +24,41 @@ class Spectateur(db.Model, UserMixin):
     motDePasse = db.Column(db.String(45), nullable=False)
     adresse = db.Column(db.String(45), nullable=False)
     infoAnnexes = db.Column(db.String(45))
+    idRole = db.Column(db.Integer, db.ForeignKey('ROLE.idRole'), nullable=False)
+    role = db.relationship('Role', backref=db.backref('rols',lazy="dynamic"))
 
     def get_id(self):
       return str(self.idSpectateur)
+    
+    def getMaxId():
+        return Spectateur.query.order_by(Spectateur.idSpectateur.desc()).first().idSpectateur
+    
+    def is_admin(self):
+        return True if self.idRole == Role.query.filter_by(nomRole="Administrateur").first().idRole else False
+    
+    def get_current_user_infos():
+        return Spectateur.query.filter_by(idSpectateur=current_user.idSpectateur).first()
+    def recupereConcertFavoris():
+        favoris = Favoriser.query.filter_by(idSpectateur=current_user.idSpectateur).all()
+        listeConcerts = []
+        for favori in favoris:
+            listeConcerts.append(Concert.query.filter_by(idConcert=favori.idConcert).first())
+        return listeConcerts
+
+class TypeBillet(db.Model):
+    __tablename__ = "TYPEBILLET"
+    idTypeBillet = db.Column(db.Integer, primary_key=True)
+    intitule = db.Column(db.String(50))
+    description = db.Column(db.String(5000))
+    prix = db.Column(db.Integer, nullable=False)
+    duree = db.Column(db.Integer, nullable=False)
 
 class Billet(db.Model):
     __tablename__ = "BILLET"
     idBillet = db.Column(db.Integer, primary_key=True)
-    duree = db.Column(db.Integer, nullable=False)
-    prix = db.Column(db.Integer, nullable=False)
-    dateValidite = db.Column(db.DateTime, nullable=False)
+    idTypeBillet = db.Column(db.Integer, db.ForeignKey('TYPEBILLET.idTypeBillet'))
+    typeBillet = db.relationship('TypeBillet', backref=db.backref('billets',lazy="dynamic"))
+    dateDebut = db.Column(db.DateTime, nullable=False)
     idSpectateur = db.Column(db.Integer, db.ForeignKey('SPECTATEUR.idSpectateur'))
     spectateur = db.relationship('Spectateur', backref=db.backref('billets',lazy="dynamic"))
 
@@ -43,6 +73,8 @@ class Style(db.Model):
 
     def getImage(self):
         return self.imageStyle if self.imageStyle else "confetti.jpg"
+    def getStyle(idStyle):
+        return Style.query.filter_by(idStyle=idStyle).first()
 
 class SousStyle(db.Model):
     __tablename__ = 'SOUSSTYLE'
@@ -72,7 +104,20 @@ class GroupeMusical(db.Model):
             "concert": unConcert.serialize() if unConcert else None,
             "photos": self.photos,
         }
-
+    def getGroupe(idGroupe):
+        return GroupeMusical.query.filter_by(idGroupe=idGroupe).first()
+    def get_membres(self):
+        return Appartient.query.filter_by(idGroupe=self.idGroupe).all()
+    def get_instruments(self):
+        membres = Appartient.query.filter_by(idGroupe=self.idGroupe).all()
+        instruments = set()  # Utiliser un ensemble pour éviter les doublons
+        for membre in membres:
+            artiste = membre.artiste
+            instruments_membre = Jouer.query.filter_by(idArtiste=artiste.idArtiste).all()
+            for instrument in instruments_membre:
+                instruments.add(instrument.type_instrument.nomTypeInstrument)
+        return list(instruments)
+        
 class Reseaux(db.Model):
     __tablename__ = "RESEAUX"
     idReseau = db.Column(db.Integer, primary_key=True)
@@ -116,6 +161,8 @@ class Concert(db.Model):
         # "inscriptions": self.inscriptions,
         # "favorises": self.favorises,
         }
+    def getConcert(idConcert):
+        return Concert.query.filter_by(idConcert=idConcert).first()
 
 class Inscrire(db.Model):
     __tablename__ = "INSCRIRE"
@@ -139,8 +186,8 @@ class Hebergement(db.Model):
     nomHebergement = db.Column(db.String(30), nullable=False)
     nbMax = db.Column(db.Integer, nullable=False)
 
-class Accueillir(db.Model):
-    __tablename__ = "ACCUEILLIR"
+class Accueilir(db.Model):
+    __tablename__ = "ACCUEILIR"
     idGroupe = db.Column(db.Integer, db.ForeignKey('GROUPEMUSICAL.idGroupe'), primary_key=True)
     idHebergement = db.Column(db.Integer, db.ForeignKey('HEBERGEMENT.idHebergement'), primary_key=True)
     dateHeureHeb = db.Column(db.DateTime, nullable=False)  # Utilisez le type DateTime pour stocker la date et l'heure

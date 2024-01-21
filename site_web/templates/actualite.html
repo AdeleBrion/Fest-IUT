@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block page_specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/actualite.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+{% endblock %}
+{% include "nav.html" %}
+{% block main %}
+    <main>
+        <img src="{{ url_for('static', filename='img/actualite1.jpg') }}">
+
+        <section>
+            <div class="prix">
+                <article>
+                    <p>Découvrez dès maintenant les billets Fest'IUT à de tout nouveaux prix !</p>
+                    <a href="{{ url_for('billeterie') }}">Accès billeterie</a>
+                </article>
+                <img src="{{ url_for('static', filename='img/billeterie2.jpg') }}">
+            </div>
+            
+            <div class="groupe-tendance">
+                <article>
+                    <p>Itzy se produit au festival, réservez vos places dès maintenant !</p>
+                    <a href="{{ url_for('billeterie') }}">Accès billeterie</a>
+                </article>
+                <img src="{{ url_for('static', filename='img/actualite2.jpg') }}">
+            </div>
+
+            <div class="reglement">
+                <article>
+                    <p>Modification du règlement du festival et nouvelles dispositions</p>
+                    <a href="">Voir le réglement</a>
+                </article>
+                <img src="{{ url_for('static', filename='img/marteau.jpg') }}">
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

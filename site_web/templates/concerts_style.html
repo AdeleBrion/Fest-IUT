@@ -16,9 +16,49 @@
                 <img src="" alt="Image du concert + {{ concert.nomConcert }}">
             </div> -->
             <fieldset class="concert_info">
-                <legend><h3>{{ concert.nomConcert }}</h3></legend>
+                <legend>
+                    <h3>{{ concert.nomConcert }}</h3>
+                </legend>
                 <p>{{ concert.dateHeureDebut }}</p>
                 <p>{{ concert.lieu.nomLieu }}</p>
+                <p>{{ concert.dureeConcert}} minutes</p>
+                <p>{{ concert.placesRestantes }} places restantes</p>
+                {% if concert in concerts_likes %}
+            <form method="post" action="{{ url_for('like_concert') }}">
+                <input type="hidden" name="concert_id" value="{{ concert.idConcert }}">
+                <button type="submit" class="invisible-button">
+                    <img class="like-button" id="like-button-{{ concert.idConcert }}" src="{{ url_for('static', filename='img/coeurRemplie.png') }}" alt="Unlike">
+                </button>
+                </form>
+            {% else %}
+                <form method="post" action="{{ url_for('like_concert') }}">
+                    <input type="hidden" name="concert_id" value="{{ concert.idConcert }}">
+                    <button type="submit" class="invisible-button">
+                        <img class="like-button" id="like-button-{{ concert.idConcert }}" src="{{ url_for('static', filename='img/coeurVide.png') }}" alt="Like">
+                    </button>
+                </form>
+            {% endif %}
+            </fieldset>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Les groupes</h2>
+    <div class="concert">
+        {% for activite in activites %}
+        <div class="unConcert">
+            <fieldset class="concert_info">
+                <legend>
+                    <h3>{{ activite.nomGroupe}}</h3>
+                </legend>
+                <p>{{ activite.descriptionGroupe }}</p>
+                <p>Membres</p>
+                <ul>
+                    {% for membre in activite.get_membres() %}
+                    <li>{{ membre.artiste.nomArtiste }} {{ membre.artiste.prenomArtiste}}</li>
+                    {% endfor %}          
+                </ul>
+                <p>Instruments : {{ activite.get_instruments()}}</p>
             </fieldset>
         </div>
         {% endfor %}
