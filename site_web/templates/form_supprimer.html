@@ -25,5 +25,29 @@
         </form>
     </div>
     {% endfor %}
+    {% for artiste in artistes %}
+    <div>
+        <form action="{{ url_for('supprimer_artiste_id', id=artiste.idArtiste) }}" method="get">
+            <p>{{ artiste.nomArtiste }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
+    {% for utilisateur in utilisateurs %}
+    <div>
+        <form action="{{ url_for('supprimer_utilisateur_id', id=utilisateur.idSpectateur) }}" method="get">
+            <p>{{ utilisateur.nomSpectateur }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
+    {% for lieu in lieux %}
+    <div>
+        <form action="{{ url_for('supprimer_lieu_id', id=lieu.idLieu) }}" method="get">
+            <p>{{ lieu.nomLieu }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

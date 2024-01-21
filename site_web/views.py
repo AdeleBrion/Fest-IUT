@@ -2,8 +2,9 @@ from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Lieu, Photo, SousStyle, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
-from .form import ConcertFrom, GroupeFrom, StyleForm
+from .models import get_email_spectateur, Billet, Lieu, Photo, SousStyle, Video,  Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Inscrire, Jouer, TypeInstrument, Favoriser
+from .form import ConcertFrom, GroupeFrom, StyleForm, ArtisteForm, LieuForm
+
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -247,12 +248,12 @@ def supprimer_groupe_id(id):
         return redirect(url_for('supprimer_groupe'))
     else:
         groupes = GroupeMusical.query.all()
-        return render_template('form_supprimer_groupe.html', groupes=groupes)
+        return render_template('form_supprimer.html', groupes=groupes)
 
 @app.route('/supprimer/groupe/')
 def supprimer_groupe():
     groupes = GroupeMusical.query.all()
-    return render_template('form_supprimer_groupe.html', groupes=groupes)
+    return render_template('form_supprimer.html', groupes=groupes)
 
 @app.route('/cree/concert/')
 def cree_concert():
@@ -288,12 +289,113 @@ def supprimer_concert_id(id):
         return redirect(url_for('supprimer_concert'))
     else:
         concerts = Concert.query.all()
-        return render_template('form_supprimer_groupe.html', concerts=concerts)
+        return render_template('form_supprimer.html', concerts=concerts)
     
 @app.route('/supprimer/concert/')
 def supprimer_concert():
     concerts = Concert.query.all()
-    return render_template('form_supprimer_groupe.html', concerts=concerts)
+    return render_template('form_supprimer.html', concerts=concerts)
+
+@app.route('/cree/artiste/')
+def cree_artiste():
+    f = ArtisteForm()
+    f.instruments.choices = [(instrument.idTypeInstrument, instrument.nomTypeInstrument) for instrument in  TypeInstrument.query.all()]
+    return render_template('form_enregistre_artiste.html', form = f, title="ajoute Artiste")
+
+@app.route('/cree/artiste/save', methods=['POST'])
+def cree_artiste_save():
+    f = ArtisteForm()
+    nom = f.nomArtiste.data
+    instrument = f.instruments.data
+    maxidArtiste = Artiste.query.order_by(Artiste.idArtiste.desc()).first().idArtiste
+    artiste = Artiste(idArtiste=maxidArtiste+1, nomArtiste=nom)
+    db.session.add(artiste)
+    joue = Jouer(idArtiste=maxidArtiste+1, idTypeInstrument=instrument)
+    db.session.add(joue)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/artiste/<int:id>', methods=['GET'])
+def supprimer_artiste_id(id):
+    if id is not None:
+        artiste = Artiste.query.get(id)
+        if artiste:
+            idArtiste = artiste.idArtiste
+            appartients = Appartient.query.filter(Appartient.idArtiste == idArtiste).all()
+            for appartient in appartients:
+                db.session.delete(appartient)
+            instruments = Jouer.query.filter(Jouer.idArtiste == idArtiste).all()
+            for instrument in instruments:
+                db.session.delete(instrument)
+            db.session.delete(artiste)
+            db.session.commit()
+        return redirect(url_for('supprimer_artiste'))
+    else:
+        artistes = Artiste.query.all()
+        return render_template('form_supprimer.html', artistes=artistes)
+    
+@app.route('/supprimer/artiste/')
+def supprimer_artiste():
+    artistes = Artiste.query.all()
+    return render_template('form_supprimer.html', artistes=artistes)
+
+@app.route('/supprimer/utilisateur/<int:id>', methods=['GET'])
+def supprimer_utilisateur_id(id):
+    if id is not None:
+        spectateur = Spectateur.query.get(id)
+        if spectateur:
+            idSpectateur = spectateur.idSpectateur
+            inscriptions = Inscrire.query.filter(Inscrire.idSpectateur == idSpectateur).all()
+            for inscription in inscriptions:
+                db.session.delete(inscription)
+            favoris = Favoriser.query.filter(Favoriser.idSpectateur == idSpectateur).all()
+            for favori in favoris:
+                db.session.delete(favori)
+            billets = Billet.query.filter(Billet.idSpectateur == idSpectateur).all()
+            for billet in billets:
+                db.session.delete(billet)
+            db.session.delete(spectateur)
+            db.session.commit()
+        return redirect(url_for('supprimer_utilisateur'))
+    else:
+        utilisateur = Spectateur.query.all()
+        return render_template('form_supprimer.html', utilisateurs=utilisateur)
+    
+@app.route('/supprimer/utilisateur/')
+def supprimer_utilisateur():
+    utilisateur = Spectateur.query.all()
+    return render_template('form_supprimer.html', utilisateurs=utilisateur)
+
+@app.route('/cree/lieu/')
+def cree_lieu():
+    f = LieuForm()
+    return render_template('form_enregistre_lieu.html', form = f, title="ajoute Lieu")
+
+@app.route('/cree/lieu/save', methods=['POST'])
+def cree_lieu_save():
+    f = LieuForm()
+    maxidLieu = Lieu.query.order_by(Lieu.idLieu.desc()).first().idLieu
+    lieu = Lieu(idLieu=maxidLieu+1, nomLieu=f.nomLieu.data, adresse=f.adresse.data, capaciteMax=f.capaciteMax.data, photoLieu=None)
+    db.session.add(lieu)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/supprimer/lieu/<int:id>', methods=['GET'])
+def supprimer_lieu_id(id):
+    if id is not None:
+        lieu = Lieu.query.get(id)
+        if lieu:
+            db.session.delete(lieu)
+            db.session.commit()
+        return redirect(url_for('supprimer_lieu'))
+    else:
+        utilisateur = Spectateur.query.all()
+        return render_template('form_supprimer.html', utilisateurs=utilisateur)
+    
+@app.route('/supprimer/lieu/')
+def supprimer_lieu():
+    lieux = Lieu.query.all()
+    return render_template('form_supprimer.html', lieux=lieux)
 
 @app.route('/cree/style/')
 def cree_style():
