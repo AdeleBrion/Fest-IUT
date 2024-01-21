@@ -33,5 +33,13 @@
         </form>
     </div>
     {% endfor %}
+    {% for utilisateur in utilisateurs %}
+    <div>
+        <form action="{{ url_for('supprimer_utilisateur_id', id=utilisateur.idSpectateur) }}" method="get">
+            <p>{{ utilisateur.nomSpectateur }}</p>
+            <input type="submit" value="Supprimer">
+        </form>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

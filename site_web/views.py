@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 
 from .app import app, login_manager, db
-from .models import Jouer, Lieu, Photo, TypeInstrument, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
+from .models import Billet, Inscrire, Jouer, Lieu, Photo, TypeInstrument, Video, get_email_spectateur, Spectateur, GroupeMusical, Concert, Style, TypeBillet, ActiviteAnnexe, Planifier, Appartient, Artiste, Favoriser
 from .form import ArtisteForm, ConcertFrom, GroupeFrom
 from flask import jsonify, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
@@ -247,12 +247,12 @@ def supprimer_groupe_id(id):
         return redirect(url_for('supprimer_groupe'))
     else:
         groupes = GroupeMusical.query.all()
-        return render_template('form_supprimer_groupe.html', groupes=groupes)
+        return render_template('form_supprimer.html', groupes=groupes)
 
 @app.route('/supprimer/groupe/')
 def supprimer_groupe():
     groupes = GroupeMusical.query.all()
-    return render_template('form_supprimer_groupe.html', groupes=groupes)
+    return render_template('form_supprimer.html', groupes=groupes)
 
 @app.route('/cree/concert/')
 def cree_concert():
@@ -288,12 +288,12 @@ def supprimer_concert_id(id):
         return redirect(url_for('supprimer_concert'))
     else:
         concerts = Concert.query.all()
-        return render_template('form_supprimer_groupe.html', concerts=concerts)
+        return render_template('form_supprimer.html', concerts=concerts)
     
 @app.route('/supprimer/concert/')
 def supprimer_concert():
     concerts = Concert.query.all()
-    return render_template('form_supprimer_groupe.html', concerts=concerts)
+    return render_template('form_supprimer.html', concerts=concerts)
 
 @app.route('/cree/artiste/')
 def cree_artiste():
@@ -331,13 +331,39 @@ def supprimer_artiste_id(id):
         return redirect(url_for('supprimer_artiste'))
     else:
         artistes = Artiste.query.all()
-        return render_template('form_supprimer_groupe.html', artistes=artistes)
+        return render_template('form_supprimer.html', artistes=artistes)
     
 @app.route('/supprimer/artiste/')
 def supprimer_artiste():
     artistes = Artiste.query.all()
-    return render_template('form_supprimer_groupe.html', artistes=artistes)
+    return render_template('form_supprimer.html', artistes=artistes)
 
+@app.route('/supprimer/utilisateur/<int:id>', methods=['GET'])
+def supprimer_utilisateur_id(id):
+    if id is not None:
+        spectateur = Spectateur.query.get(id)
+        if spectateur:
+            idSpectateur = spectateur.idSpectateur
+            inscriptions = Inscrire.query.filter(Inscrire.idSpectateur == idSpectateur).all()
+            for inscription in inscriptions:
+                db.session.delete(inscription)
+            favoris = Favoriser.query.filter(Favoriser.idSpectateur == idSpectateur).all()
+            for favori in favoris:
+                db.session.delete(favori)
+            billets = Billet.query.filter(Billet.idSpectateur == idSpectateur).all()
+            for billet in billets:
+                db.session.delete(billet)
+            db.session.delete(spectateur)
+            db.session.commit()
+        return redirect(url_for('supprimer_utilisateur'))
+    else:
+        utilisateur = Spectateur.query.all()
+        return render_template('form_supprimer.html', utilisateurs=utilisateur)
+    
+@app.route('/supprimer/utilisateur/')
+def supprimer_utilisateur():
+    utilisateur = Spectateur.query.all()
+    return render_template('form_supprimer.html', utilisateurs=utilisateur)
 #-----------------------------------------------------#
 #                        ADMIN                        #
 #-----------------------------------------------------#
